@@ -27,7 +27,8 @@ export const updateJobSeekerProfile = async (id: number, jobSeekerParams: JobSee
       ...(jobSeekerParams.currentLocation && { currentLocation: jobSeekerParams.currentLocation }),
       ...(jobSeekerParams.noticePeriod && { noticePeriod: jobSeekerParams.noticePeriod }),
       ...(jobSeekerParams.profilePicture && { profilePicture: jobSeekerParams.profilePicture }),
-      ...(jobSeekerParams.resume && { resume: jobSeekerParams.resume })
+      ...(jobSeekerParams.resume && { resume: jobSeekerParams.resume }),
+      ...(jobSeekerParams.profileSummary && { profileSummary: jobSeekerParams.profileSummary })
     });
     return jobSeekerProfile;
 

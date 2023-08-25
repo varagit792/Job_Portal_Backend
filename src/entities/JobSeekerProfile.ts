@@ -26,6 +26,9 @@ export class JobSeekerProfile extends BaseEntity {
   @Column({ default: null })
   completedSections!: number
 
+  @Column({ default: null })
+  profileSummary!: string
+
   // @Column({ default: null })
   // currentLocation!: string
 
@@ -49,9 +52,9 @@ export class JobSeekerProfile extends BaseEntity {
   @OneToMany(() => Education, (education) => education.jobSeekerProfile, { createForeignKeyConstraints: true, cascade: true })
   //@OneToMany(() => Education,(education)=>education.jobSeekerProfile)
   educations!: Education[]
-  
+
   @OneToOne(() => User)
   @JoinColumn()
-  user!:User
+  user!: User
 
 }

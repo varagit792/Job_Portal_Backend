@@ -8,6 +8,8 @@ jobSeekerProfileRouter.post('/resume', passport.authenticate('jwt', { session: f
 
 jobSeekerProfileRouter.post('/education', addOrUpdateEducation);
 
-jobSeekerProfileRouter.get('/getEducation',getEducationDetails);
+jobSeekerProfileRouter.get('/getEducation', getEducationDetails);
+
+jobSeekerProfileRouter.post('/profileDashboard', passport.authenticate('jwt', { session: false }), updateJobSeekerProfileController);
 
 export default jobSeekerProfileRouter;
