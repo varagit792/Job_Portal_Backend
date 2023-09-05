@@ -1,9 +1,15 @@
-import { Entity, Column, OneToOne, JoinColumn, OneToMany, BaseEntity, PrimaryGeneratedColumn, PrimaryColumn } from 'typeorm';
+import { Entity, Column, OneToOne, JoinColumn, OneToMany, BaseEntity, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn, PrimaryColumn } from 'typeorm';
 import { NoticePeriod } from './noticePeriod.entity';
 import { Location } from './location.entity';
 import { Education } from './education.entity';
 import { Industry } from './industry.entity';
 import { User } from './user.entity';
+import { Department } from './department.entity';
+import { RoleCategory } from './roleCategory.entity';
+import { JobRole } from './jobRole.entity';
+import { Currency } from './currency.entity';
+import { TotalExpYear } from './totalExpYear.entity';
+import { TotalExpMonth } from './totalExpMonth.entity';
 
 @Entity()
 export class JobSeekerProfile extends BaseEntity {
@@ -21,7 +27,6 @@ export class JobSeekerProfile extends BaseEntity {
 
   @Column({ default: null, nullable: true })
   profilePicturePath!: string
-
 
   @Column({ default: null, nullable: true })
   profilePictureFile!: string
@@ -44,6 +49,27 @@ export class JobSeekerProfile extends BaseEntity {
   @JoinColumn()
   currentLocation!: Location
 
+  @OneToOne(() => TotalExpYear)
+  @JoinColumn()
+  totalExpYear!: TotalExpYear
+
+  @OneToOne(() => TotalExpMonth)
+  @JoinColumn()
+  totalExpMonth!: TotalExpMonth
+
+  @Column({ default: null })
+  currentSalary!: string
+
+  @OneToOne(() => Currency)
+  @JoinColumn()
+  currentCurrency!: Currency
+
+  @Column({ default: 'India' })
+  currentCountry!: string
+
+  // @OneToMany(() => Location, (location) => location.jobSeekerProfile, { createForeignKeyConstraints: true, cascade: true })
+  // preferredLocations!: Location[]
+
   //@OneToMany(() => KeySkills, (keySkills) => keySkills.jobSeekerProfile, { createForeignKeyConstraints: true, cascade: true })
   @Column({ default: null, nullable: true, type: 'text' })
   keySkills!: string
@@ -63,4 +89,8 @@ export class JobSeekerProfile extends BaseEntity {
   @JoinColumn()
   user!: User
 
+  // @Column({ default: Date() })
+  // updateDate!:Date
+  @UpdateDateColumn({ type: "timestamp", default: () => "CURRENT_TIMESTAMP(6)", onUpdate: "CURRENT_TIMESTAMP(6)" })
+  updatedDate!: Date
 }

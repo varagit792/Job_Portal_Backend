@@ -114,3 +114,18 @@ export const registerUser: RequestHandler = async (req: Request, res: Response, 
   }
 }
 
+export const getUserDetails: RequestHandler = async (req: Request, res: Response) => {
+  try {
+ 
+    return res.status(200).json({
+      data: req.user
+    });
+
+  } catch (error) {
+    console.log('error', error);
+    return res.status(500).json({
+      message:'Internal server error'
+    })
+  }
+}
+
