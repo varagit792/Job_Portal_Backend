@@ -68,21 +68,16 @@ export const saveCareerProfile = async (careerProfileParams: CareerProfile) => {
       .createQueryBuilder("careerProfile").select("careerProfile")
       .where("careerProfile.jobSeekerProfile = :careerProfile", { careerProfile: careerProfileParams.jobSeekerProfile })
       .getOne().then(res => {
-        console.log("MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM", res);
         if (res?.id) {
-          console.log("UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU");
           AppDataSource.getRepository(CareerProfile)
             .createQueryBuilder("careerProfile").delete()
             .where("jobSeekerProfile = :jobSeekerProfile", { jobSeekerProfile: careerProfileParams.jobSeekerProfile })
             .execute().then((res) => {
-              console.log("careerProfileParams=============================", careerProfileParams);
               const careerProfileRepository = AppDataSource.getRepository(CareerProfile);
               const careerProfile = careerProfileRepository.save(careerProfileParams);
-              console.log("careerProfile Dev test-->", careerProfile);
               return careerProfile;
             })
         } else {
-          console.log("careerProfileParams=============================", careerProfileParams);
           const careerProfileRepository = AppDataSource.getRepository(CareerProfile);
           const careerProfile = careerProfileRepository.save(careerProfileParams);
           console.log("careerProfile Dev test-->", careerProfile);
