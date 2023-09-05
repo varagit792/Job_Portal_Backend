@@ -22,11 +22,11 @@ export const keySkillsController: RequestHandler = async (req: Request, res: Res
   try {
 
     const { id } = req.user
-    const posts: any = { userId: '', keySkills: '' }
+    const posts: any = { userId: '', keySkills: '', jobSeekerId: '' }
 
     posts.userId = id;
     posts.keySkills = req.body.keySkills;
-
+    posts.jobSeekerId = req.body.jobSeekerId;
     const result = await keySkills({ posts });
     return res.status(201).json({
       message: 'Key skill updated successfully',
@@ -42,7 +42,7 @@ export const keySkillsController: RequestHandler = async (req: Request, res: Res
 
 export const keySkillsGetController: RequestHandler = async (req: Request, res: Response, next: NextFunction) => {
   try {
-    const id = req.user
+    const { id } = req.user
     const result = await keySkillsGet(id);
     return res.status(201).json({
       message: 'Key skill fetch successfully',
