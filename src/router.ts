@@ -28,6 +28,8 @@ import employeeTypeRouter from './routers/employeeType.router';
 import jobTypeRouter from './routers/jobType.router';
 import preferredShiftRouter from './routers/preferredShift.router';
 import userRouter from './routers/user.router';
+import joiningDateYearRouter from './routers/joiningDateYear.router';
+import joiningDateMonthRouter from './routers/joiningDateMonth.router';
 
 const router = Router();
 
@@ -60,5 +62,7 @@ router.use(['/employeeType'], employeeTypeRouter);
 router.use(['/jobType'], jobTypeRouter);
 router.use(['/preferredShift'], preferredShiftRouter);
 router.use(['/user'], userRouter);
+router.use(['/joiningDateYear'], joiningDateYearRouter);
+router.use(['/joiningDateMonth'], joiningDateMonthRouter);
 
 export default router;   
