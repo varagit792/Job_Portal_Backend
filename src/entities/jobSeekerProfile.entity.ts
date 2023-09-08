@@ -10,6 +10,7 @@ import { JobRole } from './jobRole.entity';
 import { Currency } from './currency.entity';
 import { TotalExpYear } from './totalExpYear.entity';
 import { TotalExpMonth } from './totalExpMonth.entity';
+import { PersonalDetails } from './personalDetails.entity';
 
 @Entity()
 export class JobSeekerProfile extends BaseEntity {

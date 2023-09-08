@@ -10,6 +10,7 @@ import {
   addOrUpdateCareerProfile,
   getCareerProfileDetails,
   deleteJobSeekerProfilePicture,
+  addOrUpdatePersonalDetails
 } from '../controllers/jobSeekerProfile.controller';
 import passport from '../config/passport';
 import { keySkillsController, keySkillsGetController } from '../controllers/keySkills.controller';
@@ -29,5 +30,8 @@ jobSeekerProfileRouter.post('/keySkills', passport.authenticate('jwt', { session
 jobSeekerProfileRouter.get('/keySkills', passport.authenticate('jwt', { session: false }), keySkillsGetController);
 jobSeekerProfileRouter.post('/careerProfile', passport.authenticate('jwt', { session: false }), addOrUpdateCareerProfile);
 jobSeekerProfileRouter.get('/getCareerProfile', passport.authenticate('jwt', { session: false }), getCareerProfileDetails);
+
+jobSeekerProfileRouter.post('/personalDetails', passport.authenticate('jwt', { session: false }), addOrUpdatePersonalDetails);
+jobSeekerProfileRouter.put('/personalDetails', passport.authenticate('jwt', { session: false }), addOrUpdatePersonalDetails);
 
 export default jobSeekerProfileRouter;
