@@ -1,4 +1,4 @@
-import { Entity, Column, OneToOne, JoinColumn, OneToMany, BaseEntity, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn } from 'typeorm';
+import { Entity, Column, OneToOne, JoinColumn, OneToMany, BaseEntity, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn, PrimaryColumn } from 'typeorm';
 import { NoticePeriod } from './noticePeriod.entity';
 import { Location } from './location.entity';
 import { Education } from './education.entity';
@@ -13,7 +13,7 @@ import { TotalExpMonth } from './totalExpMonth.entity';
 
 @Entity()
 export class JobSeekerProfile extends BaseEntity {
-  @PrimaryGeneratedColumn('increment')
+  @PrimaryColumn()
   id!: number
 
   @Column({ default: null })
@@ -57,14 +57,14 @@ export class JobSeekerProfile extends BaseEntity {
   @JoinColumn()
   totalExpMonth!: TotalExpMonth
 
-  @Column({default:null})
+  @Column({ default: null })
   currentSalary!: string
 
   @OneToOne(() => Currency)
   @JoinColumn()
   currentCurrency!: Currency
 
-  @Column({default:'India'})
+  @Column({ default: 'India' })
   currentCountry!: string
 
   // @OneToMany(() => Location, (location) => location.jobSeekerProfile, { createForeignKeyConstraints: true, cascade: true })
@@ -92,5 +92,5 @@ export class JobSeekerProfile extends BaseEntity {
   // @Column({ default: Date() })
   // updateDate!:Date
   @UpdateDateColumn({ type: "timestamp", default: () => "CURRENT_TIMESTAMP(6)", onUpdate: "CURRENT_TIMESTAMP(6)" })
-  updatedDate!:Date
+  updatedDate!: Date
 }

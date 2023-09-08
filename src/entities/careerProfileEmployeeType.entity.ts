@@ -7,8 +7,8 @@ export class CareerProfileEmployeeType extends BaseEntity {
   @PrimaryGeneratedColumn()
   id!: number
 
-  @ManyToOne(() => CareerProfile, (careerProfile) => careerProfile.careerProfileEmployeeType)
-  careerProfile!: CareerProfile
+  @ManyToOne(() => CareerProfile, (careerProfile) => careerProfile.careerProfileEmployeeType, { nullable: false, onDelete: "CASCADE" })
+  public careerProfile!: CareerProfile
 
   @OneToOne(() => EmployeeType)
   @JoinColumn({ name: "employeeTypeId" })
