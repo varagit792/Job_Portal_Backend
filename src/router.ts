@@ -30,6 +30,9 @@ import preferredShiftRouter from './routers/preferredShift.router';
 import userRouter from './routers/user.router';
 import joiningDateYearRouter from './routers/joiningDateYear.router';
 import joiningDateMonthRouter from './routers/joiningDateMonth.router';
+import daysRouter from './routers/days.router';
+import maritalStatusRouter from './routers/maritalStatus.router';
+import categoryRouter from './routers/category.router'
 
 const router = Router();
 
@@ -64,5 +67,8 @@ router.use(['/preferredShift'], preferredShiftRouter);
 router.use(['/user'], userRouter);
 router.use(['/joiningDateYear'], joiningDateYearRouter);
 router.use(['/joiningDateMonth'], joiningDateMonthRouter);
+router.use(['/days'], daysRouter);
+router.use(['/maritalStatus'], maritalStatusRouter);
+router.use(['/category'], categoryRouter);
 
 export default router;   

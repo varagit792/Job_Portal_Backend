@@ -10,6 +10,7 @@ import { JobRole } from './jobRole.entity';
 import { Currency } from './currency.entity';
 import { TotalExpYear } from './totalExpYear.entity';
 import { TotalExpMonth } from './totalExpMonth.entity';
+import { PersonalDetails } from './personalDetails.entity';
 
 @Entity()
 export class JobSeekerProfile extends BaseEntity {
@@ -57,14 +58,14 @@ export class JobSeekerProfile extends BaseEntity {
   @JoinColumn()
   totalExpMonth!: TotalExpMonth
 
-  @Column({default:null})
+  @Column({ default: null })
   currentSalary!: string
 
   @OneToOne(() => Currency)
   @JoinColumn()
   currentCurrency!: Currency
 
-  @Column({default:'India'})
+  @Column({ default: 'India' })
   currentCountry!: string
 
   // @OneToMany(() => Location, (location) => location.jobSeekerProfile, { createForeignKeyConstraints: true, cascade: true })
@@ -92,5 +93,5 @@ export class JobSeekerProfile extends BaseEntity {
   // @Column({ default: Date() })
   // updateDate!:Date
   @UpdateDateColumn({ type: "timestamp", default: () => "CURRENT_TIMESTAMP(6)", onUpdate: "CURRENT_TIMESTAMP(6)" })
-  updatedDate!:Date
+  updatedDate!: Date
 }
