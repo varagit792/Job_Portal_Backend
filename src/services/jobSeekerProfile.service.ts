@@ -11,7 +11,10 @@ import { PersonalDetails } from '../entities/personalDetails.entity';
 
 type Params = {
   userId: number,
-  workStatus: boolean
+  jobSeekerType: string
+  id: number;
+  resumePath: string;
+  resumeFile?:string
 }
 
 export const saveJobSeekerProfile = async (jobSeekerParams: Params) => {
@@ -55,7 +58,14 @@ export const updateJobSeekerProfile = async (id: number, jobSeekerParams: JobSee
 export const getJobSeekerProfile = async () => {
   try {
     const jobSeekerProfileRepository = AppDataSource.getRepository(JobSeekerProfile);
-    const jobSeekerProfile = await jobSeekerProfileRepository.find();
+    const jobSeekerProfile = await jobSeekerProfileRepository.find({
+      relations: {
+        currentLocation: true,
+        totalExpMonth: true,
+        totalExpYear: true,
+        noticePeriod:true
+      }
+    });
     return jobSeekerProfile;
   } catch (error) {
     console.log('error', error);
@@ -182,6 +192,37 @@ export const savePersonalDetails = async (personalDetailsParams: PersonalDetails
     }
     return personalDetails;
   } catch (error) {
+    throw error;
+  }
+}
+
+export const updateJobSeekerProfileBasicDetails = async (id: number, jobSeekerParams: JobSeekerProfile) => {
+
+  try {
+
+    const jobSeekerProfileRepository = AppDataSource.manager.getRepository(JobSeekerProfile);
+    const profileData = await jobSeekerProfileRepository.findOne({
+      where: {
+        id
+      },
+      relations: ['noticePeriod', 'totalExpMonth', 'totalExpYear', 'currentCurrency']
+
+    });
+
+    if (profileData) {
+      profileData.noticePeriod = jobSeekerParams.noticePeriod;
+      profileData.totalExpMonth = jobSeekerParams.totalExpMonth;
+      profileData.totalExpYear = jobSeekerParams.totalExpYear;
+      profileData.currentCountry = jobSeekerParams.currentCountry;
+      profileData.currentSalary = jobSeekerParams.currentSalary;
+      profileData.jobSeekerType = jobSeekerParams.jobSeekerType;
+      profileData.currentLocation = jobSeekerParams.currentLocation;
+      const jobSeekerProfile = await jobSeekerProfileRepository.save(profileData)
+      return jobSeekerProfile;
+    }
+
+  } catch (error) {
+    console.log('error', error);
     throw error;
   }
 }
