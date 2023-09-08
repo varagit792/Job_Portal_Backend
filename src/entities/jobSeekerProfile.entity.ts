@@ -1,4 +1,4 @@
-import { Entity, Column, OneToOne, JoinColumn, OneToMany, BaseEntity, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn } from 'typeorm';
+import { Entity, Column, OneToOne, JoinColumn, OneToMany, BaseEntity, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn, PrimaryColumn } from 'typeorm';
 import { NoticePeriod } from './noticePeriod.entity';
 import { Location } from './location.entity';
 import { Education } from './education.entity';
@@ -14,7 +14,7 @@ import { PersonalDetails } from './personalDetails.entity';
 
 @Entity()
 export class JobSeekerProfile extends BaseEntity {
-  @PrimaryGeneratedColumn('increment')
+  @PrimaryColumn()
   id!: number
 
   @Column({ default: null })

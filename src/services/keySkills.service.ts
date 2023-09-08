@@ -16,23 +16,17 @@ export const keySkillsList = async () => {
 }
 
 export const keySkills = async ({ posts }: any) => {
-  const { keySkills, userId } = posts;
+  const { keySkills, userId, jobSeekerId } = posts;
+  console.log("++++++++++++++++++++++", jobSeekerId);
+
   try {
-    AppDataSource.getRepository(JobSeekerProfile)
-      .createQueryBuilder("jobSeekerProfile").select("jobSeekerProfile")
-      .where("jobSeekerProfile.userId = :userId", { userId: userId })
-      .getOne().then(res => {
-        if (res?.id) {
-          AppDataSource.getRepository(JobSeekerProfile).createQueryBuilder("jobSeekerProfile")
-            .update<JobSeekerProfile>(JobSeekerProfile, { keySkills: keySkills })
-            .where("userId = :id", { id: userId })
-            .execute()
-        } else {
-          AppDataSource.getRepository(JobSeekerProfile).createQueryBuilder().insert()
-            .into(JobSeekerProfile)
-            .values([{ keySkills: keySkills, user: userId }]).execute();
-        }
-      });
+
+    AppDataSource.getRepository(JobSeekerProfile).createQueryBuilder("jobSeekerProfile")
+      .update<JobSeekerProfile>(JobSeekerProfile, { keySkills: keySkills })
+      .where("id = :id", { id: jobSeekerId })
+      .execute()
+
+
     const queryResult = AppDataSource.getRepository(JobSeekerProfile)
       .createQueryBuilder("jobSeekerProfile").select("jobSeekerProfile")
       .where("jobSeekerProfile.userId = :userId", { userId: userId })
