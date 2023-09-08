@@ -113,7 +113,7 @@ const options: DataSourceOptions & SeederOptions = {
   password: process.env.DB_PASSWORD,
   database: process.env.DB_NAME,
   synchronize: true,
-  logging: true,
+  // logging: true,
   entities: [User, JobSeekerProfile, Employment, TotalExpYear, TotalExpMonth, Company, JobTitle, Currency, State, City, NoticePeriod, AvailabilityToJoin, KeySkills, Industry, Department, RoleCategory, JobRole, Education, HighestQualification, Course, Specialization, CourseType, UniversityInstitute, Gender, Location, EducationType, Country, City, PassOutYear, EmployeeType, JobType, PreferredShift, CareerProfile, CareerProfileEmployeeType, CareerProfileJobType, CareerProfilePreferredLocations, CareerProfilePreferredShift, JoiningDateYear, JoiningDateMonth, PersonalDetails, Days, MaritalStatus, Category],
   seeds: [TotalExpYearSeeder, TotalExpMonthSeeder, CompanySeeder, JobTitleSeeder, CurrencySeeder, StateSeeder, NoticePeriodSeeder, AvailabilityToJoinSeeder, KeySkillsSeeder, IndustrySeeder, DepartmentSeeder, RoleCategorySeeder, JobRoleSeeder, HighestQualificationSeeder, CourseSeeder, SpecializationSeeder, CourseTypeSeeder, UniversityInstituteSeeder, GenderSeeder, LocationSeeder, EducationTypeSeeder, CountrySeeder, CitySeeder, PassoutYearSeeder, EmployeeTypeSeeder, JobTypeSeeder, PreferredShiftSeeder, JoiningDateYearSeeder, JoiningDateMonthSeeder, DaysSeeder, MaritalStatusSeeder, CategorySeeder],
   subscribers: [],
