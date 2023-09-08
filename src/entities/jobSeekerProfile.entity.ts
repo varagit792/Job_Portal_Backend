@@ -17,8 +17,8 @@ export class JobSeekerProfile extends BaseEntity {
   @PrimaryColumn()
   id!: number
 
-  @Column({ default: null })
-  workStatus!: boolean
+  @Column({ default: 'Fresher' })
+  jobSeekerType!: string
 
   @Column({ default: null, nullable: true })
   resumePath!: string
@@ -46,24 +46,24 @@ export class JobSeekerProfile extends BaseEntity {
   @Column({ default: null, type: 'text' })
   resumeHeadline!: string
 
-  @OneToOne(() => Location)
+  @OneToOne(() => Location, { nullable: true, onDelete: 'SET NULL', onUpdate: 'CASCADE' })
   @JoinColumn()
-  currentLocation!: Location
+  currentLocation!: Location | null
 
-  @OneToOne(() => TotalExpYear)
+  @OneToOne(() => TotalExpYear, { nullable: true, onDelete: 'SET NULL', onUpdate: 'CASCADE' })
   @JoinColumn()
-  totalExpYear!: TotalExpYear
+  totalExpYear!: TotalExpYear | null
 
-  @OneToOne(() => TotalExpMonth)
+  @OneToOne(() => TotalExpMonth, { nullable: true, onDelete: 'SET NULL', onUpdate: 'CASCADE' })
   @JoinColumn()
-  totalExpMonth!: TotalExpMonth
+  totalExpMonth!: TotalExpMonth | null
 
   @Column({ default: null })
   currentSalary!: string
 
-  @OneToOne(() => Currency)
+  @OneToOne(() => Currency, { nullable: true, onDelete: 'SET NULL', onUpdate: 'CASCADE' })
   @JoinColumn()
-  currentCurrency!: Currency
+  currentCurrency!: Currency | null
 
   @Column({ default: 'India' })
   currentCountry!: string
@@ -79,9 +79,9 @@ export class JobSeekerProfile extends BaseEntity {
   @JoinColumn()
   industry!: Industry
 
-  @OneToOne(() => NoticePeriod)
+  @OneToOne(() => NoticePeriod, { nullable: true, onDelete: 'SET NULL', onUpdate: 'CASCADE' })
   @JoinColumn()
-  noticePeriod!: NoticePeriod
+  noticePeriod!: NoticePeriod | null
 
   @OneToMany(() => Education, (education) => education.jobSeekerProfile, { createForeignKeyConstraints: true, cascade: true })
   educations!: Education[]
@@ -90,8 +90,8 @@ export class JobSeekerProfile extends BaseEntity {
   @JoinColumn()
   user!: User
 
-  // @Column({ default: Date() })
-  // updateDate!:Date
   @UpdateDateColumn({ type: "timestamp", default: () => "CURRENT_TIMESTAMP(6)", onUpdate: "CURRENT_TIMESTAMP(6)" })
-  updatedDate!: Date
+  profileLastUpdated!: Date
+  @UpdateDateColumn({ type: 'timestamp', default: () => "CURRENT_TIMESTAMP(6)", onUpdate: "CURRENT_TIMESTAMP(6)" })
+  resumeLastUpdated!: Date
 }

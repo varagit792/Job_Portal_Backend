@@ -50,7 +50,9 @@ passport.use(new GoogleStrategy({
       const jobSeekerParams = {
         userId: userData.id,
         id: userData.id,
-        workStatus:false
+        jobSeekerType: 'Fresher',
+        resumePath: '',
+        resumeFile:''
       }
       const jobSeeker = await saveJobSeekerProfile(jobSeekerParams);
       return done(null, user)
