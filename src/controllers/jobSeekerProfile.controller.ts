@@ -13,7 +13,7 @@ export const updateJobSeekerProfileController = async (req: Request, res: Respon
   try {
 
     const jobSeekerParams: JobSeekerProfile = req.body;
-    const jobSeekerProfileData = await updateJobSeekerProfile(jobSeekerParams.id, jobSeekerParams);
+    const jobSeekerProfileData = await updateJobSeekerProfile(req.user.id, jobSeekerParams);
     return res.status(200).json({
       data: jobSeekerProfileData
     });
@@ -27,7 +27,7 @@ export const updateJobSeekerProfileController = async (req: Request, res: Respon
 
 export const getJobSeekerProfileController = async (req: Request, res: Response) => {
   try {
-    const jobSeekerProfile = await getJobSeekerProfile();
+    const jobSeekerProfile = await getJobSeekerProfile(req.user.id);
     res.status(200).json({
       data: jobSeekerProfile
     });

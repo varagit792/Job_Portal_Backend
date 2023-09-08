@@ -14,7 +14,7 @@ type Params = {
   jobSeekerType: string
   id: number;
   resumePath: string;
-  resumeFile?:string
+  resumeFile?: string
 }
 
 export const saveJobSeekerProfile = async (jobSeekerParams: Params) => {
@@ -30,7 +30,7 @@ export const saveJobSeekerProfile = async (jobSeekerParams: Params) => {
 };
 
 export const updateJobSeekerProfile = async (id: number, jobSeekerParams: JobSeekerProfile) => {
-  console.log("jobSeekerParams=============", jobSeekerParams);
+  console.log("jobSeekerParams=============", jobSeekerParams, id);
 
   try {
 
@@ -55,15 +55,18 @@ export const updateJobSeekerProfile = async (id: number, jobSeekerParams: JobSee
 
 }
 
-export const getJobSeekerProfile = async () => {
+export const getJobSeekerProfile = async (id: number) => {
   try {
     const jobSeekerProfileRepository = AppDataSource.getRepository(JobSeekerProfile);
-    const jobSeekerProfile = await jobSeekerProfileRepository.find({
+    const jobSeekerProfile = await jobSeekerProfileRepository.findOne({
+      where: {
+        id
+      },
       relations: {
         currentLocation: true,
         totalExpMonth: true,
         totalExpYear: true,
-        noticePeriod:true
+        noticePeriod: true,
       }
     });
     return jobSeekerProfile;
