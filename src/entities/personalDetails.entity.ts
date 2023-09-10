@@ -33,8 +33,8 @@ export class PersonalDetails extends BaseEntity {
     @Column({ default: null })
     pinCode!: string
 
-    @OneToOne(() => JobSeekerProfile)
+    @OneToOne(() => JobSeekerProfile, jobSeekerProfile => jobSeekerProfile.personalDetails)
     @JoinColumn()
-    jobSeekerProfile!: JobSeekerProfile
+    jobSeekerProfile: JobSeekerProfile | undefined;
 }
 
