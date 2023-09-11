@@ -10,7 +10,9 @@ export class CareerProfileEmployeeType extends BaseEntity {
   @ManyToOne(() => CareerProfile, (careerProfile) => careerProfile.careerProfileEmployeeType, { nullable: false, onDelete: "CASCADE" })
   public careerProfile!: CareerProfile
 
-  @OneToOne(() => EmployeeType)
+  @OneToOne(() => EmployeeType, (employeeType) => employeeType.careerProfileEmployeeType, {
+    cascade: true, onDelete: 'CASCADE', createForeignKeyConstraints: false
+  })
   @JoinColumn({ name: "employeeTypeId" })
   employeeType!: EmployeeType
 

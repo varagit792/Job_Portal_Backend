@@ -10,7 +10,9 @@ export class CareerProfilePreferredShift extends BaseEntity {
   @ManyToOne(() => CareerProfile, (careerProfile) => careerProfile.careerProfileEmployeeType, { nullable: false, onDelete: "CASCADE" })
   public careerProfile!: CareerProfile
 
-  @OneToOne(() => PreferredShift)
+  @OneToOne(() => PreferredShift, (preferredShift) => preferredShift.careerProfilePreferredShift, {
+    cascade: true, onDelete: 'CASCADE', createForeignKeyConstraints: false
+  })
   @JoinColumn({ name: "preferredShiftId" })
   preferredShift!: PreferredShift
 
