@@ -34,6 +34,5 @@ jobSeekerProfileRouter.get('/getCareerProfile', passport.authenticate('jwt', { s
 jobSeekerProfileRouter.put('/profileBasicDetails', passport.authenticate('jwt'), updateJobSeekerProfileBasicDetailsController);
 
 jobSeekerProfileRouter.post('/personalDetails', passport.authenticate('jwt', { session: false }), addOrUpdatePersonalDetails);
-jobSeekerProfileRouter.put('/personalDetails', passport.authenticate('jwt', { session: false }), addOrUpdatePersonalDetails);
 
 export default jobSeekerProfileRouter;

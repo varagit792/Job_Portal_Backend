@@ -67,6 +67,7 @@ export const getJobSeekerProfile = async (id: number) => {
         totalExpMonth: true,
         totalExpYear: true,
         noticePeriod: true,
+        personalDetails: true
       }
     });
     return jobSeekerProfile;
@@ -178,7 +179,6 @@ export const getEducation = async () => {
 
 export const savePersonalDetails = async (personalDetailsParams: PersonalDetails) => {
   try {
-    console.log("personalDetailsParams", personalDetailsParams);
     let personalDetails: any;
     const personalDetailsRepository = AppDataSource.getRepository(PersonalDetails);
     if (personalDetailsParams?.id) {
