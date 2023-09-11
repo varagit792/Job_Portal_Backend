@@ -67,7 +67,9 @@ export const getJobSeekerProfile = async (id: number) => {
         totalExpMonth: true,
         totalExpYear: true,
         noticePeriod: true,
-        personalDetails: true
+        personalDetails: {
+          language: true
+        },
       }
     });
     return jobSeekerProfile;
@@ -176,20 +178,44 @@ export const getEducation = async () => {
   }
 }
 
-
 export const savePersonalDetails = async (personalDetailsParams: PersonalDetails) => {
   try {
     let personalDetails: any;
     const personalDetailsRepository = AppDataSource.getRepository(PersonalDetails);
     if (personalDetailsParams?.id) {
-      let updatedValue = await personalDetailsRepository.update(personalDetailsParams.id, { ...personalDetailsParams });
-      if (updatedValue.affected == 1) {
-        personalDetails = await personalDetailsRepository.findOne({
-          where: {
-            id: personalDetailsParams.id
+      personalDetails = await personalDetailsRepository.findOne({
+        where: {
+          id: personalDetailsParams.id
+        },
+        relations: ["language"]
+      });
+      personalDetails.id = Number(personalDetailsParams.id);
+      personalDetails.jobSeekerProfile = personalDetailsParams.jobSeekerProfile,
+        personalDetails.gender = personalDetailsParams.gender,
+        personalDetails.maritalStatus = personalDetailsParams.maritalStatus,
+        personalDetails.birthDate = personalDetailsParams.birthDate,
+        personalDetails.category = personalDetailsParams.category,
+        personalDetails.differentlyAbled = personalDetailsParams.differentlyAbled,
+        personalDetails.careerBreak = personalDetailsParams.careerBreak,
+        personalDetails?.language?.forEach((child: any) => {
+          if (child.id) {
+            const updatedChild = personalDetailsParams?.language?.find((item) => Number(item.id) === Number(child.id));
+            if (updatedChild) {
+              child.id = updatedChild.id,
+                child.language = updatedChild.language,
+                child.proficiency = updatedChild.proficiency,
+                child.read = updatedChild.read,
+                child.write = updatedChild.write,
+                child.speak = updatedChild.speak
+            }
           }
-        })
-      }
+        });
+      personalDetailsParams?.language?.forEach((child: any) => {
+        if (!child.id) {
+          personalDetails?.language.push(child);
+        }
+      })
+      personalDetails = await personalDetailsRepository.save(personalDetails);
     } else {
       personalDetails = await personalDetailsRepository.save(personalDetailsParams)
     }
