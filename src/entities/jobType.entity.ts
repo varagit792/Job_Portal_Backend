@@ -1,6 +1,7 @@
-import { Entity, PrimaryGeneratedColumn, Column, BaseEntity, ManyToOne } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, BaseEntity, ManyToOne, OneToOne } from 'typeorm';
 import { JobSeekerProfile } from './jobSeekerProfile.entity';
 import { CareerProfile } from './careerProfile.entity';
+import { CareerProfileJobType } from './careerProfileJobType.entity';
 
 @Entity()
 export class JobType extends BaseEntity {
@@ -12,5 +13,8 @@ export class JobType extends BaseEntity {
 
   @Column()
   status!: boolean
+
+  @OneToOne(() => CareerProfileJobType, (careerProfileJobType) => careerProfileJobType.jobType)
+  careerProfileJobType!: CareerProfileJobType
 
 }

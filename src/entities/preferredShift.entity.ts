@@ -1,5 +1,6 @@
-import { Entity, PrimaryGeneratedColumn, Column, BaseEntity, ManyToOne } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, BaseEntity, ManyToOne, OneToOne } from 'typeorm';
 import { CareerProfile } from './careerProfile.entity';
+import { CareerProfilePreferredShift } from './careerProfilePreferredShift.entity';
 
 @Entity()
 export class PreferredShift extends BaseEntity {
@@ -11,5 +12,8 @@ export class PreferredShift extends BaseEntity {
 
   @Column()
   status!: boolean
+
+  @OneToOne(() => CareerProfilePreferredShift, (careerProfilePreferredShift) => careerProfilePreferredShift.preferredShift)
+  careerProfilePreferredShift!: CareerProfilePreferredShift
 
 }

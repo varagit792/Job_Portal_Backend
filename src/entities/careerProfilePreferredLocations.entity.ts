@@ -8,9 +8,11 @@ export class CareerProfilePreferredLocations extends BaseEntity {
   id!: number
 
   @ManyToOne(() => CareerProfile, (careerProfile) => careerProfile.careerProfilePreferredLocations, { nullable: false, onDelete: "CASCADE" })
-  public careerProfile!: CareerProfile
+  careerProfile!: CareerProfile
 
-  @OneToOne(() => Location)
+  @OneToOne(() => Location, (location) => location.careerProfilePreferredLocations, {
+    cascade: true, onDelete: 'CASCADE', createForeignKeyConstraints: false
+  })
   @JoinColumn({ name: "locationId" })
   location!: Location
 

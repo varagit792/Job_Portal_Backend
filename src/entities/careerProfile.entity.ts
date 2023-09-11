@@ -21,19 +21,27 @@ export class CareerProfile extends BaseEntity {
   })
   careerProfilePreferredLocations!: CareerProfilePreferredLocations[]
 
-  @OneToOne(() => Industry, { cascade: true, eager: true })
+  @OneToOne(() => Industry, (industry) => industry.careerProfile, {
+    cascade: true, onDelete: 'CASCADE', createForeignKeyConstraints: false
+  })
   @JoinColumn()
   industry!: Industry
 
-  @OneToOne(() => Department, { cascade: true, eager: true })
+  @OneToOne(() => Department, (department) => department.careerProfile, {
+    cascade: true, onDelete: 'CASCADE', createForeignKeyConstraints: false
+  })
   @JoinColumn()
   department!: Department
 
-  @OneToOne(() => RoleCategory, { cascade: true, eager: true })
+  @OneToOne(() => RoleCategory, (roleCategory) => roleCategory.careerProfile, {
+    cascade: true, onDelete: 'CASCADE', createForeignKeyConstraints: false
+  })
   @JoinColumn()
   roleCategory!: RoleCategory
 
-  @OneToOne(() => JobRole, { cascade: true, eager: true })
+  @OneToOne(() => JobRole, (jobRole) => jobRole.careerProfile, {
+    cascade: true, onDelete: 'CASCADE', createForeignKeyConstraints: false
+  })
   @JoinColumn()
   jobRole!: JobRole
 
@@ -46,7 +54,9 @@ export class CareerProfile extends BaseEntity {
   @OneToMany(() => CareerProfilePreferredShift, (careerProfilePreferredShift) => careerProfilePreferredShift.careerProfile, { createForeignKeyConstraints: false, onDelete: "CASCADE", cascade: ['insert'] })
   careerProfilePreferredShift!: CareerProfilePreferredShift[]
 
-  @OneToOne(() => Currency, { cascade: true, eager: true })
+  @OneToOne(() => Currency, (currency) => currency.careerProfile, {
+    cascade: true, onDelete: 'CASCADE', createForeignKeyConstraints: false
+  })
   @JoinColumn()
   currency!: Currency
 
