@@ -1,5 +1,6 @@
 import express, { Express, NextFunction, Response } from 'express';
 import cors from 'cors';
+import cookieParser from 'cookie-parser';
 import * as bodyParser from 'body-parser';
 import router from './router';
 import { errorHandler } from './middlewares/errorHandler';
@@ -30,7 +31,8 @@ const corsOptions = {
   optionsSuccessStatus: 204,
 };
 app.use(cors(corsOptions));
-
+app.use(express.json());
+app.use(cookieParser());
 // Google Auth and Facebook Auth
 app.use(session({
   resave: false,
