@@ -3,7 +3,7 @@ import { Request, RequestHandler, Response, NextFunction } from 'express';
 import multer from 'multer';
 import bcrypt from 'bcrypt';
 import { promisify } from 'util';
-import { fetchUser, saveUser } from '../services/user.service';
+import { loginCheckUser, fetchUser, saveUser } from '../services/user.service';
 import { saveJobSeekerProfile } from '../services/jobSeekerProfile.service';
 import { generateToken } from '../utils/generateToken';
 import { User } from '../entities/user.entity';
@@ -36,7 +36,7 @@ export const registerUser: RequestHandler = async (req: Request, res: Response, 
       throw new Error('file limit cannot be undefined')
     }
     let upload = await promisify(multer({
-      storage:storageResume,
+      storage: storageResume,
       fileFilter: fileFilterDocument,
       limits: { fileSize: parseInt(process.env.FILE_LIMIT) }
     }).single('file'));
@@ -78,7 +78,7 @@ export const registerUser: RequestHandler = async (req: Request, res: Response, 
           userId: user.id,
           workStatus,
           id: user.id,
-          resume:resumePath
+          resume: resumePath
         }
         const jobSeeker = await saveJobSeekerProfile(jobSeekerParams);
         OutPutData.jobSeekProfileId = jobSeeker.id
@@ -114,9 +114,42 @@ export const registerUser: RequestHandler = async (req: Request, res: Response, 
   }
 }
 
+export const signInUser: RequestHandler = async (req: Request, res: Response, next: NextFunction) => {
+
+  try {
+    const { ...userParams } = req.body;
+    const userData = await loginCheckUser(userParams.email);
+    if (userData) {
+      const passwordMatch = await bcrypt.compare(userParams.password, `${userData.hashedPassword}`);
+      console.log(passwordMatch, "====================");
+
+      if (passwordMatch) {
+        const token = await generateToken(userData);
+        console.log('token', token);
+        res.cookie('token', token);
+        return res.status(201).json({
+          message: 'valid user',
+          data: userData
+        });
+      } else {
+        return res.status(500).json({
+          message: 'Invalid user',
+
+        });
+      }
+    } else {
+      return res.status(500).json({
+        message: 'Invalid user',
+      });
+    }
+  } catch (error) {
+    console.log('error', error);
+  }
+}
+
 export const getUserDetails: RequestHandler = async (req: Request, res: Response) => {
   try {
- 
+
     return res.status(200).json({
       data: req.user
     });
@@ -124,7 +157,7 @@ export const getUserDetails: RequestHandler = async (req: Request, res: Response
   } catch (error) {
     console.log('error', error);
     return res.status(500).json({
-      message:'Internal server error'
+      message: 'Internal server error'
     })
   }
 }
