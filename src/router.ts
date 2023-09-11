@@ -32,7 +32,8 @@ import joiningDateYearRouter from './routers/joiningDateYear.router';
 import joiningDateMonthRouter from './routers/joiningDateMonth.router';
 import daysRouter from './routers/days.router';
 import maritalStatusRouter from './routers/maritalStatus.router';
-import categoryRouter from './routers/category.router'
+import categoryRouter from './routers/category.router';
+import proficiencyRouter from './routers/proficiency.router';
 
 const router = Router();
 
@@ -70,5 +71,6 @@ router.use(['/joiningDateMonth'], joiningDateMonthRouter);
 router.use(['/days'], daysRouter);
 router.use(['/maritalStatus'], maritalStatusRouter);
 router.use(['/category'], categoryRouter);
+router.use(['/proficiency'], proficiencyRouter);
 
 export default router;   

@@ -77,6 +77,9 @@ import { MaritalStatus } from '../entities/maritalStatus.entity';
 import MaritalStatusSeeder from '../entities/seed/MaritalStatus.seeder';
 import { Category } from '../entities/category.entity';
 import CategorySeeder from '../entities/seed/Category.seeder';
+import { Proficiency } from '../entities/proficiency.entity';
+import ProficiencySeeder from '../entities/seed/Proficiency.seeder';
+import { Language } from '../entities/language.entity';
 
 if (process.env.DB_NAME === undefined) {
   throw new Error('Dbname cannot be undefined')
@@ -114,8 +117,8 @@ const options: DataSourceOptions & SeederOptions = {
   database: process.env.DB_NAME,
   synchronize: true,
   // logging: true,
-  entities: [User, JobSeekerProfile, Employment, TotalExpYear, TotalExpMonth, Company, JobTitle, Currency, State, City, NoticePeriod, AvailabilityToJoin, KeySkills, Industry, Department, RoleCategory, JobRole, Education, HighestQualification, Course, Specialization, CourseType, UniversityInstitute, Gender, Location, EducationType, Country, City, PassOutYear, EmployeeType, JobType, PreferredShift, CareerProfile, CareerProfileEmployeeType, CareerProfileJobType, CareerProfilePreferredLocations, CareerProfilePreferredShift, JoiningDateYear, JoiningDateMonth, PersonalDetails, Days, MaritalStatus, Category],
-  seeds: [TotalExpYearSeeder, TotalExpMonthSeeder, CompanySeeder, JobTitleSeeder, CurrencySeeder, StateSeeder, NoticePeriodSeeder, AvailabilityToJoinSeeder, KeySkillsSeeder, IndustrySeeder, DepartmentSeeder, RoleCategorySeeder, JobRoleSeeder, HighestQualificationSeeder, CourseSeeder, SpecializationSeeder, CourseTypeSeeder, UniversityInstituteSeeder, GenderSeeder, LocationSeeder, EducationTypeSeeder, CountrySeeder, CitySeeder, PassoutYearSeeder, EmployeeTypeSeeder, JobTypeSeeder, PreferredShiftSeeder, JoiningDateYearSeeder, JoiningDateMonthSeeder, DaysSeeder, MaritalStatusSeeder, CategorySeeder],
+  entities: [User, JobSeekerProfile, Employment, TotalExpYear, TotalExpMonth, Company, JobTitle, Currency, State, City, NoticePeriod, AvailabilityToJoin, KeySkills, Industry, Department, RoleCategory, JobRole, Education, HighestQualification, Course, Specialization, CourseType, UniversityInstitute, Gender, Location, EducationType, Country, City, PassOutYear, EmployeeType, JobType, PreferredShift, CareerProfile, CareerProfileEmployeeType, CareerProfileJobType, CareerProfilePreferredLocations, CareerProfilePreferredShift, JoiningDateYear, JoiningDateMonth, PersonalDetails, Days, MaritalStatus, Category, Proficiency, Language],
+  seeds: [TotalExpYearSeeder, TotalExpMonthSeeder, CompanySeeder, JobTitleSeeder, CurrencySeeder, StateSeeder, NoticePeriodSeeder, AvailabilityToJoinSeeder, KeySkillsSeeder, IndustrySeeder, DepartmentSeeder, RoleCategorySeeder, JobRoleSeeder, HighestQualificationSeeder, CourseSeeder, SpecializationSeeder, CourseTypeSeeder, UniversityInstituteSeeder, GenderSeeder, LocationSeeder, EducationTypeSeeder, CountrySeeder, CitySeeder, PassoutYearSeeder, EmployeeTypeSeeder, JobTypeSeeder, PreferredShiftSeeder, JoiningDateYearSeeder, JoiningDateMonthSeeder, DaysSeeder, MaritalStatusSeeder, CategorySeeder, ProficiencySeeder],
   subscribers: [],
   migrations: [],
 }
