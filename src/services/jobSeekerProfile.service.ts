@@ -198,10 +198,10 @@ export const savePersonalDetails = async (personalDetailsParams: PersonalDetails
         personalDetails.differentlyAbled = personalDetailsParams.differentlyAbled,
         personalDetails.careerBreak = personalDetailsParams.careerBreak,
         personalDetails?.language?.forEach((child: any) => {
-          if (child.id) {
-            const updatedChild = personalDetailsParams?.language?.find((item) => Number(item.id) === Number(child.id));
+          if (child.languageId) {
+            const updatedChild = personalDetailsParams?.language?.find((item) => Number(item.languageId) === Number(child.languageId));
             if (updatedChild) {
-              child.id = updatedChild.id,
+              child.languageId = updatedChild.languageId,
                 child.language = updatedChild.language,
                 child.proficiency = updatedChild.proficiency,
                 child.read = updatedChild.read,
@@ -211,7 +211,7 @@ export const savePersonalDetails = async (personalDetailsParams: PersonalDetails
           }
         });
       personalDetailsParams?.language?.forEach((child: any) => {
-        if (!child.id) {
+        if (!child.languageId) {
           personalDetails?.language.push(child);
         }
       })
