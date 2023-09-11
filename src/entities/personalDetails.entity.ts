@@ -1,5 +1,6 @@
 import { Entity, Column, OneToOne, JoinColumn, OneToMany, BaseEntity, PrimaryGeneratedColumn } from 'typeorm';
 import { JobSeekerProfile } from './jobSeekerProfile.entity';
+import { Language } from './language.entity';
 
 @Entity()
 export class PersonalDetails extends BaseEntity {
@@ -36,5 +37,8 @@ export class PersonalDetails extends BaseEntity {
     @OneToOne(() => JobSeekerProfile, jobSeekerProfile => jobSeekerProfile.personalDetails)
     @JoinColumn()
     jobSeekerProfile: JobSeekerProfile | undefined;
+
+    @OneToMany(() => Language, (language) => language.personalDetails, { createForeignKeyConstraints: true, cascade: true })
+    language: Language[] | undefined;
 }
 
