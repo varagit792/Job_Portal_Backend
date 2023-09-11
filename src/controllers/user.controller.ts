@@ -19,6 +19,7 @@ export const registerUser: RequestHandler = async (req: Request, res: Response, 
   try {
 
     const { workStatus, ...userParams } = req.body;
+    const jobSeekerType = workStatus ? 'Experienced' : 'Fresher';
 
     const userData = await fetchUser(userParams.email);
     if (userData) {
@@ -49,6 +50,8 @@ export const registerUser: RequestHandler = async (req: Request, res: Response, 
       resumePath = req.file.path;
     };
 
+    console.log('file data ', req.file)
+    const fileName = req.file?.filename
     const user = await saveUser(userParams);
 
     const OutPutData: OutParams = {
@@ -74,11 +77,13 @@ export const registerUser: RequestHandler = async (req: Request, res: Response, 
     }
     switch (user.userType) {
       case 'jobSeeker': {
+        
         const jobSeekerParams = {
           userId: user.id,
-          workStatus,
+          jobSeekerType,
           id: user.id,
-          resume: resumePath
+          resumePath: resumePath,
+          resumeFile:fileName
         }
         const jobSeeker = await saveJobSeekerProfile(jobSeekerParams);
         OutPutData.jobSeekProfileId = jobSeeker.id

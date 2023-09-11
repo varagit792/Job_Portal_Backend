@@ -7,10 +7,14 @@ import { CareerProfileJobType } from '../entities/careerProfileJobType.entity';
 import { PreferredShift } from '../entities/preferredShift.entity';
 import { CareerProfilePreferredLocations } from '../entities/careerProfilePreferredLocations.entity';
 import { log } from 'console';
+import { PersonalDetails } from '../entities/personalDetails.entity';
 
 type Params = {
   userId: number,
-  workStatus: boolean
+  jobSeekerType: string
+  id: number;
+  resumePath: string;
+  resumeFile?: string
 }
 
 export const saveJobSeekerProfile = async (jobSeekerParams: Params) => {
@@ -26,7 +30,7 @@ export const saveJobSeekerProfile = async (jobSeekerParams: Params) => {
 };
 
 export const updateJobSeekerProfile = async (id: number, jobSeekerParams: JobSeekerProfile) => {
-  console.log("jobSeekerParams=============", jobSeekerParams);
+  console.log("jobSeekerParams=============", jobSeekerParams, id);
 
   try {
 
@@ -51,10 +55,21 @@ export const updateJobSeekerProfile = async (id: number, jobSeekerParams: JobSee
 
 }
 
-export const getJobSeekerProfile = async () => {
+export const getJobSeekerProfile = async (id: number) => {
   try {
     const jobSeekerProfileRepository = AppDataSource.getRepository(JobSeekerProfile);
-    const jobSeekerProfile = await jobSeekerProfileRepository.find();
+    const jobSeekerProfile = await jobSeekerProfileRepository.findOne({
+      where: {
+        id
+      },
+      relations: {
+        currentLocation: true,
+        totalExpMonth: true,
+        totalExpYear: true,
+        noticePeriod: true,
+        personalDetails: true
+      }
+    });
     return jobSeekerProfile;
   } catch (error) {
     console.log('error', error);
@@ -120,27 +135,27 @@ export const getCareerProfile = async () => {
   }
 }
 
-export const saveEducation = async (educationParams: Education) => {
-  console.log("educationParams-->", educationParams);
+export const saveEducation = async (personalDetailsParams: Education) => {
+  console.log("personalDetailsParams-->", personalDetailsParams);
   try {
-    let education: any;
-    const educationRepository = AppDataSource.getRepository(Education);
-    if (educationParams?.id) {
-      let updatedValue = await educationRepository.update(educationParams.id, { ...educationParams });
+    let personalDetails: any;
+    const personalDetailsRepository = AppDataSource.getRepository(Education);
+    if (personalDetailsParams?.id) {
+      let updatedValue = await personalDetailsRepository.update(personalDetailsParams.id, { ...personalDetailsParams });
       if (updatedValue.affected == 1) {
-        education = await educationRepository.findOne({
+        personalDetails = await personalDetailsRepository.findOne({
           where: {
-            id: educationParams.id
+            id: personalDetailsParams.id
           }
         })
       }
     } else {
-      education = await educationRepository.save(educationParams);
+      personalDetails = await personalDetailsRepository.save(personalDetailsParams);
     }
     //delete user.hashedPassword
-    console.log("education-->", education);
+    console.log("personalDetails-->", personalDetails);
 
-    return education;
+    return personalDetails;
 
   } catch (error) {
     console.log('error', error);
@@ -151,9 +166,63 @@ export const saveEducation = async (educationParams: Education) => {
 export const getEducation = async () => {
 
   try {
-    const educationRepository = AppDataSource.getRepository(Education);
-    const education = await educationRepository.find();
-    return education;
+    const personalDetailsRepository = AppDataSource.getRepository(Education);
+    const personalDetails = await personalDetailsRepository.find();
+    return personalDetails;
+
+  } catch (error) {
+    console.log('error', error);
+    throw error;
+  }
+}
+
+
+export const savePersonalDetails = async (personalDetailsParams: PersonalDetails) => {
+  try {
+    let personalDetails: any;
+    const personalDetailsRepository = AppDataSource.getRepository(PersonalDetails);
+    if (personalDetailsParams?.id) {
+      let updatedValue = await personalDetailsRepository.update(personalDetailsParams.id, { ...personalDetailsParams });
+      if (updatedValue.affected == 1) {
+        personalDetails = await personalDetailsRepository.findOne({
+          where: {
+            id: personalDetailsParams.id
+          }
+        })
+      }
+    } else {
+      personalDetails = await personalDetailsRepository.save(personalDetailsParams)
+    }
+    return personalDetails;
+  } catch (error) {
+    throw error;
+  }
+}
+
+export const updateJobSeekerProfileBasicDetails = async (id: number, jobSeekerParams: JobSeekerProfile) => {
+
+  try {
+
+    const jobSeekerProfileRepository = AppDataSource.manager.getRepository(JobSeekerProfile);
+    const profileData = await jobSeekerProfileRepository.findOne({
+      where: {
+        id
+      },
+      relations: ['noticePeriod', 'totalExpMonth', 'totalExpYear', 'currentCurrency']
+
+    });
+
+    if (profileData) {
+      profileData.noticePeriod = jobSeekerParams.noticePeriod;
+      profileData.totalExpMonth = jobSeekerParams.totalExpMonth;
+      profileData.totalExpYear = jobSeekerParams.totalExpYear;
+      profileData.currentCountry = jobSeekerParams.currentCountry;
+      profileData.currentSalary = jobSeekerParams.currentSalary;
+      profileData.jobSeekerType = jobSeekerParams.jobSeekerType;
+      profileData.currentLocation = jobSeekerParams.currentLocation;
+      const jobSeekerProfile = await jobSeekerProfileRepository.save(profileData)
+      return jobSeekerProfile;
+    }
 
   } catch (error) {
     console.log('error', error);

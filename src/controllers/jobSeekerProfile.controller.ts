@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { getEducation, saveEducation, updateJobSeekerProfile, getJobSeekerProfile, saveCareerProfile, getCareerProfile } from '../services/jobSeekerProfile.service';
+import { getEducation, saveEducation, updateJobSeekerProfile, getJobSeekerProfile, saveCareerProfile, getCareerProfile, savePersonalDetails, updateJobSeekerProfileBasicDetails } from '../services/jobSeekerProfile.service';
 import { JobSeekerProfile } from '../entities/jobSeekerProfile.entity';
 import multer from 'multer';
 import { storageResume, fileFilterDocument, fileFilterImage, storageProfilePicture } from '../config/multer';
@@ -7,12 +7,13 @@ import { promisify } from 'util';
 import 'dotenv/config';
 import { log } from 'console';
 import { couldStartTrivia } from 'typescript';
+import { updateUser } from '../services/user.service';
 
 export const updateJobSeekerProfileController = async (req: Request, res: Response) => {
   try {
 
     const jobSeekerParams: JobSeekerProfile = req.body;
-    const jobSeekerProfileData = await updateJobSeekerProfile(jobSeekerParams.id, jobSeekerParams);
+    const jobSeekerProfileData = await updateJobSeekerProfile(req.user.id, jobSeekerParams);
     return res.status(200).json({
       data: jobSeekerProfileData
     });
@@ -26,7 +27,7 @@ export const updateJobSeekerProfileController = async (req: Request, res: Respon
 
 export const getJobSeekerProfileController = async (req: Request, res: Response) => {
   try {
-    const jobSeekerProfile = await getJobSeekerProfile();
+    const jobSeekerProfile = await getJobSeekerProfile(req.user.id);
     res.status(200).json({
       data: jobSeekerProfile
     });
@@ -243,6 +244,44 @@ export const getCareerProfileDetails = async (req: Request, res: Response) => {
     return res.status(500).json({
       message: 'Internal Server Error',
       error: error.sqlMessage
+    });
+  }
+}
+
+export const addOrUpdatePersonalDetails = async (req: Request, res: Response) => {
+  try {
+    const personalDetails = await savePersonalDetails(req.body);
+    res.status(201).json({
+      message: 'Personal details added successfully',
+      data: personalDetails
+    });
+  } catch (error: any) {
+    return res.status(500).json({
+      message: 'Internal Server Error',
+      error: error.sqlMessage
+    });
+  }
+}
+
+export const updateJobSeekerProfileBasicDetailsController = async (req: Request, res: Response) => {
+  try {
+
+    const { email, mobileNumber, name, ...jobSeekerBasicDetailParams } = req.body;
+    const userParams = {
+      email,
+      mobileNumber,
+      name
+    };
+
+    const userData = await updateUser(req.user.id, userParams);
+    const jobSeekerProfileData = await updateJobSeekerProfileBasicDetails(req.user.id, jobSeekerBasicDetailParams);
+    return res.status(200).json({
+      data: jobSeekerProfileData
+    });
+  } catch (error) {
+    console.log('error', error);
+    res.status(500).json({
+      message: 'Internal Server Error'
     });
   }
 }
