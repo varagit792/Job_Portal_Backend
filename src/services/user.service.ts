@@ -43,3 +43,17 @@ export const fetchUser = async (email: string) => {
     throw error;
   }
 }
+
+
+export const loginCheckUser = async (email: string) => {
+  try {
+    const userRepository = AppDataSource.getRepository(User);
+    const user = await userRepository.createQueryBuilder("user")
+      .where("user.email = :email", { email: email })
+      .getOne();
+    return user;
+  } catch (error) {
+    console.log('error', error);
+    throw error;
+  }
+}

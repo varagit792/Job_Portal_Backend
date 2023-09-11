@@ -8,7 +8,7 @@ export class CareerProfileEmployeeType extends BaseEntity {
   id!: number
 
   @ManyToOne(() => CareerProfile, (careerProfile) => careerProfile.careerProfileEmployeeType, { nullable: false, onDelete: "CASCADE" })
-  public careerProfile!: CareerProfile
+  careerProfile!: CareerProfile
 
   @OneToOne(() => EmployeeType, (employeeType) => employeeType.careerProfileEmployeeType, {
     cascade: true, onDelete: 'CASCADE', createForeignKeyConstraints: false
