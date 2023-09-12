@@ -97,7 +97,6 @@ export const saveCareerProfile = async (careerProfileParams: CareerProfile) => {
         } else {
           const careerProfileRepository = AppDataSource.getRepository(CareerProfile);
           const careerProfile = careerProfileRepository.save(careerProfileParams);
-          console.log("careerProfile Dev test-->", careerProfile);
           return careerProfile;
         }
       });
@@ -126,9 +125,6 @@ export const getCareerProfile = async () => {
         currency: true
       }
     });
-    //delete user.hashedPassword
-    console.log("careerProfile-->", careerProfile);
-
     return careerProfile;
 
   } catch (error) {

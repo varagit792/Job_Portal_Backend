@@ -3,7 +3,7 @@ import passport from '../config/passport';
 import { sign, Secret, SignOptions } from 'jsonwebtoken';
 import 'dotenv/config';
 import { jwtSign } from '../utils/jwtSign';
-import { registerUser } from '../controllers/user.controller';
+import { registerUser, signInUser } from '../controllers/user.controller';
 import { Request } from 'express-jwt';
 
 let JWT_SECRET: Secret;
@@ -33,16 +33,16 @@ authRouter.get('/google/callback',
     }),
   jwtSign
 )
-authRouter.get('/logout', (req: Request, res:Response, next) => {
+authRouter.get('/logout', (req: Request, res: Response, next) => {
   res.cookie('token', null);
-  res.redirect('http://localhost:3000/')
+  return req.user
 });
 
 authRouter.get('/current_user', passport.authenticate('jwt'), (req, res) => {
   res.send({ data: req.user });
 });
 
-authRouter.post('/login', passport.authenticate('local'), jwtSign);
+authRouter.post('/login', signInUser);
 
 authRouter.post('/register', registerUser);
 
