@@ -4,7 +4,7 @@ import { PersonalDetails } from './personalDetails.entity';
 @Entity()
 export class Language extends BaseEntity {
     @PrimaryGeneratedColumn('increment')
-    id!: number
+    languageId!: number
 
     @Column({ default: null })
     language!: string;
