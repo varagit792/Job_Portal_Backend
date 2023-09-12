@@ -5,6 +5,8 @@ import 'dotenv/config';
 import { jwtSign } from '../utils/jwtSign';
 import { registerUser, signInUser } from '../controllers/user.controller';
 import { Request } from 'express-jwt';
+import { SignOut } from '../controllers/signOut.controller';
+import verifyUser from '../middlewares/isAuthentcated';
 
 let JWT_SECRET: Secret;
 if (!process.env.JWT_SECRET) {
@@ -35,7 +37,15 @@ authRouter.get('/google/callback',
 )
 authRouter.get('/logout', (req: Request, res: Response, next) => {
   res.cookie('token', null);
-  return req.user
+  res.redirect('http://localhost:3000/')
+});
+
+authRouter.get('/signOut', passport.authenticate('jwt'), SignOut);
+
+authRouter.get('/verifyUser', verifyUser, (req, res) => {
+  console.log(req?.user);
+
+  return res.json({ Status: "Success", Name: req?.user })
 });
 
 authRouter.get('/current_user', passport.authenticate('jwt'), (req, res) => {

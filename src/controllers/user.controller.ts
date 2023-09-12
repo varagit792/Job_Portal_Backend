@@ -77,13 +77,13 @@ export const registerUser: RequestHandler = async (req: Request, res: Response, 
     }
     switch (user.userType) {
       case 'jobSeeker': {
-        
+
         const jobSeekerParams = {
           userId: user.id,
           jobSeekerType,
           id: user.id,
           resumePath: resumePath,
-          resumeFile:fileName
+          resumeFile: fileName
         }
         const jobSeeker = await saveJobSeekerProfile(jobSeekerParams);
         OutPutData.jobSeekProfileId = jobSeeker.id
@@ -126,7 +126,6 @@ export const signInUser: RequestHandler = async (req: Request, res: Response, ne
     const userData = await loginCheckUser(userParams.email);
     if (userData) {
       const passwordMatch = await bcrypt.compare(userParams.password, `${userData.hashedPassword}`);
-      console.log(passwordMatch, "====================");
 
       if (passwordMatch) {
         const token = await generateToken(userData);
