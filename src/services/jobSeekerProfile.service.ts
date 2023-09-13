@@ -71,6 +71,19 @@ export const getJobSeekerProfile = async (id: number) => {
         personalDetails: {
           language: true
         },
+        // employments: true,
+        employments: {
+          jobSeekerProfileEmploymentSkills: {
+            keySkills: true
+          },
+          totalExpMonths: true,
+          totalExpYears: true,
+          noticePeriod: true,
+          joiningDateYear: true,
+          joiningDateMonth: true,
+          location: true,
+          currencyType:true,
+        }        
       }
     });
     return jobSeekerProfile;

@@ -34,6 +34,7 @@ import daysRouter from './routers/days.router';
 import maritalStatusRouter from './routers/maritalStatus.router';
 import categoryRouter from './routers/category.router';
 import proficiencyRouter from './routers/proficiency.router';
+import jobSeekerProfileEmploymentRouter from './routers/jobSeekerProfileEmployment.router';
 
 const router = Router();
 
@@ -72,5 +73,6 @@ router.use(['/days'], daysRouter);
 router.use(['/maritalStatus'], maritalStatusRouter);
 router.use(['/category'], categoryRouter);
 router.use(['/proficiency'], proficiencyRouter);
+router.use(['/jobSeekerProfileEmployment'], jobSeekerProfileEmploymentRouter);
 
 export default router;   

@@ -11,6 +11,7 @@ import { Currency } from './currency.entity';
 import { TotalExpYear } from './totalExpYear.entity';
 import { TotalExpMonth } from './totalExpMonth.entity';
 import { PersonalDetails } from './personalDetails.entity';
+import { JobSeekerProfileEmployment } from './jobSeekerProfileEmployment.entity';
 
 @Entity()
 export class JobSeekerProfile extends BaseEntity {
@@ -85,6 +86,9 @@ export class JobSeekerProfile extends BaseEntity {
 
   @OneToMany(() => Education, (education) => education.jobSeekerProfile, { createForeignKeyConstraints: true, cascade: true })
   educations!: Education[]
+
+  @OneToMany(() => JobSeekerProfileEmployment, (employment) => employment.jobSeekerProfile, { createForeignKeyConstraints: true, cascade: true })
+  employments!: JobSeekerProfileEmployment[]
 
   @OneToOne(() => PersonalDetails, personalDetails => personalDetails.jobSeekerProfile)
   personalDetails: PersonalDetails | undefined;
