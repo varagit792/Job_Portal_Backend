@@ -1,100 +1,99 @@
-import { Entity, PrimaryGeneratedColumn, Column, BaseEntity, ManyToOne } from 'typeorm';
-
-enum EmploymentType {
-  Full_time = 'Full-time',
-  Internship = 'Internship'
-}
-
-enum CurrencyType {
-  Rupee = 'Rupee',
-  Dollar = 'Dollar'
-}
-
-enum NoticePeriod{
-  FifteenDays_or_less = '15Days or less',
-  OneMonth = '1 Month',
-  TwoMonth = '2 Months',
-  ThreeMonth = '3 Months',
-  More_than_3Months = 'More than 3 Months',
-  Serving_notice_period = 'Serving Notice Period'
-}
+import { Entity, PrimaryGeneratedColumn, Column, BaseEntity, ManyToOne, OneToOne, JoinColumn, OneToMany } from 'typeorm';
+import { EmployeeType } from './employeeType.entity';
+import { TotalExpMonth } from './totalExpMonth.entity';
+import { TotalExpYear } from './totalExpYear.entity';
+import { Location } from './location.entity';
+import { Currency } from './currency.entity';
+import { NoticePeriod } from './noticePeriod.entity';
+import { Department } from './department.entity';
+import { JobSeekerProfileEmploymentSkills } from './jobSeekerProfileEmploymentSkills.entity';
+import { KeySkills } from './keySkills.entity';
+import { JoiningDateYear } from './joiningDateYear.entity';
+import { JoiningDateMonth } from './joiningDateMonth.entity';
+import { JobSeekerProfile } from './jobSeekerProfile.entity';
 
 @Entity()
 export class JobSeekerProfileEmployment extends BaseEntity {
   @PrimaryGeneratedColumn()
   id!: number
 
+  @OneToMany(() => JobSeekerProfileEmploymentSkills, (jobSeekerProfileEmploymentSkills) => jobSeekerProfileEmploymentSkills.jobSeekerProfileEmployment, { createForeignKeyConstraints: true, cascade: true })
+  jobSeekerProfileEmploymentSkills!: JobSeekerProfileEmploymentSkills[]
+
+  // @Column()
+  // jobSeekerProfileId!: number
+
+  @ManyToOne(() => JobSeekerProfile, (jobSeekerProfile) => jobSeekerProfile.employments, { onDelete: 'CASCADE' })
+  jobSeekerProfile!: JobSeekerProfile
+
+
   @Column({ default: true })
-  is_current_employment!: boolean
+  isCurrentEmployment!: boolean
 
-  @Column({
-    type: 'enum',
-    enum: EmploymentType,
-    default: EmploymentType.Full_time
-  })
-  employment_type!: EmploymentType
+  // @OneToOne(() => EmployeeType)
+  // @JoinColumn()
+  @Column({ default: null, nullable: true })
+  employmentType!: string
 
-  @Column({ default: null, nullable:true })
-  total_exp_years!: number
-  
-  @Column({ default: null, nullable:true })
-  total_exp_months!: number
+  @OneToOne(() => TotalExpYear)
+  @JoinColumn()
+  totalExpYears!: TotalExpYear
+
+  @OneToOne(() => TotalExpMonth)
+  @JoinColumn()
+  totalExpMonths!: TotalExpMonth
 
   @Column()
-  company_name!: string
+  companyName!: string
 
   @Column({ default: null, nullable: true })
   designation!: string
-  
-  @Column()
-  joining_date_year!: number
-  
-  @Column()
-  joining_date_month!: string
 
-  @Column({default: null, nullable: true})
-  location_id!: number
-  
-  @Column({ default: null, nullable: true })
-  department_id!: number
-  
-  @Column({ default: null, nullable: true })
-  current_salary!: number
+  // @Column()
+  // joiningDateYear!: number
+  @OneToOne(() => JoiningDateYear)
+  @JoinColumn()
+  joiningDateYear!: JoiningDateYear
 
-  @Column({
-    type: 'enum',
-    enum: CurrencyType,
-    default: CurrencyType.Rupee
-  })
-  currency_type!: CurrencyType
+  // @Column()
+  // joiningDateMonth!: number
+  @OneToOne(() => JoiningDateMonth)
+  @JoinColumn()
+  joiningDateMonth!: JoiningDateMonth
+
+  @OneToOne(() => Location)
+  @JoinColumn()
+  location!: Location
+
+  @OneToOne(() => Department)
+  @JoinColumn()
+  department!: Department
 
   @Column({ default: null, nullable: true })
-  monthly_stipend!: number
+  currentSalary!: number
 
-  @Column({
-    type: 'enum',
-    enum: CurrencyType,
-    default: CurrencyType.Rupee
-  })
-  monthly_stipend_currency_type!: CurrencyType
-
-  @Column({
-    type: 'text',
-  })
-  job_profile!: string;
-
-  @Column({
-    type: 'enum',
-    enum: NoticePeriod,
-    default: null,
-    nullable: true
-  })
-  notice_period!: NoticePeriod
+  @OneToOne(() => Currency)
+  @JoinColumn()
+  currencyType!: Currency
 
   @Column({ default: null, nullable: true })
-  worked_till_year!: number
+  monthlyStipend!: number
+
+  @OneToOne(() => Currency)
+  @JoinColumn()
+  monthlyStipendCurrencyType!: Currency
+
+  @Column({ default: null, nullable: true, type: 'text' })
+  jobProfile!: string;
+
+  @OneToOne(() => NoticePeriod)
+  @JoinColumn()
+  noticePeriod!: NoticePeriod
 
   @Column({ default: null, nullable: true })
-  worked_till_month!: string
- 
+  workedTillYear!: number
+
+  @Column({ default: null, nullable: true })
+  workedTillMonth!: number
+
 }
