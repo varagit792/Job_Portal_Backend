@@ -8,6 +8,7 @@ import { PreferredShift } from '../entities/preferredShift.entity';
 import { CareerProfilePreferredLocations } from '../entities/careerProfilePreferredLocations.entity';
 import { log } from 'console';
 import { PersonalDetails } from '../entities/personalDetails.entity';
+import { Language } from '../entities/language.entity';
 
 type Params = {
   userId: number,
@@ -219,6 +220,21 @@ export const savePersonalDetails = async (personalDetailsParams: PersonalDetails
       personalDetails = await personalDetailsRepository.save(personalDetailsParams)
     }
     return personalDetails;
+  } catch (error) {
+    throw error;
+  }
+}
+
+export const deleteLanguages = async (languageParams: Language) => {
+  try {
+    AppDataSource.getRepository(Language)
+      .createQueryBuilder()
+      .delete()
+      .from(Language)
+      .where('languageId In(:languageId)', {
+        languageId: languageParams,
+      })
+      .execute();
   } catch (error) {
     throw error;
   }

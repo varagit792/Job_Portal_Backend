@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { getEducation, saveEducation, updateJobSeekerProfile, getJobSeekerProfile, saveCareerProfile, getCareerProfile, savePersonalDetails, updateJobSeekerProfileBasicDetails } from '../services/jobSeekerProfile.service';
+import { getEducation, saveEducation, updateJobSeekerProfile, getJobSeekerProfile, saveCareerProfile, getCareerProfile, savePersonalDetails, updateJobSeekerProfileBasicDetails, deleteLanguages } from '../services/jobSeekerProfile.service';
 import { JobSeekerProfile } from '../entities/jobSeekerProfile.entity';
 import multer from 'multer';
 import { storageResume, fileFilterDocument, fileFilterImage, storageProfilePicture } from '../config/multer';
@@ -254,6 +254,21 @@ export const addOrUpdatePersonalDetails = async (req: Request, res: Response) =>
     res.status(201).json({
       message: 'Personal details added successfully',
       data: personalDetails
+    });
+  } catch (error: any) {
+    return res.status(500).json({
+      message: 'Internal Server Error',
+      error: error.sqlMessage
+    });
+  }
+}
+
+export const deletePersonalDetailsLanguages = async (req: Request, res: Response) => {
+  try {
+    const languages = await deleteLanguages(req.body);
+    res.status(201).json({
+      message: 'Languages successfully deleted',
+      data: languages
     });
   } catch (error: any) {
     return res.status(500).json({
