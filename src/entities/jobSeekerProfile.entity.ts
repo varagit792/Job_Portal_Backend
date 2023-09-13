@@ -18,7 +18,7 @@ export class JobSeekerProfile extends BaseEntity {
   @PrimaryColumn()
   id!: number
 
-  @Column({ default: 'Fresher' })
+  @Column({ default: 'null' })
   jobSeekerType!: string
 
   @Column({ default: null, nullable: true })
@@ -97,8 +97,8 @@ export class JobSeekerProfile extends BaseEntity {
   @JoinColumn()
   user!: User
 
-  @UpdateDateColumn({ type: "timestamp", default: () => "CURRENT_TIMESTAMP(6)", onUpdate: "CURRENT_TIMESTAMP(6)" })
+  @UpdateDateColumn({ type: "timestamp", default: () => null, onUpdate: "CURRENT_TIMESTAMP(6)", nullable:true })
   profileLastUpdated!: Date
-  @UpdateDateColumn({ type: 'timestamp', default: () => "CURRENT_TIMESTAMP(6)", onUpdate: "CURRENT_TIMESTAMP(6)" })
+  @UpdateDateColumn({ type: 'timestamp', default: () => null, onUpdate: "CURRENT_TIMESTAMP(6)" , nullable:true})
   resumeLastUpdated!: Date
 }
