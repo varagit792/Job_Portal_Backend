@@ -1,4 +1,5 @@
-import { Entity, PrimaryGeneratedColumn, Column, BaseEntity, ManyToOne } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, BaseEntity, ManyToOne, OneToMany } from 'typeorm';
+import { JobSeekerProfileEmployment } from './jobSeekerProfileEmployment.entity';
 
 @Entity()
 export class NoticePeriod extends BaseEntity {
@@ -10,5 +11,8 @@ export class NoticePeriod extends BaseEntity {
 
   @Column()
   status!: boolean
+
+  @OneToMany(type => JobSeekerProfileEmployment, j => j.noticePeriod)
+  jobSeekerProfileEmployment!: JobSeekerProfileEmployment
 
 }

@@ -1,6 +1,7 @@
-import { Entity, PrimaryGeneratedColumn, Column, BaseEntity, ManyToOne, OneToOne } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, BaseEntity, ManyToOne, OneToOne, OneToMany } from 'typeorm';
 import { JobSeekerProfile } from './jobSeekerProfile.entity';
 import { CareerProfile } from './careerProfile.entity';
+import { JobSeekerProfileEmployment } from './jobSeekerProfileEmployment.entity';
 
 @Entity()
 export class Department extends BaseEntity {
@@ -17,5 +18,8 @@ export class Department extends BaseEntity {
 
   @OneToOne(() => CareerProfile, (careerProfile) => careerProfile.department)
   careerProfile!: CareerProfile
+
+  @OneToMany(type => JobSeekerProfileEmployment, j => j.department)
+  jobSeekerProfileEmployment!:JobSeekerProfileEmployment
 
 }
