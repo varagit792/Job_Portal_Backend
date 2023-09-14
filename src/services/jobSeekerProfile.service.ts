@@ -71,7 +71,7 @@ export const getJobSeekerProfile = async (id: number) => {
         personalDetails: {
           language: true
         },
-        // employments: true,
+        educations : true,
         employments: {
           jobSeekerProfileEmploymentSkills: {
             keySkills: true
