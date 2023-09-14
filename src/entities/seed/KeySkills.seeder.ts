@@ -289,6 +289,10 @@ export default class KeySkillsSeeder implements Seeder {
         status: true,
       },
       {
+        title: 'Java',
+        status: true,
+      },
+      {
         title: 'Caché ObjectScript',
         status: true,
       },
@@ -442,6 +446,14 @@ export default class KeySkillsSeeder implements Seeder {
       },
       {
         title: 'COMPASS',
+        status: true,
+      },
+      {
+        title: 'Node Js',
+        status: true,
+      },
+      {
+        title: 'React Js',
         status: true,
       },
       {
@@ -1090,10 +1102,6 @@ export default class KeySkillsSeeder implements Seeder {
       },
       {
         title: 'JASS',
-        status: true,
-      },
-      {
-        title: 'Java',
         status: true,
       },
       {
@@ -1834,6 +1842,10 @@ export default class KeySkillsSeeder implements Seeder {
       },
       {
         title: 'PHP',
+        status: true,
+      },
+      {
+        title: 'MYSQL',
         status: true,
       },
       {

@@ -50,7 +50,6 @@ export const registerUser: RequestHandler = async (req: Request, res: Response, 
       resumePath = req.file.path;
     };
 
-    console.log('file data ', req.file)
     const fileName = req.file?.filename
     const user = await saveUser(userParams);
 
@@ -90,7 +89,6 @@ export const registerUser: RequestHandler = async (req: Request, res: Response, 
       }
     }
     const token = await generateToken(user);
-    console.log('token', token);
     res.cookie('token', token);
     return res.status(201).json({
       message: 'User successfully saved',
@@ -129,11 +127,12 @@ export const signInUser: RequestHandler = async (req: Request, res: Response, ne
 
       if (passwordMatch) {
         const token = await generateToken(userData);
-        console.log('token', token);
         res.cookie('token', token);
+
         return res.status(201).json({
           message: 'valid user',
-          data: userData
+          data: userData,
+          token: token
         });
       } else {
         return res.status(500).json({

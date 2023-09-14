@@ -2542,6 +2542,10 @@ export default class CompanySeeder implements Seeder {
         status: true,
       },
       {
+        title: 'RATNA GLOBAL TECHNOLOGIES PVT. LTD',
+        status: true,
+      },
+      {
         title: 'ARIC HEALTHCARE PRIVATE LIMITED',
         status: true,
       },
