@@ -15,8 +15,11 @@ export default class EmployeeTypeSeeder implements Seeder {
       {
         title: 'Part Time',
         status: true,
+      },
+      {
+        title: 'Internship',
+        status: true,
       }
-
     ],
       ["id"]);
 

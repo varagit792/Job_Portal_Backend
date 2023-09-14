@@ -11,13 +11,14 @@ import { Currency } from './currency.entity';
 import { TotalExpYear } from './totalExpYear.entity';
 import { TotalExpMonth } from './totalExpMonth.entity';
 import { PersonalDetails } from './personalDetails.entity';
+import { JobSeekerProfileEmployment } from './jobSeekerProfileEmployment.entity';
 
 @Entity()
 export class JobSeekerProfile extends BaseEntity {
   @PrimaryColumn()
   id!: number
 
-  @Column({ default: 'Fresher' })
+  @Column({ default: 'null' })
   jobSeekerType!: string
 
   @Column({ default: null, nullable: true })
@@ -86,6 +87,9 @@ export class JobSeekerProfile extends BaseEntity {
   @OneToMany(() => Education, (education) => education.jobSeekerProfile, { createForeignKeyConstraints: true, cascade: true })
   educations!: Education[]
 
+  @OneToMany(() => JobSeekerProfileEmployment, (employment) => employment.jobSeekerProfile, { createForeignKeyConstraints: true, cascade: true })
+  employments!: JobSeekerProfileEmployment[]
+
   @OneToOne(() => PersonalDetails, personalDetails => personalDetails.jobSeekerProfile)
   personalDetails: PersonalDetails | undefined;
 
@@ -93,8 +97,8 @@ export class JobSeekerProfile extends BaseEntity {
   @JoinColumn()
   user!: User
 
-  @UpdateDateColumn({ type: "timestamp", default: () => "CURRENT_TIMESTAMP(6)", onUpdate: "CURRENT_TIMESTAMP(6)" })
+  @UpdateDateColumn({ type: "timestamp", default: () => null, onUpdate: "CURRENT_TIMESTAMP(6)", nullable:true })
   profileLastUpdated!: Date
-  @UpdateDateColumn({ type: 'timestamp', default: () => "CURRENT_TIMESTAMP(6)", onUpdate: "CURRENT_TIMESTAMP(6)" })
+  @UpdateDateColumn({ type: 'timestamp', default: () => null, onUpdate: "CURRENT_TIMESTAMP(6)" , nullable:true})
   resumeLastUpdated!: Date
 }
