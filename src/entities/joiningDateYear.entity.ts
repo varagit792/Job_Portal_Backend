@@ -1,4 +1,5 @@
-import { Entity, PrimaryGeneratedColumn, Column, BaseEntity } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, BaseEntity, OneToMany } from 'typeorm';
+import { JobSeekerProfileEmployment } from './jobSeekerProfileEmployment.entity';
 
 @Entity()
 export class JoiningDateYear extends BaseEntity {
@@ -11,4 +12,6 @@ export class JoiningDateYear extends BaseEntity {
   @Column()
   status!: boolean
 
+  @OneToMany(type => JobSeekerProfileEmployment, j => j.joiningDateYear)
+  jobSeekerProfileEmployment!:JobSeekerProfileEmployment
 }

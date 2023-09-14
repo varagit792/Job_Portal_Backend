@@ -5,12 +5,13 @@ import 'dotenv/config';
 
 export const addOrUpdateJobSeekerProfileEmployment = async (req: Request, res: Response) => {
     try {
-        const education = await saveJobSeekerProfileEmployment(req.body);
-        console.log("education", education);
+        console.log("req.body", req.body);
+        const employment = await saveJobSeekerProfileEmployment(req.body);
+        console.log("employment", employment);
         
         res.status(201).json({
             message: 'Employment details added successfully',
-            data: education
+            data: employment
         });
     } catch (error: any) {
         return res.status(500).json({

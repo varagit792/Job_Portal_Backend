@@ -1,5 +1,6 @@
-import { Entity, PrimaryGeneratedColumn, Column, BaseEntity, OneToOne } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, BaseEntity, OneToOne, OneToMany } from 'typeorm';
 import { CareerProfile } from './careerProfile.entity';
+import { JobSeekerProfileEmployment } from './jobSeekerProfileEmployment.entity';
 
 @Entity()
 export class Currency extends BaseEntity {
@@ -15,4 +16,7 @@ export class Currency extends BaseEntity {
   @OneToOne(() => CareerProfile, (careerProfile) => careerProfile.currency)
   careerProfile!: CareerProfile
 
+  @OneToMany(type => JobSeekerProfileEmployment, j => { j.currencyType, j.monthlyStipendCurrencyType })
+  jobSeekerProfileEmployment!: JobSeekerProfileEmployment
+  
 }

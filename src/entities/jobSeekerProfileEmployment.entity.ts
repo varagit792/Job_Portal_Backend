@@ -35,12 +35,18 @@ export class JobSeekerProfileEmployment extends BaseEntity {
   @Column({ default: null, nullable: true })
   employmentType!: string
 
-  @OneToOne(() => TotalExpYear)
-  @JoinColumn()
+  // @OneToOne(() => TotalExpYear)
+  // @JoinColumn()
+  // totalExpYears!: TotalExpYear
+  @ManyToOne(() => TotalExpYear)
+  @JoinColumn({ name:'totalExpYearsId', referencedColumnName:'id'})
   totalExpYears!: TotalExpYear
 
-  @OneToOne(() => TotalExpMonth)
-  @JoinColumn()
+  // @OneToOne(() => TotalExpMonth)
+  // @JoinColumn()
+  // totalExpMonths!: TotalExpMonth
+  @ManyToOne(() => TotalExpMonth)
+  @JoinColumn({ name:'totalExpMonthsId', referencedColumnName:'id'})
   totalExpMonths!: TotalExpMonth
 
   @Column()
@@ -51,43 +57,63 @@ export class JobSeekerProfileEmployment extends BaseEntity {
 
   // @Column()
   // joiningDateYear!: number
-  @OneToOne(() => JoiningDateYear)
-  @JoinColumn()
+  @ManyToOne(() => JoiningDateYear)
+  @JoinColumn({ name:'joiningDateYearId', referencedColumnName:'id'})
   joiningDateYear!: JoiningDateYear
 
   // @Column()
   // joiningDateMonth!: number
-  @OneToOne(() => JoiningDateMonth)
-  @JoinColumn()
+  // @OneToOne(() => JoiningDateMonth)
+  // @JoinColumn()
+  // joiningDateMonth!: JoiningDateMonth
+  @ManyToOne(() => JoiningDateMonth)
+  @JoinColumn({ name:'joiningDateMonthId', referencedColumnName:'id'})
   joiningDateMonth!: JoiningDateMonth
 
-  @OneToOne(() => Location)
-  @JoinColumn()
+  // @OneToOne(() => Location)
+  // @JoinColumn()
+  // location!: Location
+  @ManyToOne(() => Location)
+  @JoinColumn({ name:'locationId', referencedColumnName:'id'})
   location!: Location
 
-  @OneToOne(() => Department)
-  @JoinColumn()
+  // @OneToOne(() => Department)
+  // @JoinColumn()
+  // department!: Department
+  @ManyToOne(() => Department)
+  @JoinColumn({ name:'departmentId', referencedColumnName:'id'})
   department!: Department
 
   @Column({ default: null, nullable: true })
   currentSalary!: number
 
-  @OneToOne(() => Currency)
-  @JoinColumn()
+  // @OneToOne(() => Currency)
+  // @JoinColumn()
+  // currencyType!: Currency
+  @ManyToOne(() => Currency)
+  @JoinColumn({ name:'currencyTypeId', referencedColumnName:'id'})
   currencyType!: Currency
 
   @Column({ default: null, nullable: true })
   monthlyStipend!: number
 
-  @OneToOne(() => Currency)
-  @JoinColumn()
+  // @OneToOne(() => Currency)
+  // @JoinColumn()
+  // monthlyStipendCurrencyType!: Currency
+
+  @ManyToOne(() => Currency)
+  @JoinColumn({ name:'monthlyStipendCurrencyTypeId', referencedColumnName:'id'})
   monthlyStipendCurrencyType!: Currency
 
   @Column({ default: null, nullable: true, type: 'text' })
   jobProfile!: string;
 
-  @OneToOne(() => NoticePeriod)
-  @JoinColumn()
+  // @OneToOne(() => NoticePeriod)
+  // @JoinColumn()
+  // noticePeriod!: NoticePeriod
+
+  @ManyToOne(() => NoticePeriod)
+  @JoinColumn({ name:'noticePeriodId', referencedColumnName:'id'})
   noticePeriod!: NoticePeriod
 
   @Column({ default: null, nullable: true })
