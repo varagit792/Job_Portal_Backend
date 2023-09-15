@@ -1,4 +1,4 @@
-import { Entity, Column, OneToOne, JoinColumn, OneToMany, BaseEntity, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn, PrimaryColumn } from 'typeorm';
+import { Entity, Column, OneToOne, JoinColumn, OneToMany, BaseEntity, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn, PrimaryColumn, Unique, Index, ManyToOne } from 'typeorm';
 import { NoticePeriod } from './noticePeriod.entity';
 import { Location } from './location.entity';
 import { Education } from './education.entity';
@@ -48,23 +48,24 @@ export class JobSeekerProfile extends BaseEntity {
   @Column({ default: null, type: 'text' })
   resumeHeadline!: string
 
-  @OneToOne(() => Location, { nullable: true, onDelete: 'SET NULL', onUpdate: 'CASCADE' })
-  @JoinColumn()
+  @ManyToOne(() => Location, { nullable: true, onDelete: 'SET NULL', onUpdate: 'CASCADE' })
+  @JoinColumn({ name:'currentLocationId', referencedColumnName:'id'})
   currentLocation!: Location | null
 
-  @OneToOne(() => TotalExpYear, { nullable: true, onDelete: 'SET NULL', onUpdate: 'CASCADE' })
-  @JoinColumn()
+  @ManyToOne(() => TotalExpYear, { nullable: true, onDelete: 'SET NULL', onUpdate: 'CASCADE' })
+  @JoinColumn({ name: 'totalExpYearId', referencedColumnName:'id'})
   totalExpYear!: TotalExpYear | null
 
-  @OneToOne(() => TotalExpMonth, { nullable: true, onDelete: 'SET NULL', onUpdate: 'CASCADE' })
-  @JoinColumn()
+  @ManyToOne(type => TotalExpMonth, t => t.jobSeekerProfile, { nullable: true, onDelete: 'SET NULL', onUpdate: 'CASCADE' })
+  @JoinColumn({ name:'totalExpMonthId', referencedColumnName:'id'})
   totalExpMonth!: TotalExpMonth | null
+
 
   @Column({ default: null })
   currentSalary!: string
 
-  @OneToOne(() => Currency, { nullable: true, onDelete: 'SET NULL', onUpdate: 'CASCADE' })
-  @JoinColumn()
+  @ManyToOne(() => Currency, { nullable: true, onDelete: 'SET NULL', onUpdate: 'CASCADE' })
+  @JoinColumn({ name:'currentCurrencyId', referencedColumnName:'id'})
   currentCurrency!: Currency | null
 
   @Column({ default: 'India' })
@@ -77,7 +78,7 @@ export class JobSeekerProfile extends BaseEntity {
   @Column({ default: null, nullable: true, type: 'text' })
   keySkills!: string
 
-  @OneToOne(() => Industry)
+ @ManyToOne(() => Industry)
   @JoinColumn()
   industry!: Industry
 

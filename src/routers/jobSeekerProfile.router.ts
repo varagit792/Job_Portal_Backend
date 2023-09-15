@@ -13,7 +13,8 @@ import {
   addOrUpdatePersonalDetails,
   updateJobSeekerProfileBasicDetailsController,
   deletePersonalDetailsLanguages,
-  ProfileIndicator
+  ProfileIndicator,
+  jobSeekerMailVerification
 } from '../controllers/jobSeekerProfile.controller';
 import passport from '../config/passport';
 import { keySkillsController, keySkillsGetController } from '../controllers/keySkills.controller';
@@ -37,6 +38,8 @@ jobSeekerProfileRouter.put('/profileBasicDetails', passport.authenticate('jwt'),
 
 jobSeekerProfileRouter.post('/personalDetails', passport.authenticate('jwt', { session: false }), addOrUpdatePersonalDetails);
 jobSeekerProfileRouter.delete('/deletePersonalDetailsLanguages', passport.authenticate('jwt', { session: false }), deletePersonalDetailsLanguages);
+jobSeekerProfileRouter.post('/emailVerification', passport.authenticate('jwt', { session: false }), jobSeekerMailVerification);
+
 
 jobSeekerProfileRouter.get('/profileIndicator', passport.authenticate('jwt', { session: false }), ProfileIndicator);
 

@@ -8,6 +8,7 @@ import 'dotenv/config';
 import { log } from 'console';
 import { couldStartTrivia } from 'typescript';
 import { updateUser } from '../services/user.service';
+import { sendEmail } from '../utils/sendEmail';
 
 export const updateJobSeekerProfileController = async (req: Request, res: Response) => {
   try {
@@ -381,5 +382,21 @@ export const ProfileIndicator = async (req: Request, res: Response) => {
       message: 'Internal Server Error',
       error: error.sqlMessage
     });
+  }
+}
+export const jobSeekerMailVerification = async (req: Request, res: Response) => {
+  try {
+    
+    const mailData = await sendEmail(req.body);
+
+    return res.status(200).json({
+      data: mailData
+    });
+
+  } catch (error:any) {
+    console.log('error', error);
+    res.status(500).json({
+      message: error.message
+    })
   }
 }
