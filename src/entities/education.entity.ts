@@ -22,7 +22,10 @@ export class Education extends BaseEntity {
   // @Column()
   // course!: string
 
-  @Column()
+  @Column({ default: null, nullable: true })
+  board!: string
+
+  @Column({ default: null, nullable: true })
   specialization!: string
 
   @Column()
