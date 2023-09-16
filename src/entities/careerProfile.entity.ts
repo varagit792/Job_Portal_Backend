@@ -54,14 +54,14 @@ export class CareerProfile extends BaseEntity {
   @OneToMany(() => CareerProfilePreferredShift, (careerProfilePreferredShift) => careerProfilePreferredShift.careerProfile, { createForeignKeyConstraints: false, onDelete: "CASCADE", cascade: ['insert'] })
   careerProfilePreferredShift!: CareerProfilePreferredShift[]
 
-  @OneToOne(() => Currency, { cascade: true, eager: true ,onDelete:'SET NULL'})
+  @OneToOne(() => Currency, { cascade: true, onDelete: 'CASCADE', createForeignKeyConstraints: false })
   @JoinColumn()
   currency!: Currency | null
 
   @Column({ default: null })
   expectedSalary!: string
 
-  @OneToOne(() => JobSeekerProfile)
+  @OneToOne(() => JobSeekerProfile, (jobSeekerProfile) => jobSeekerProfile.careerProfile)
   @JoinColumn()
   jobSeekerProfile!: JobSeekerProfile
 

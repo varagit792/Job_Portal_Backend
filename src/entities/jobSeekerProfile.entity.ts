@@ -12,6 +12,7 @@ import { TotalExpYear } from './totalExpYear.entity';
 import { TotalExpMonth } from './totalExpMonth.entity';
 import { PersonalDetails } from './personalDetails.entity';
 import { JobSeekerProfileEmployment } from './jobSeekerProfileEmployment.entity';
+import { CareerProfile } from './careerProfile.entity';
 
 @Entity()
 export class JobSeekerProfile extends BaseEntity {
@@ -97,8 +98,11 @@ export class JobSeekerProfile extends BaseEntity {
   @JoinColumn()
   user!: User
 
-  @UpdateDateColumn({ type: "timestamp", default: () => null, onUpdate: "CURRENT_TIMESTAMP(6)", nullable:true })
+  @OneToOne(() => CareerProfile, (careerProfile) => careerProfile.jobSeekerProfile)
+  careerProfile!: CareerProfile
+
+  @UpdateDateColumn({ type: "timestamp", default: () => null, onUpdate: "CURRENT_TIMESTAMP(6)", nullable: true })
   profileLastUpdated!: Date
-  @UpdateDateColumn({ type: 'timestamp', default: () => null, onUpdate: "CURRENT_TIMESTAMP(6)" , nullable:true})
+  @UpdateDateColumn({ type: 'timestamp', default: () => null, onUpdate: "CURRENT_TIMESTAMP(6)", nullable: true })
   resumeLastUpdated!: Date
 }

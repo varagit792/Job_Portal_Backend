@@ -235,8 +235,9 @@ export const addOrUpdateCareerProfile = async (req: Request, res: Response) => {
 }
 
 export const getCareerProfileDetails = async (req: Request, res: Response) => {
+
   try {
-    const careerProfile = await getCareerProfile();
+    const careerProfile = await getCareerProfile(req.user.id);
     res.status(200).json({
       data: careerProfile
     });
@@ -297,6 +298,88 @@ export const updateJobSeekerProfileBasicDetailsController = async (req: Request,
     console.log('error', error);
     res.status(500).json({
       message: 'Internal Server Error'
+    });
+  }
+}
+
+export const ProfileIndicator = async (req: Request, res: Response) => {
+  /**
+   * Weighage
+   * 
+   * Resume = 10%
+   * Resume head line = 2%
+   * Profile Picture = 2%
+   * Career profile = 10%
+   * Key skill = 10%
+   * Education = 13%
+   * It Skills = 10%
+   * Projects = 10%
+   * Profile summery = 4%
+   * Accomplishments = 4%
+   * Personal details = 10%
+   * Language = 5%
+   * 
+  */
+
+  const resume = 10;
+  const resumeHeadLine = 2
+  const profilePicture = 2
+  const careerProfile = 10
+  const keySkill = 10
+  const education = 13
+  const itSkills = 10
+  const projects = 10
+  const profileSummery = 4
+  const accomplishments = 4
+  const personalDetails = 10
+  const employment = 10
+  const language = 5
+  try {
+    const indicator = await getJobSeekerProfile(req.user.id);
+    let calculatedProfileIndicator = 0;
+    if (indicator?.resumeFile && indicator?.resumePath) {
+      calculatedProfileIndicator += resume;
+    }
+
+    if (indicator?.resumeHeadline) {
+      calculatedProfileIndicator += resumeHeadLine;
+    }
+
+    if (indicator?.profilePictureFile && indicator?.profilePicturePath) {
+      calculatedProfileIndicator += profilePicture;
+    }
+    if (indicator?.careerProfile) {
+      calculatedProfileIndicator += careerProfile;
+    }
+    if (indicator?.keySkills) {
+      calculatedProfileIndicator += keySkill;
+    }
+    if (indicator?.educations && indicator?.educations?.length > 0) {
+      calculatedProfileIndicator += education;
+    }
+    if (indicator?.profileSummary) {
+      calculatedProfileIndicator += profileSummery;
+    }
+
+    if (indicator?.employments && indicator?.employments?.length > 0) {
+      calculatedProfileIndicator += employment;
+    }
+
+    if (indicator?.personalDetails) {
+      calculatedProfileIndicator += personalDetails;
+    }
+    if (indicator?.personalDetails?.language && indicator?.personalDetails?.language?.length > 0) {
+      calculatedProfileIndicator += language;
+    }
+
+    res.status(201).json({
+      message: 'Profile indicator fetched',
+      data: calculatedProfileIndicator
+    });
+  } catch (error: any) {
+    return res.status(500).json({
+      message: 'Internal Server Error',
+      error: error.sqlMessage
     });
   }
 }
