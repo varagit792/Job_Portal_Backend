@@ -71,7 +71,19 @@ export const getJobSeekerProfile = async (id: number) => {
         personalDetails: {
           language: true
         },
-        educations : true,
+        educations: true,
+        careerProfile: {
+          industry: true,
+          department: true,
+          roleCategory: true,
+          jobRole: true,
+          careerProfileJobType: { jobType: true },
+          careerProfileEmployeeType: { employeeType: true },
+          jobSeekerProfile: true,
+          careerProfilePreferredShift: { preferredShift: true },
+          careerProfilePreferredLocations: { location: true },
+          currency: true
+        },
         employments: {
           jobSeekerProfileEmploymentSkills: {
             keySkills: true
@@ -82,8 +94,8 @@ export const getJobSeekerProfile = async (id: number) => {
           joiningDateYear: true,
           joiningDateMonth: true,
           location: true,
-          currencyType:true,
-        }        
+          currencyType: true,
+        }
       }
     });
     return jobSeekerProfile;
@@ -121,11 +133,14 @@ export const saveCareerProfile = async (careerProfileParams: CareerProfile) => {
   }
 }
 
-export const getCareerProfile = async () => {
+export const getCareerProfile = async (id: number) => {
 
   try {
     const careerProfileRepository = AppDataSource.getRepository(CareerProfile);
     const careerProfile = await careerProfileRepository.find({
+      where: {
+        id
+      },
       relations: {
         industry: true,
         department: true,
@@ -283,3 +298,4 @@ export const updateJobSeekerProfileBasicDetails = async (id: number, jobSeekerPa
     throw error;
   }
 }
+
