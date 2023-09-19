@@ -1,16 +1,15 @@
 import { transport } from '../config/nodemailer';
 
-export const sendEmail = async (reqBody: any) => {
+export const sendEmailVerifyLink = async (mailParams:any) => {
   try {
-    console.log('email body', reqBody);
+    
     const info = await transport.sendMail({
-      from: 'admain@jobportal.com',
-      to: reqBody.email,
-      subject: reqBody.subject,
-      text: reqBody.mailBody
+      from: 'admin@jobportal.com',
+      to: mailParams.email,
+      subject: 'Email Confirmation',
+      html: `Please click <a href=http://localhost:4000/jobSeekerProfile/emailVerify/${mailParams.token}> here </a> to verify your email, Thanks `
     });
 
-    console.log('info id ', info);
     return info.messageId;
 
   } catch (error) {
