@@ -13,6 +13,8 @@ import { TotalExpMonth } from './totalExpMonth.entity';
 import { PersonalDetails } from './personalDetails.entity';
 import { JobSeekerProfileEmployment } from './jobSeekerProfileEmployment.entity';
 import { CareerProfile } from './careerProfile.entity';
+import { JobTitle } from './jobTitle.entity';
+import { Company } from './company.entity';
 
 @Entity()
 export class JobSeekerProfile extends BaseEntity {
@@ -49,15 +51,15 @@ export class JobSeekerProfile extends BaseEntity {
   resumeHeadline!: string
 
   @ManyToOne(() => Location, { nullable: true, onDelete: 'SET NULL', onUpdate: 'CASCADE' })
-  @JoinColumn({ name:'currentLocationId', referencedColumnName:'id'})
+  @JoinColumn({ name: 'currentLocationId', referencedColumnName: 'id' })
   currentLocation!: Location | null
 
   @ManyToOne(() => TotalExpYear, { nullable: true, onDelete: 'SET NULL', onUpdate: 'CASCADE' })
-  @JoinColumn({ name: 'totalExpYearId', referencedColumnName:'id'})
+  @JoinColumn({ name: 'totalExpYearId', referencedColumnName: 'id' })
   totalExpYear!: TotalExpYear | null
 
   @ManyToOne(type => TotalExpMonth, t => t.jobSeekerProfile, { nullable: true, onDelete: 'SET NULL', onUpdate: 'CASCADE' })
-  @JoinColumn({ name:'totalExpMonthId', referencedColumnName:'id'})
+  @JoinColumn({ name: 'totalExpMonthId', referencedColumnName: 'id' })
   totalExpMonth!: TotalExpMonth | null
 
 
@@ -65,7 +67,7 @@ export class JobSeekerProfile extends BaseEntity {
   currentSalary!: string
 
   @ManyToOne(() => Currency, { nullable: true, onDelete: 'SET NULL', onUpdate: 'CASCADE' })
-  @JoinColumn({ name:'currentCurrencyId', referencedColumnName:'id'})
+  @JoinColumn({ name: 'currentCurrencyId', referencedColumnName: 'id' })
   currentCurrency!: Currency | null
 
   @Column({ default: 'India' })
@@ -78,13 +80,21 @@ export class JobSeekerProfile extends BaseEntity {
   @Column({ default: null, nullable: true, type: 'text' })
   keySkills!: string
 
- @ManyToOne(() => Industry)
+  @ManyToOne(() => Industry)
   @JoinColumn()
   industry!: Industry
 
   @OneToOne(() => NoticePeriod, { nullable: true, onDelete: 'SET NULL', onUpdate: 'CASCADE' })
   @JoinColumn()
   noticePeriod!: NoticePeriod | null
+
+  @OneToOne(() => JobTitle, { nullable: true, onDelete: 'SET NULL', onUpdate: 'CASCADE' })
+  @JoinColumn()
+  currentJobTitle!: JobRole | null
+
+  @OneToOne(() => Company, { nullable: true, onDelete: 'SET NULL', onUpdate: 'CASCADE' })
+  @JoinColumn()
+  currentCompany!: Company | null
 
   @OneToMany(() => Education, (education) => education.jobSeekerProfile, { createForeignKeyConstraints: true, cascade: true })
   educations!: Education[]
