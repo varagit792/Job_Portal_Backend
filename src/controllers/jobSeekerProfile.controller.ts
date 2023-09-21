@@ -78,7 +78,7 @@ export const updateJobSeekerResume = async (req: Request, res: Response) => {
     if (error instanceof multer.MulterError) {
       if (error.code === 'LIMIT_FILE_SIZE') {
         return res.status(400).json({
-          message: 'File size larger then 2MB'
+          message: 'Uploaded file size is larger than 2MB'
         })
       }
     } else {
