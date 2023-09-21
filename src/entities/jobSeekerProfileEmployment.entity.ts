@@ -55,6 +55,9 @@ export class JobSeekerProfileEmployment extends BaseEntity {
   @Column({ default: null, nullable: true })
   designation!: string
 
+  @Column({ default: null, nullable: true })
+  role!: string
+
   // @Column()
   // joiningDateYear!: number
   @ManyToOne(() => JoiningDateYear)
@@ -121,5 +124,11 @@ export class JobSeekerProfileEmployment extends BaseEntity {
 
   @Column({ default: null, nullable: true })
   workedTillMonth!: number
+
+  @Column({ default: null, nullable: true })
+  workedFromYear!: number
+
+  @Column({ default: null, nullable: true })
+  workedFromMonth!: number
 
 }

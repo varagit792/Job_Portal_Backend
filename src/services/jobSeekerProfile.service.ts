@@ -95,7 +95,8 @@ export const getJobSeekerProfile = async (id: number) => {
           joiningDateMonth: true,
           location: true,
           currencyType: true,
-        }
+          department: true,
+        }        
       }
     });
     return jobSeekerProfile;
