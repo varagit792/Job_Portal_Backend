@@ -31,8 +31,6 @@ export const saveJobSeekerProfile = async (jobSeekerParams: Params) => {
 };
 
 export const updateJobSeekerProfile = async (id: number, jobSeekerParams: JobSeekerProfile) => {
-  console.log("jobSeekerParams=============", jobSeekerParams, id);
-
   try {
 
     const jobSeekerProfileRepository = AppDataSource.getRepository(JobSeekerProfile);
@@ -163,7 +161,6 @@ export const getCareerProfile = async (id: number) => {
 }
 
 export const saveEducation = async (personalDetailsParams: Education) => {
-  console.log("personalDetailsParams-->", personalDetailsParams);
   try {
     let personalDetails: any;
     const personalDetailsRepository = AppDataSource.getRepository(Education);
@@ -180,8 +177,6 @@ export const saveEducation = async (personalDetailsParams: Education) => {
       personalDetails = await personalDetailsRepository.save(personalDetailsParams);
     }
     //delete user.hashedPassword
-    console.log("personalDetails-->", personalDetails);
-
     return personalDetails;
 
   } catch (error) {
