@@ -30,10 +30,10 @@ export class User extends BaseEntity {
   @OneToOne(() => JobSeekerProfile)
   @JoinColumn()
   jobSeekerProfile!: JobSeekerProfile
-  // @Column({default:false})
-  // isEmailVerified!: boolean
+  @Column({default:false})
+  isEmailVerified!: boolean
 
-  // @Column({default:false})
-  // isMobileVerified!: boolean
+  @Column({default:false})
+  isMobileVerified!: boolean
 
 }

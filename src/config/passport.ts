@@ -12,9 +12,9 @@ type JWTPayLoad = {
   email: string,
   id: number,
   iat: number,
-  exp:number
+  exp: number
 }
-if (process.env.GOOGLE_CLIENT_ID  === undefined) {
+if (process.env.GOOGLE_CLIENT_ID === undefined) {
   throw new Error("cannot be undefined")
 }
 if (process.env.GOOGLE_CLIENT_SECRET === undefined) {
@@ -30,13 +30,13 @@ passport.use(new GoogleStrategy({
   clientSecret: process.env.GOOGLE_CLIENT_SECRET,
   callbackURL: '/auth/google/callback'
 },
-  async(accessToken: any, refreshToken: any, profile: any, done: any) => {
+  async (accessToken: any, refreshToken: any, profile: any, done: any) => {
     try {
       const user = new User();
       const existingUser = await User.findOneBy({
         accountId: profile.id
       });
-      
+
       if (existingUser) {
         console.log('user exits ', existingUser);
         return done(null, existingUser);
@@ -45,14 +45,15 @@ passport.use(new GoogleStrategy({
       user.accountId = profile.id;
       user.accountType = 'google';
       user.email = profile.emails[0].value;
-      user.name = `${profile.name.givenName}   ${profile.name.familyName}`;
+      user.name = profile.name.givenName;
+      user.isEmailVerified = true;
       const userData = await user.save();
       const jobSeekerParams = {
         userId: userData.id,
         id: userData.id,
         jobSeekerType: 'Fresher',
         resumePath: '',
-        resumeFile:''
+        resumeFile: ''
       }
       const jobSeeker = await saveJobSeekerProfile(jobSeekerParams);
       return done(null, user)
@@ -90,7 +91,7 @@ passport.use(new LocalStrategy({ usernameField: 'email', passwordField: 'passwor
         email
       });
       if (!user) {
-        return done({message:'user not found'}, false);
+        return done({ message: 'user not found' }, false);
       };
       if (user.hashedPassword === undefined) {
         new Error("Password cannot be undefined")
@@ -99,9 +100,9 @@ passport.use(new LocalStrategy({ usernameField: 'email', passwordField: 'passwor
         if (!passwordMatch) {
           return done({ message: 'password did not match' }, false);
         };
-        return done(null, user);   
+        return done(null, user);
       }
-      
+
     } catch (error) {
       console.log('error in local login ', error);
       return done(error, false);

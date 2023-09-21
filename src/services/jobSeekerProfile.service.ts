@@ -66,6 +66,8 @@ export const getJobSeekerProfile = async (id: number) => {
         totalExpMonth: true,
         totalExpYear: true,
         noticePeriod: true,
+        currentCompany: true,
+        currentJobTitle: true,
         personalDetails: {
           language: true
         },

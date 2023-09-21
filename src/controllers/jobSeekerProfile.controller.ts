@@ -7,8 +7,11 @@ import { promisify } from 'util';
 import 'dotenv/config';
 import { log } from 'console';
 import { couldStartTrivia } from 'typescript';
-import { updateUser } from '../services/user.service';
-
+import { fetchUser, updateUser } from '../services/user.service';
+import { sendEmailVerifyLink } from '../utils/sendEmail';
+import { generateToken } from '../utils/generateToken';
+import jwt,{ Secret } from 'jsonwebtoken';
+import { verifyJwtToken } from '../utils/verifyJwtToken';
 export const updateJobSeekerProfileController = async (req: Request, res: Response) => {
   try {
 
@@ -393,5 +396,54 @@ export const ProfileIndicator = async (req: Request, res: Response) => {
       message: 'Internal Server Error',
       error: error.sqlMessage
     });
+  }
+}
+export const jobSeekerMailVerification = async (req: Request, res: Response) => {
+  try {
+
+    const token = await generateToken(req.user);
+    const mailParams = {
+      email: req.user.email,
+      token
+    }
+    const mailData = await sendEmailVerifyLink(mailParams);
+
+    return res.status(200).json({
+      data: mailData
+    });
+
+  } catch (error: any) {
+    console.log('error', error);
+    res.status(500).json({
+      message: error.message
+    })
+  }
+}
+
+export const updateJobSeekerMailVerification = async (req: Request, res: Response) => {
+  try {
+
+    const token = req.params.token;
+    const decoded: any = await verifyJwtToken(token);
+    const userData = await fetchUser(decoded.email)
+    if (userData) {
+      const emailParams = {
+        isEmailVerified: true
+      }
+      const mailData = await updateUser(userData.id, emailParams);
+      return res.status(200).json({
+        message:'Email successfully verified'
+      });
+    } else {
+      return res.status(400).json({
+        message: 'User not present'
+      });
+    };
+
+  } catch (error: any) {
+    console.log('error', error);
+    res.status(500).json({
+      message: error.message
+    })
   }
 }
