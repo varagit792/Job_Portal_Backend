@@ -275,8 +275,7 @@ export const updateJobSeekerProfileBasicDetails = async (id: number, jobSeekerPa
       where: {
         id
       },
-      relations: ['noticePeriod', 'totalExpMonth', 'totalExpYear', 'currentCurrency']
-
+      relations: ['noticePeriod', 'totalExpMonth', 'totalExpYear', 'currentCurrency', 'currentCompany', 'currentJobTitle']
     });
 
     if (profileData) {
@@ -287,6 +286,8 @@ export const updateJobSeekerProfileBasicDetails = async (id: number, jobSeekerPa
       profileData.currentSalary = jobSeekerParams.currentSalary;
       profileData.jobSeekerType = jobSeekerParams.jobSeekerType;
       profileData.currentLocation = jobSeekerParams.currentLocation;
+      profileData.currentCompany = jobSeekerParams.currentCompany;
+      profileData.currentJobTitle = jobSeekerParams.currentJobTitle;
       const jobSeekerProfile = await jobSeekerProfileRepository.save(profileData)
       return jobSeekerProfile;
     }

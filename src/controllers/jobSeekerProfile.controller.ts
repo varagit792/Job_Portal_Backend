@@ -10,7 +10,7 @@ import { couldStartTrivia } from 'typescript';
 import { fetchUser, updateUser } from '../services/user.service';
 import { sendEmailVerifyLink } from '../utils/sendEmail';
 import { generateToken } from '../utils/generateToken';
-import jwt,{ Secret } from 'jsonwebtoken';
+import jwt, { Secret } from 'jsonwebtoken';
 import { verifyJwtToken } from '../utils/verifyJwtToken';
 export const updateJobSeekerProfileController = async (req: Request, res: Response) => {
   try {
@@ -78,7 +78,7 @@ export const updateJobSeekerResume = async (req: Request, res: Response) => {
     if (error instanceof multer.MulterError) {
       if (error.code === 'LIMIT_FILE_SIZE') {
         return res.status(400).json({
-          message: 'File size larger then 2MB'
+          message: 'Uploaded file size is larger than 2MB'
         })
       }
     } else {
@@ -432,7 +432,7 @@ export const updateJobSeekerMailVerification = async (req: Request, res: Respons
       }
       const mailData = await updateUser(userData.id, emailParams);
       return res.status(200).json({
-        message:'Email successfully verified'
+        message: 'Email successfully verified'
       });
     } else {
       return res.status(400).json({
