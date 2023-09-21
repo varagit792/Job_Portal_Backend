@@ -321,60 +321,72 @@ export const ProfileIndicator = async (req: Request, res: Response) => {
    * 
   */
 
-  const resume = 10;
-  const resumeHeadLine = 2
-  const profilePicture = 2
-  const careerProfile = 10
-  const keySkill = 10
-  const education = 13
-  const itSkills = 10
-  const projects = 10
-  const profileSummery = 4
-  const accomplishments = 4
-  const personalDetails = 10
-  const employment = 10
-  const language = 5
+  const completeData = {
+    calculatedProfileIndicator: 0,
+    resume: { status: false, value: 10 },
+    resumeHeadLine: { status: false, value: 2 },
+    profilePicture: { status: false, value: 2 },
+    careerProfile: { status: false, value: 10 },
+    keySkill: { status: false, value: 10 },
+    education: { status: false, value: 13 },
+    itSkills: { status: false, value: 10 },
+    projects: { status: false, value: 10 },
+    profileSummery: { status: false, value: 4 },
+    accomplishments: { status: false, value: 4 },
+    personalDetails: { status: false, value: 10 },
+    employment: { status: false, value: 10 },
+    language: { status: false, value: 5 },
+  }
   try {
     const indicator = await getJobSeekerProfile(req.user.id);
-    let calculatedProfileIndicator = 0;
     if (indicator?.resumeFile && indicator?.resumePath) {
-      calculatedProfileIndicator += resume;
+      completeData.calculatedProfileIndicator += completeData?.resume?.value;
+      completeData.resume.status = true;
     }
 
     if (indicator?.resumeHeadline) {
-      calculatedProfileIndicator += resumeHeadLine;
+      completeData.calculatedProfileIndicator += completeData?.resumeHeadLine?.value;
+      completeData.resumeHeadLine.status = true;
     }
 
     if (indicator?.profilePictureFile && indicator?.profilePicturePath) {
-      calculatedProfileIndicator += profilePicture;
+      completeData.calculatedProfileIndicator += completeData?.profilePicture?.value;
+      completeData.profilePicture.status = true;
     }
     if (indicator?.careerProfile) {
-      calculatedProfileIndicator += careerProfile;
+      completeData.calculatedProfileIndicator += completeData?.careerProfile?.value;
+      completeData.careerProfile.status = true;
     }
     if (indicator?.keySkills) {
-      calculatedProfileIndicator += keySkill;
+      completeData.calculatedProfileIndicator += completeData?.keySkill?.value;
+      completeData.keySkill.status = true;
     }
     if (indicator?.educations && indicator?.educations?.length > 0) {
-      calculatedProfileIndicator += education;
+      completeData.calculatedProfileIndicator += completeData?.education?.value;
+      completeData.education.status = true;
     }
     if (indicator?.profileSummary) {
-      calculatedProfileIndicator += profileSummery;
+      completeData.calculatedProfileIndicator += completeData?.profileSummery?.value;
+      completeData.profileSummery.status = true;
     }
 
     if (indicator?.employments && indicator?.employments?.length > 0) {
-      calculatedProfileIndicator += employment;
+      completeData.calculatedProfileIndicator += completeData?.employment?.value;
+      completeData.employment.status = true;
     }
 
     if (indicator?.personalDetails) {
-      calculatedProfileIndicator += personalDetails;
+      completeData.calculatedProfileIndicator += completeData?.personalDetails?.value;
+      completeData.personalDetails.status = true;
     }
     if (indicator?.personalDetails?.language && indicator?.personalDetails?.language?.length > 0) {
-      calculatedProfileIndicator += language;
+      completeData.calculatedProfileIndicator += completeData?.language?.value;
+      completeData.language.status = true;
     }
 
     res.status(201).json({
       message: 'Profile indicator fetched',
-      data: calculatedProfileIndicator
+      data: [completeData]
     });
   } catch (error: any) {
     return res.status(500).json({
