@@ -32,7 +32,6 @@ export const saveJobSeekerProfile = async (jobSeekerParams: Params) => {
 
 export const updateJobSeekerProfile = async (id: number, jobSeekerParams: JobSeekerProfile) => {
   try {
-
     const jobSeekerProfileRepository = AppDataSource.getRepository(JobSeekerProfile);
     await jobSeekerProfileRepository.update(id, {
       ...(jobSeekerParams.completedSections && { completedSections: jobSeekerParams.completedSections }),
@@ -44,6 +43,7 @@ export const updateJobSeekerProfile = async (id: number, jobSeekerParams: JobSee
       ...({ resumeFile: jobSeekerParams.resumeFile }),
       ...({ resumeHeadline: jobSeekerParams.resumeHeadline }),
       ...({ profileSummary: jobSeekerParams.profileSummary }),
+      ...({ about: jobSeekerParams.about }),
     });
     const jobSeekerProfile = await jobSeekerProfileRepository.findOneBy({ id });
     return jobSeekerProfile;
@@ -96,7 +96,7 @@ export const getJobSeekerProfile = async (id: number) => {
           location: true,
           currencyType: true,
           department: true,
-        }        
+        }
       }
     });
     return jobSeekerProfile;
