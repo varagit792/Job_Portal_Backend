@@ -35,10 +35,10 @@ authRouter.get('/google/callback',
     }),
   jwtSign
 )
-authRouter.get('/logout', (req: Request, res: Response, next) => {
-  res.cookie('token', null);
-  res.redirect('http://localhost:3000/')
-});
+// authRouter.get('/logout', (req: Request, res: Response, next) => {
+//   res.cookie('token', null);
+//   res.redirect('http://localhost:3000/')
+// });
 
 authRouter.get('/signOut', passport.authenticate('jwt'), SignOut);
 
