@@ -45,8 +45,9 @@ export class JobSeekerProfile extends BaseEntity {
   @Column({ default: null, nullable: true, type: 'text' })
   profileSummary!: string
 
-  // @Column({ default: null })
-  // currentLocation!: string
+  @Column({ default: null, nullable: true, type: 'text' })
+  about!: string
+
   @Column({ default: null, type: 'text' })
   resumeHeadline!: string
 
