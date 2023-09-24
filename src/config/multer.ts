@@ -14,7 +14,7 @@ export const storageResume = multer.diskStorage({
   }
 });
 
-export const storageProfilePicture= multer.diskStorage({
+export const storageProfilePicture = multer.diskStorage({
   destination: function (req, file, cb) {
     cb(null, path.resolve(__dirname, `..${path.sep}..${path.sep}uploadProfilePicture`));
   },
@@ -30,7 +30,7 @@ export const fileFilterDocument = (req: Request, file: Express.Multer.File, cb: 
     cb(null, true)
   } else {
     cb(null, false);
-    cb(new Error("Invalid file type"));
+    cb(new Error("Filetype accepted are pdf, doc, docx"));
   }
 }
 
@@ -40,7 +40,7 @@ export const fileFilterImage = (req: Request, file: Express.Multer.File, cb: Fil
     cb(null, true)
   } else {
     cb(null, false);
-    cb(new Error("Invalid file type"));
+    cb(new Error("Filetype accepted are png, jpg, jpeg, gif"));
   }
 }
 
