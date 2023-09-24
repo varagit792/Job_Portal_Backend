@@ -93,6 +93,7 @@ export const registerUser: RequestHandler = async (req: Request, res: Response, 
     return res.status(201).json({
       message: 'User successfully saved',
       data: OutPutData,
+      token:token
     });
 
   } catch (error) {
