@@ -2,7 +2,7 @@ import { Entity, PrimaryGeneratedColumn, Column, BaseEntity, ManyToOne, OneToOne
 import { Jobs } from './jobs.entity';
 
 @Entity()
-export class HighestQualification extends BaseEntity {
+export class Recurrence extends BaseEntity {
   @PrimaryGeneratedColumn()
   id!: number
 
@@ -12,7 +12,7 @@ export class HighestQualification extends BaseEntity {
   @Column()
   status!: boolean
 
-  @OneToOne(() => Jobs, (jobs) => jobs.education)
-  education!: Jobs
+  @OneToOne(() => Jobs, (jobs) => jobs.recurrence)
+  recurrence!: Jobs
 
 }

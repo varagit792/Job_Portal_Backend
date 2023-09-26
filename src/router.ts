@@ -21,6 +21,8 @@ import roleCategoryRouter from './routers/roleCategory.router';
 import specializationRouter from './routers/specialization.router';
 import stateRouter from './routers/state.router';
 import cityRouter from './routers/city.router';
+import recurrenceRouter from './routers/recurrence.router';
+import numberSystemRouter from './routers/numberSystem.router';
 import totalExpMonthRouter from './routers/totalExpMonth.router';
 import totalExpYearRouter from './routers/totalExpYear.router';
 import universityInstituteRouter from './routers/universityInstitute.router';
@@ -37,6 +39,7 @@ import categoryRouter from './routers/category.router';
 import proficiencyRouter from './routers/proficiency.router';
 import jobSeekerProfileEmploymentRouter from './routers/jobSeekerProfileEmployment.router';
 import boardRouter from './routers/board.router';
+import jobsRouter from './routers/admin/jobs.router';
 
 const router = Router();
 
@@ -46,6 +49,8 @@ router.use(['/availabilityToJoin'], availabilityToJoinRouter);
 router.use(['/company'], companyRouter);
 router.use(['/course'], courseRouter);
 router.use(['/courseType'], courseTypeRouter);
+router.use(['/recurrence'], recurrenceRouter);
+router.use(['/numberSystem'], numberSystemRouter);
 router.use(['/currency'], currencyRouter);
 router.use(['/department'], departmentRouter);
 router.use(['/educationType'], educationTypeRouter);
@@ -78,5 +83,6 @@ router.use(['/category'], categoryRouter);
 router.use(['/proficiency'], proficiencyRouter);
 router.use(['/jobSeekerProfileEmployment'], jobSeekerProfileEmploymentRouter);
 router.use(['/board'], boardRouter);
+router.use(['/jobs'], jobsRouter);
 
 export default router;   
