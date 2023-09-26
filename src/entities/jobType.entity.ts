@@ -2,6 +2,7 @@ import { Entity, PrimaryGeneratedColumn, Column, BaseEntity, ManyToOne, OneToOne
 import { JobSeekerProfile } from './jobSeekerProfile.entity';
 import { CareerProfile } from './careerProfile.entity';
 import { CareerProfileJobType } from './careerProfileJobType.entity';
+import { Jobs } from './jobs.entity';
 
 @Entity()
 export class JobType extends BaseEntity {
@@ -16,5 +17,8 @@ export class JobType extends BaseEntity {
 
   @OneToOne(() => CareerProfileJobType, (careerProfileJobType) => careerProfileJobType.jobType)
   careerProfileJobType!: CareerProfileJobType
+
+  @OneToOne(() => Jobs, (jobs) => jobs.jobType)
+  jobType!: Jobs
 
 }

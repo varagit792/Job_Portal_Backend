@@ -1,5 +1,6 @@
-import { Entity, PrimaryGeneratedColumn, Column, BaseEntity, OneToOne, JoinColumn } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, BaseEntity, OneToOne, JoinColumn, OneToMany } from 'typeorm';
 import { JobSeekerProfile } from './jobSeekerProfile.entity';
+import { Jobs } from './jobs.entity';
 
 @Entity()
 export class User extends BaseEntity {
@@ -9,7 +10,7 @@ export class User extends BaseEntity {
   @Column()
   name!: string
 
-  @Column({ nullable: false ,unique:true})
+  @Column({ nullable: false, unique: true })
   email!: string
 
   @Column({ default: null })
@@ -30,10 +31,14 @@ export class User extends BaseEntity {
   @OneToOne(() => JobSeekerProfile)
   @JoinColumn()
   jobSeekerProfile!: JobSeekerProfile
-  @Column({default:false})
+
+  @Column({ default: false })
   isEmailVerified!: boolean
 
-  @Column({default:false})
+  @Column({ default: false })
   isMobileVerified!: boolean
+
+  @OneToMany(() => Jobs, (jobs) => jobs.user, { createForeignKeyConstraints: true, cascade: true })
+  user!: Jobs[]
 
 }
