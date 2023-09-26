@@ -56,11 +56,35 @@ export const saveJobs = async (jobsParams: Jobs) => {
   }
 }
 
-export const allJobs = async () => {
+export const allJobs = async (offset: any = 1) => {
+  const page = Number(process.env.JOB_PER_PAGE);
+  const skip = (page * offset) - page;
   try {
     const jobsRepository = AppDataSource.getRepository(Jobs);
-    const jobs = await jobsRepository.findBy({
-      status: true
+    const jobs = await jobsRepository.find({
+      order: {
+        id: "DESC",
+      },
+      relations: {
+        company: true,
+        totalExpYearStart: true,
+        totalExpYearEnd: true,
+        numberSystem: true,
+        recurrence: true,
+        jobsLocation: true,
+        jobsRole: true,
+        industryType: true,
+        department: true,
+        employeeType: true,
+        jobType: true,
+        roleCategory: true,
+        education: true,
+        user: true,
+        jobsKeySkills: { keySkills: true }
+      },
+      skip: (skip),
+      take: (page),
+
     });
 
     return jobs;
