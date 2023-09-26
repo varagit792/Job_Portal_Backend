@@ -59,10 +59,9 @@ export const saveJobs = async (jobsParams: Jobs) => {
 export const allJobs = async () => {
   try {
     const jobsRepository = AppDataSource.getRepository(Jobs);
-    const jobs = await jobsRepository.findOneBy({
+    const jobs = await jobsRepository.findBy({
       status: true
     });
-    console.log(jobs);
 
     return jobs;
   } catch (error) {
