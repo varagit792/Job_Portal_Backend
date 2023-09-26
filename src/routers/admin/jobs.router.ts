@@ -6,7 +6,7 @@ const jobsRouter = Router();
 
 //jobsRouter.get('/all', passport.authenticate('jwt'), getJobsDetails);
 
-jobsRouter.get('/all/:offset', fetchAllJobs);
+jobsRouter.get('/all/:offset?', fetchAllJobs);
 jobsRouter.post('/post', postJobs);
 
 export default jobsRouter;
