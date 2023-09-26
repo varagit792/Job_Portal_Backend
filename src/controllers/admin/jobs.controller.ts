@@ -4,9 +4,8 @@ import 'dotenv/config';
 
 export const fetchAllJobs: RequestHandler = async (req: Request, res: Response) => {
   try {
-    const result = await allJobs();
-    console.log(result);
-
+    const offset = req.params.offset;
+    const result = await allJobs(offset);
     return res.status(200).json({
       data: result
     });
@@ -22,8 +21,6 @@ export const fetchAllJobs: RequestHandler = async (req: Request, res: Response) 
 export const postJobs: RequestHandler = async (req: Request, res: Response) => {
   try {
     const result = await saveJobs(req.body);
-    console.log(result);
-
     return res.status(200).json({
       data: result
     });
