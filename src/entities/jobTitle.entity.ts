@@ -1,4 +1,5 @@
-import { Entity, PrimaryGeneratedColumn, Column, BaseEntity } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, BaseEntity, OneToOne } from 'typeorm';
+import { Jobs } from './jobs.entity';
 
 @Entity()
 export class JobTitle extends BaseEntity {
@@ -10,5 +11,8 @@ export class JobTitle extends BaseEntity {
 
   @Column()
   status!: boolean
+
+  @OneToOne(() => Jobs, (jobs) => jobs.jobsRole)
+  jobsRole!: Jobs
 
 }

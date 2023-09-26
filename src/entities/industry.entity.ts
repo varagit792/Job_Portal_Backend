@@ -1,5 +1,6 @@
 import { Entity, PrimaryGeneratedColumn, Column, BaseEntity, ManyToOne, OneToOne } from 'typeorm';
 import { CareerProfile } from './careerProfile.entity';
+import { Jobs } from './jobs.entity';
 
 @Entity()
 export class Industry extends BaseEntity {
@@ -14,6 +15,10 @@ export class Industry extends BaseEntity {
 
   @OneToOne(() => CareerProfile, (careerProfile) => careerProfile.industry)
   careerProfile!: CareerProfile
+
+
+  @OneToOne(() => Jobs, (jobs) => jobs.industryType)
+  industryType!: Jobs
 
 
 

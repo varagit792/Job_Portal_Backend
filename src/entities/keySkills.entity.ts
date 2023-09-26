@@ -1,5 +1,6 @@
-import { Entity, PrimaryGeneratedColumn, Column, BaseEntity, ManyToOne } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, BaseEntity, ManyToOne, OneToOne } from 'typeorm';
 import { JobSeekerProfile } from './jobSeekerProfile.entity';
+import { JobsKeySkills } from './jobsKeySkills.entity';
 
 @Entity()
 export class KeySkills extends BaseEntity {
@@ -9,12 +10,11 @@ export class KeySkills extends BaseEntity {
   @Column({ unique: true })
   title!: string;
 
+  @OneToOne(() => JobsKeySkills, (jobs) => jobs.keySkills)
+  keySkills!: JobsKeySkills
+
   @Column()
   status!: boolean
 
-  //@ManyToOne(() => JobSeekerProfile, (jobSeekerProfile) => jobSeekerProfile.keySkills,{onDelete:'CASCADE'})
-  //jobSeekerProfile!:JobSeekerProfile
-  // @ManyToOne(() => JobSeekerProfile, (jobSeekerProfile) => jobSeekerProfile.keySkills,{onDelete:'CASCADE'})
-  // jobSeekerProfile!:JobSeekerProfile
 
 }

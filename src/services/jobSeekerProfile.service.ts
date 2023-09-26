@@ -165,6 +165,8 @@ export const getCareerProfile = async (id: number) => {
 
 export const saveEducation = async (personalDetailsParams: Education) => {
   try {
+    console.log("personalDetailsParams", personalDetailsParams);
+
     let personalDetails: any;
     const personalDetailsRepository = AppDataSource.getRepository(Education);
     if (personalDetailsParams?.id) {
