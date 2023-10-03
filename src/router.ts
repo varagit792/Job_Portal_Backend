@@ -40,6 +40,7 @@ import proficiencyRouter from './routers/proficiency.router';
 import jobSeekerProfileEmploymentRouter from './routers/jobSeekerProfileEmployment.router';
 import boardRouter from './routers/board.router';
 import jobsRouter from './routers/admin/jobs.router';
+import companiesRouter from './routers/admin/companies.router';
 
 const router = Router();
 
@@ -84,5 +85,6 @@ router.use(['/proficiency'], proficiencyRouter);
 router.use(['/jobSeekerProfileEmployment'], jobSeekerProfileEmploymentRouter);
 router.use(['/board'], boardRouter);
 router.use(['/jobs'], jobsRouter);
+router.use(['/companies'], companiesRouter);
 
 export default router;   
