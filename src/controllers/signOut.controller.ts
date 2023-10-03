@@ -2,11 +2,7 @@ import { Request, RequestHandler, Response, NextFunction } from 'express';
 
 export const SignOut: RequestHandler = async (req: Request, res: Response, next: NextFunction) => {
   try {
-    //res.clearCookie('token');
-    //res.cookie('token', null);
-    //res.cookie('name', null);
     res.clearCookie('token');
-    res.clearCookie('name');
     // console.log("Logout Successfully");
     await req.user.save();
     // res.render("login")
