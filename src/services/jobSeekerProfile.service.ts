@@ -2,11 +2,6 @@ import { JobSeekerProfile } from '../entities/jobSeekerProfile.entity';
 import { AppDataSource } from '../config/typeorm';
 import { Education } from '../entities/education.entity';
 import { CareerProfile } from '../entities/careerProfile.entity';
-import { CareerProfileEmployeeType } from '../entities/careerProfileEmployeeType.entity';
-import { CareerProfileJobType } from '../entities/careerProfileJobType.entity';
-import { PreferredShift } from '../entities/preferredShift.entity';
-import { CareerProfilePreferredLocations } from '../entities/careerProfilePreferredLocations.entity';
-import { log } from 'console';
 import { PersonalDetails } from '../entities/personalDetails.entity';
 import { Language } from '../entities/language.entity';
 
@@ -51,7 +46,6 @@ export const updateJobSeekerProfile = async (id: number, jobSeekerParams: JobSee
     console.log('error', error);
     throw error;
   }
-
 }
 
 export const getJobSeekerProfile = async (id: number) => {
@@ -66,6 +60,7 @@ export const getJobSeekerProfile = async (id: number) => {
         totalExpMonth: true,
         totalExpYear: true,
         noticePeriod: true,
+        keySkills: { profileKeySkills: true },
         currentCompany: true,
         currentJobTitle: true,
         personalDetails: {
@@ -165,8 +160,6 @@ export const getCareerProfile = async (id: number) => {
 
 export const saveEducation = async (personalDetailsParams: Education) => {
   try {
-    console.log("personalDetailsParams", personalDetailsParams);
-
     let personalDetails: any;
     const personalDetailsRepository = AppDataSource.getRepository(Education);
     if (personalDetailsParams?.id) {

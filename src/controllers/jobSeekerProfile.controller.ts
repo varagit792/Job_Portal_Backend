@@ -5,12 +5,9 @@ import multer from 'multer';
 import { storageResume, fileFilterDocument, fileFilterImage, storageProfilePicture } from '../config/multer';
 import { promisify } from 'util';
 import 'dotenv/config';
-import { log } from 'console';
-import { couldStartTrivia } from 'typescript';
 import { fetchUser, updateUser } from '../services/user.service';
 import { sendEmailVerifyLink } from '../utils/sendEmail';
 import { generateToken } from '../utils/generateToken';
-import jwt, { Secret } from 'jsonwebtoken';
 import { verifyJwtToken } from '../utils/verifyJwtToken';
 export const updateJobSeekerProfileController = async (req: Request, res: Response) => {
   try {
@@ -360,7 +357,7 @@ export const ProfileIndicator = async (req: Request, res: Response) => {
       completeData.calculatedProfileIndicator += completeData?.careerProfile?.value;
       completeData.careerProfile.status = true;
     }
-    if (indicator?.keySkills) {
+    if (indicator?.keySkills && indicator?.keySkills?.length > 0) {
       completeData.calculatedProfileIndicator += completeData?.keySkill?.value;
       completeData.keySkill.status = true;
     }
