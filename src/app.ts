@@ -15,7 +15,9 @@ import path from 'path';
 (async () => {
   AppDataSource.initialize().then(() => {
     console.log('Db connected');
-    runSeeders(AppDataSource);
+    if (process.env.RUN_SEEDS === 'true') {
+      runSeeders(AppDataSource);
+    }
   }).catch((error) => {
     console.log('Unable to connect to database ', error)
   });

@@ -15,6 +15,7 @@ import { JobSeekerProfileEmployment } from './jobSeekerProfileEmployment.entity'
 import { CareerProfile } from './careerProfile.entity';
 import { JobTitle } from './jobTitle.entity';
 import { Company } from './company.entity';
+import { JobSeekerProfileKeySkills } from './jobSeekerProfileKeySkills.entity';
 
 @Entity()
 export class JobSeekerProfile extends BaseEntity {
@@ -77,9 +78,8 @@ export class JobSeekerProfile extends BaseEntity {
   // @OneToMany(() => Location, (location) => location.jobSeekerProfile, { createForeignKeyConstraints: true, cascade: true })
   // preferredLocations!: Location[]
 
-  //@OneToMany(() => KeySkills, (keySkills) => keySkills.jobSeekerProfile, { createForeignKeyConstraints: true, cascade: true })
-  @Column({ default: null, nullable: true, type: 'text' })
-  keySkills!: string
+  @OneToMany(() => JobSeekerProfileKeySkills, (keySkills) => keySkills.jobSeekerProfileKeySkills, { createForeignKeyConstraints: true, cascade: true })
+  keySkills!: JobSeekerProfileKeySkills[]
 
   @ManyToOne(() => Industry)
   @JoinColumn()

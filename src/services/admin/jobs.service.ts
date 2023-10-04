@@ -94,3 +94,35 @@ export const filtersJobs = async (data: any) => {
     throw error;
   }
 }
+
+export const getJobDetails = async (id: number) => {
+
+  try {
+    const jobsRepository = AppDataSource.getRepository(Jobs);
+    const job = await jobsRepository.findOne({
+      where: { id },
+      relations: {
+        company: true,
+        totalExpYearStart: true,
+        totalExpYearEnd: true,
+        numberSystem: true,
+        recurrence: true,
+        jobsLocation: true,
+        jobsRole: true,
+        industryType: true,
+        department: true,
+        employeeType: true,
+        jobType: true,
+        roleCategory: true,
+        education: true,
+        user: true,
+        jobsKeySkills: { keySkills: true }
+      },
+    });
+
+    return job;
+  } catch (error) {
+    console.log('error', error);
+    throw error;
+  }
+}

@@ -1,5 +1,6 @@
 import { AppDataSource } from "../config/typeorm";
 import { JobSeekerProfile } from "../entities/jobSeekerProfile.entity";
+import { JobSeekerProfileKeySkills } from "../entities/jobSeekerProfileKeySkills.entity";
 import { KeySkills } from "../entities/keySkills.entity";
 
 export const keySkillsList = async () => {
@@ -15,23 +16,29 @@ export const keySkillsList = async () => {
   }
 }
 
-export const keySkills = async ({ posts }: any) => {
-  const { keySkills, userId, jobSeekerId } = posts;
-  console.log("++++++++++++++++++++++", jobSeekerId);
-
+export const keySkills = async ({ keySkills, jobSeekerId }: any) => {
   try {
-
-    AppDataSource.getRepository(JobSeekerProfile).createQueryBuilder("jobSeekerProfile")
-      .update<JobSeekerProfile>(JobSeekerProfile, { keySkills: keySkills })
-      .where("id = :id", { id: jobSeekerId })
-      .execute()
-
-
-    const queryResult = AppDataSource.getRepository(JobSeekerProfile)
-      .createQueryBuilder("jobSeekerProfile").select("jobSeekerProfile")
-      .where("jobSeekerProfile.userId = :userId", { userId: userId })
-      .getMany();
-    return queryResult;
+    const jobSeekerProfileKeySkillsRepository = AppDataSource.getRepository(JobSeekerProfileKeySkills);
+    await jobSeekerProfileKeySkillsRepository.delete({ jobSeekerProfileKeySkills: jobSeekerId as any }).then(async () => {
+      if (keySkills) {
+        for (let i = 0; i < keySkills?.length; i++) {
+          let keySkill: any = new Object();
+          keySkill.jobSeekerProfileKeySkills = jobSeekerId;
+          keySkill.profileKeySkills = keySkills[i];
+          await jobSeekerProfileKeySkillsRepository.save(keySkill);
+        }
+      }
+      const jobSeekerProfileRepository = AppDataSource.getRepository(JobSeekerProfile)
+      const resultKeySkills = await jobSeekerProfileRepository.find({
+        relations: {
+          keySkills: { profileKeySkills: true }
+        },
+        where: {
+          id: jobSeekerId
+        }
+      })
+      return resultKeySkills;
+    })
   } catch (error) {
     console.log('error', error);
     throw error;
@@ -40,11 +47,16 @@ export const keySkills = async ({ posts }: any) => {
 
 export const keySkillsGet = async ({ id }: any) => {
   try {
-    const queryResult = AppDataSource.getRepository(JobSeekerProfile)
-      .createQueryBuilder("jobSeekerProfile").select("jobSeekerProfile")
-      .where("jobSeekerProfile.userId = :userId", { userId: id })
-      .getMany();
-    return queryResult;
+    const jobSeekerProfileRepository = AppDataSource.getRepository(JobSeekerProfile)
+    const resultKeySkills = await jobSeekerProfileRepository.find({
+      relations: {
+        keySkills: { profileKeySkills: true }
+      },
+      where: {
+        user: id
+      }
+    })
+    return resultKeySkills;
   } catch (error) {
     console.log('error', error);
     throw error;

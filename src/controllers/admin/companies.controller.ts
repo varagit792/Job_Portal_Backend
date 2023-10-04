@@ -1,11 +1,11 @@
 import { Request, RequestHandler, Response, NextFunction } from 'express';
-import { saveJobs, filtersJobs, getJobDetails } from '../../services/admin/jobs.service';
 import 'dotenv/config';
+import { allCompanies, getCompanyDetails, saveCompanies } from '../../services/admin/companies.service';
 
-export const fetchFiltersJobs: RequestHandler = async (req: Request, res: Response) => {
+export const fetchAllCompanies: RequestHandler = async (req: Request, res: Response) => {
   try {
-    const query = req?.query;
-    const result = await filtersJobs(query);
+    const offset = req?.params?.offset;
+    const result = await allCompanies(offset);
     return res.status(200).json({
       data: result
     });
@@ -18,9 +18,9 @@ export const fetchFiltersJobs: RequestHandler = async (req: Request, res: Respon
   }
 }
 
-export const postJobs: RequestHandler = async (req: Request, res: Response) => {
+export const postCompanies: RequestHandler = async (req: Request, res: Response) => {
   try {
-    const result = await saveJobs(req.body);
+    const result = await saveCompanies(req.body);
     return res.status(200).json({
       data: result
     });
@@ -34,11 +34,11 @@ export const postJobs: RequestHandler = async (req: Request, res: Response) => {
 }
 
 
-export const fetchJobDetails: RequestHandler = async (req: Request, res: Response) => {
+export const fetchCompanyDetails: RequestHandler = async (req: Request, res: Response) => {
   try {
-
+    
     const jobId = req.params.id;
-    const result = await getJobDetails(parseInt(jobId));
+    const result = await getCompanyDetails(parseInt(jobId));
     return res.status(200).json({
       data: result
     });
