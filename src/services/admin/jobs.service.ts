@@ -1,4 +1,4 @@
-import { In } from 'typeorm';
+import { LessThanOrEqual } from 'typeorm';
 import { AppDataSource } from '../../config/typeorm'
 import { Jobs } from '../../entities/jobs.entity';
 
@@ -66,7 +66,7 @@ export const filtersJobs = async (data: any) => {
         id: "DESC",
       },
       where: {
-        ...((data?.data?.expYear?.length > 1) && { totalExpYearEnd: { id: In([...data?.data?.expYear]) } })
+        ...((data?.data?.expYear > 1) && { totalExpYearEnd: { id: LessThanOrEqual(data?.data?.expYear) } })
       },
       relations: {
         company: true,
