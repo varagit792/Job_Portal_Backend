@@ -1,5 +1,5 @@
 import { Request, RequestHandler, Response, NextFunction } from 'express';
-import { allJobs, getJobDetails, saveJobs } from '../../services/admin/jobs.service';
+import { allJobs, getJobDetails, saveJobs } from '../../services/employer/jobs.service';
 import 'dotenv/config';
 
 export const fetchAllJobs: RequestHandler = async (req: Request, res: Response) => {
@@ -36,7 +36,7 @@ export const postJobs: RequestHandler = async (req: Request, res: Response) => {
 
 export const fetchJobDetails: RequestHandler = async (req: Request, res: Response) => {
   try {
-    
+
     const jobId = req.params.id;
     const result = await getJobDetails(parseInt(jobId));
     return res.status(200).json({

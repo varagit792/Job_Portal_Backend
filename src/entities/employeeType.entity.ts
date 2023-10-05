@@ -16,7 +16,6 @@ export class EmployeeType extends BaseEntity {
   @OneToOne(() => CareerProfileEmployeeType, (careerProfileEmployeeType) => careerProfileEmployeeType.employeeType)
   careerProfileEmployeeType!: CareerProfileEmployeeType
 
-  @OneToOne(() => Jobs, (jobs) => jobs.employeeType)
-  employeeType!: Jobs
+
 
 }

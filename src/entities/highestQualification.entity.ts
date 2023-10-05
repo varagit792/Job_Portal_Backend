@@ -1,5 +1,5 @@
 import { Entity, PrimaryGeneratedColumn, Column, BaseEntity, ManyToOne, OneToOne } from 'typeorm';
-import { Jobs } from './jobs.entity';
+import { JobEducation } from './jobEducation.entity';
 
 @Entity()
 export class HighestQualification extends BaseEntity {
@@ -12,7 +12,7 @@ export class HighestQualification extends BaseEntity {
   @Column()
   status!: boolean
 
-  @OneToOne(() => Jobs, (jobs) => jobs.education)
-  education!: Jobs
+  @OneToOne(() => JobEducation, (jobs) => jobs.education)
+  education!: JobEducation
 
 }

@@ -39,7 +39,10 @@ import categoryRouter from './routers/category.router';
 import proficiencyRouter from './routers/proficiency.router';
 import jobSeekerProfileEmploymentRouter from './routers/jobSeekerProfileEmployment.router';
 import boardRouter from './routers/board.router';
-import jobsRouter from './routers/admin/jobs.router';
+import jobsRouter from './routers/employer/jobs.router';
+import localityRouter from './routers/locality.router';
+import workModeRouter from './routers/workMode.router';
+import salaryRangeRouter from './routers/salaryRange.router';
 
 const router = Router();
 
@@ -47,6 +50,8 @@ router.use(['/auth'], authRouter);
 router.use(['/multer'], multerRouter);
 router.use(['/availabilityToJoin'], availabilityToJoinRouter);
 router.use(['/company'], companyRouter);
+router.use(['/locality'], localityRouter);
+router.use(['/workMode'], workModeRouter);
 router.use(['/course'], courseRouter);
 router.use(['/courseType'], courseTypeRouter);
 router.use(['/recurrence'], recurrenceRouter);
@@ -55,6 +60,7 @@ router.use(['/currency'], currencyRouter);
 router.use(['/department'], departmentRouter);
 router.use(['/educationType'], educationTypeRouter);
 router.use(['/gender'], genderRouter);
+router.use(['/salaryRange'], salaryRangeRouter);
 router.use(['/highestQualification'], highestQualificationRouter);
 router.use(['/industry'], industryRouter);
 router.use(['/jobRole'], jobRoleRouter);

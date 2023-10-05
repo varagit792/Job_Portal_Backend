@@ -40,7 +40,7 @@ const options: DataSourceOptions & SeederOptions = {
   synchronize: true,
   // logging: true,
   entities: [__dirname + '/../**/*.entity.js'],
-  seeds: [__dirname + '/../**/*.seeder.js'],
+  // seeds: [__dirname + '/../**/*.seeder.js'],
   subscribers: [],
   migrations: [],
 }

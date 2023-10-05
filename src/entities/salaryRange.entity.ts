@@ -2,7 +2,7 @@ import { Entity, PrimaryGeneratedColumn, Column, BaseEntity, OneToOne } from 'ty
 import { Jobs } from './jobs.entity';
 
 @Entity()
-export class JobTitle extends BaseEntity {
+export class SalaryRange extends BaseEntity {
   @PrimaryGeneratedColumn()
   id!: number
 
@@ -12,6 +12,10 @@ export class JobTitle extends BaseEntity {
   @Column()
   status!: boolean
 
+  @OneToOne(() => Jobs, (jobs) => jobs.payScaleLowerRange)
+  payScaleLowerRange!: Jobs
 
+  @OneToOne(() => Jobs, (jobs) => jobs.payScaleUpperRange)
+  payScaleUpperRange!: Jobs
 
 }
