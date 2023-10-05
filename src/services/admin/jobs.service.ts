@@ -56,7 +56,7 @@ export const saveJobs = async (jobsParams: Jobs) => {
   }
 }
 
-export const filtersJobs = async (data: any) => {
+export const jobsList = async (data: any) => {
   const page = Number(process.env.JOB_PER_PAGE);
   const skip = (page * data?.page) - page;
   try {

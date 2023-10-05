@@ -1,11 +1,11 @@
 import { Request, RequestHandler, Response, NextFunction } from 'express';
-import { saveJobs, filtersJobs, getJobDetails } from '../../services/admin/jobs.service';
+import { saveJobs, jobsList, getJobDetails } from '../../services/admin/jobs.service';
 import 'dotenv/config';
 
-export const fetchFiltersJobs: RequestHandler = async (req: Request, res: Response) => {
+export const fetchJobsList: RequestHandler = async (req: Request, res: Response) => {
   try {
     const query = req?.query;
-    const result = await filtersJobs(query);
+    const result = await jobsList(query);
     return res.status(200).json({
       data: result
     });
