@@ -1,3 +1,4 @@
+import { LessThanOrEqual } from 'typeorm';
 import { AppDataSource } from '../../config/typeorm'
 import { Jobs } from '../../entities/jobs.entity';
 
@@ -44,7 +45,6 @@ export const saveJobs = async (jobsParams: Jobs) => {
           }
         }
       });
-
       jobs = await jobsRepository.save(jobs);
     } else {
       jobs = await jobsRepository.save(jobsParams)
@@ -56,14 +56,17 @@ export const saveJobs = async (jobsParams: Jobs) => {
   }
 }
 
-export const allJobs = async (offset: any = 1) => {
+export const jobsList = async (data: any) => {
   const page = Number(process.env.JOB_PER_PAGE);
-  const skip = (page * offset) - page;
+  const skip = (page * data?.page) - page;
   try {
     const jobsRepository = AppDataSource.getRepository(Jobs);
-    const jobs = await jobsRepository.find({
+    let jobs = await jobsRepository.find({
       order: {
         id: "DESC",
+      },
+      where: {
+        ...((data?.data?.expYear > 1) && { totalExpYearEnd: { id: LessThanOrEqual(data?.data?.expYear) } })
       },
       relations: {
         company: true,
@@ -84,9 +87,7 @@ export const allJobs = async (offset: any = 1) => {
       },
       skip: (skip),
       take: (page),
-
     });
-
     return jobs;
   } catch (error) {
     console.log('error', error);
@@ -125,5 +126,3 @@ export const getJobDetails = async (id: number) => {
     throw error;
   }
 }
-
-

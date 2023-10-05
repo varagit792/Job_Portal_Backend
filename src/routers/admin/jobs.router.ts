@@ -1,12 +1,8 @@
 import { Router } from 'express';
-import { fetchAllJobs, fetchJobDetails, postJobs } from '../../controllers/admin/jobs.controller';
-import passport from 'passport';
+import { fetchJobsList, postJobs, fetchJobDetails } from '../../controllers/admin/jobs.controller';
 
 const jobsRouter = Router();
-
-//jobsRouter.get('/all', passport.authenticate('jwt'), getJobsDetails);
-
-jobsRouter.get('/all/:offset?', fetchAllJobs);
+jobsRouter.get('/list', fetchJobsList);
 jobsRouter.post('/post', postJobs);
 jobsRouter.get('/get/:id', fetchJobDetails);
 

@@ -1,11 +1,11 @@
 import { Request, RequestHandler, Response, NextFunction } from 'express';
-import { allJobs, getJobDetails, saveJobs } from '../../services/admin/jobs.service';
+import { saveJobs, jobsList, getJobDetails } from '../../services/admin/jobs.service';
 import 'dotenv/config';
 
-export const fetchAllJobs: RequestHandler = async (req: Request, res: Response) => {
+export const fetchJobsList: RequestHandler = async (req: Request, res: Response) => {
   try {
-    const offset = req?.params?.offset;
-    const result = await allJobs(offset);
+    const query = req?.query;
+    const result = await jobsList(query);
     return res.status(200).json({
       data: result
     });
@@ -36,7 +36,7 @@ export const postJobs: RequestHandler = async (req: Request, res: Response) => {
 
 export const fetchJobDetails: RequestHandler = async (req: Request, res: Response) => {
   try {
-    
+
     const jobId = req.params.id;
     const result = await getJobDetails(parseInt(jobId));
     return res.status(200).json({
