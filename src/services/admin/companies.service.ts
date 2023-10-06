@@ -1,16 +1,18 @@
 import { AppDataSource } from '../../config/typeorm'
-import { Companies } from '../../entities/companies.entity';
+import { Company } from '../../entities/company.entity';
 
-export const saveCompanies = async (companiesParams: Companies) => {
+export const saveCompanies = async (companiesParams: Company) => {
   try {
     let companies: any;
-    const companiesRepository = AppDataSource.getRepository(Companies);
+    const companiesRepository = AppDataSource.getRepository(Company);
     if (companiesParams?.id) {
       companies = await companiesRepository.findOne({
         where: {
           id: companiesParams?.id
         },
-        //relations: ["jobsKeySkills"]
+        relations: {
+          location:true
+        }
       });
 
       companies.id = Number(companiesParams?.id);
@@ -24,7 +26,7 @@ export const saveCompanies = async (companiesParams: Companies) => {
         // companies.totalExpYearEnd = companiesParams?.totalExpYearEnd,
         // companies.numberSystem = companiesParams?.numberSystem,
         // companies.recurrence = companiesParams?.recurrence,
-        // companies.jobsLocation = companiesParams?.jobsLocation,
+        companies.location = companiesParams?.location,
         // companies.jobsRole = companiesParams?.jobsRole,
         // companies.industryType = companiesParams?.industryType,
         // companies.department = companiesParams?.department,
@@ -33,7 +35,7 @@ export const saveCompanies = async (companiesParams: Companies) => {
         // companies.roleCategory = companiesParams?.roleCategory,
         // companies.education = companiesParams?.education,
         // companies.education = companiesParams?.education,
-        companies.user = companiesParams?.user
+        //companies.user = companiesParams?.user
       // companiesParams?.jobsKeySkills?.forEach((child: any) => {
       //   if (child.id) {
       //     const updatedChild = jobsParams?.jobsKeySkills?.find((item) => Number(item?.jobsKeySkills) === Number(child?.jobsKeySkills));
@@ -44,6 +46,7 @@ export const saveCompanies = async (companiesParams: Companies) => {
       //     }
       //   }
       // });
+console.log("comapanies-->",companies);
 
       companies = await companiesRepository.save(companies);
     } else {
@@ -60,7 +63,7 @@ export const allCompanies = async (offset: any = 1) => {
   const page = Number(process.env.JOB_PER_PAGE);
   const skip = (page * offset) - page;
   try {
-    const companiesRepository = AppDataSource.getRepository(Companies);
+    const companiesRepository = AppDataSource.getRepository(Company);
     const companies = await companiesRepository.find({
       order: {
         id: "DESC",
@@ -71,7 +74,7 @@ export const allCompanies = async (offset: any = 1) => {
         // totalExpYearEnd: true,
         // numberSystem: true,
         // recurrence: true,
-        // jobsLocation: true,
+        location: true,
         // jobsRole: true,
         // industryType: true,
         // department: true,
@@ -79,7 +82,7 @@ export const allCompanies = async (offset: any = 1) => {
         // jobType: true,
         // roleCategory: true,
         // education: true,
-        user: true,
+        //user: true,
         //jobsKeySkills: { keySkills: true }
       },
       skip: (skip),
@@ -97,7 +100,7 @@ export const allCompanies = async (offset: any = 1) => {
 export const getCompanyDetails = async (id: number) => {
 
   try {
-    const companiesRepository = AppDataSource.getRepository(Companies);
+    const companiesRepository = AppDataSource.getRepository(Company);
     const company = await companiesRepository.findOne({
       where: { id },
       relations: {
@@ -106,7 +109,7 @@ export const getCompanyDetails = async (id: number) => {
         // totalExpYearEnd: true,
         // numberSystem: true,
         // recurrence: true,
-        // jobsLocation: true,
+        location: true,
         // jobsRole: true,
         // industryType: true,
         // department: true,
@@ -114,7 +117,7 @@ export const getCompanyDetails = async (id: number) => {
         // jobType: true,
         // roleCategory: true,
         // education: true,
-        user: true,
+        //user: true,
         //jobsKeySkills: { keySkills: true }
       },
     });
