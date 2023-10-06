@@ -1,9 +1,8 @@
 import { Entity, PrimaryGeneratedColumn, Column, BaseEntity, ManyToOne, OneToOne } from 'typeorm';
 import { Jobs } from './jobs.entity';
-import { JobEducation } from './jobEducation.entity';
 
 @Entity()
-export class HighestQualification extends BaseEntity {
+export class WorkMode extends BaseEntity {
   @PrimaryGeneratedColumn()
   id!: number
 
@@ -13,7 +12,7 @@ export class HighestQualification extends BaseEntity {
   @Column()
   status!: boolean
 
-  @OneToOne(() => JobEducation, (jobs) => jobs.education)
-  education!: JobEducation
+  @OneToOne(() => Jobs, (jobs) => jobs.workMode)
+  jobs!: Jobs
 
 }

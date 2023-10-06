@@ -39,14 +39,20 @@ import categoryRouter from './routers/category.router';
 import proficiencyRouter from './routers/proficiency.router';
 import jobSeekerProfileEmploymentRouter from './routers/jobSeekerProfileEmployment.router';
 import boardRouter from './routers/board.router';
-import jobsRouter from './routers/admin/jobs.router';
-import companiesRouter from './routers/admin/companies.router';
+import jobsRouter from './routers/employer/jobs.router';
+import localityRouter from './routers/locality.router';
+import workModeRouter from './routers/workMode.router';
+import salaryRangeRouter from './routers/salaryRange.router';
+import companiesRouter from './routers/employer/companies.router';
 
 const router = Router();
 
 router.use(['/auth'], authRouter);
 router.use(['/multer'], multerRouter);
 router.use(['/availabilityToJoin'], availabilityToJoinRouter);
+router.use(['/locality'], localityRouter);
+router.use(['/workMode'], workModeRouter);
+router.use(['/salaryRange'], salaryRangeRouter);
 router.use(['/company'], companyRouter);
 router.use(['/course'], courseRouter);
 router.use(['/courseType'], courseTypeRouter);

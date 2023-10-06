@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { fetchAllCompanies, fetchCompanyDetails, postCompanies } from '../../controllers/admin/companies.controller';
+import { fetchAllCompanies, fetchCompanyDetails, postCompanies } from '../../controllers/employer/companies.controller';
 
 const companiesRouter = Router();
 

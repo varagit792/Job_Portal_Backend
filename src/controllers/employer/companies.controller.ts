@@ -1,6 +1,6 @@
 import { Request, RequestHandler, Response, NextFunction } from 'express';
 import 'dotenv/config';
-import { allCompanies, getCompanyDetails, saveCompanies } from '../../services/admin/companies.service';
+import { allCompanies, getCompanyDetails, saveCompanies } from '../../services/employer/companies.service';
 
 export const fetchAllCompanies: RequestHandler = async (req: Request, res: Response) => {
   try {
