@@ -1,5 +1,5 @@
 import { Request, RequestHandler, Response, NextFunction } from 'express';
-import { saveJobs, jobsList, getJobDetails } from '../../services/admin/jobs.service';
+import { saveJobs, jobsList, getJobDetails } from '../../services/employer/jobs.service';
 import 'dotenv/config';
 
 export const fetchJobsList: RequestHandler = async (req: Request, res: Response) => {
