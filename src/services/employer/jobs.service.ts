@@ -1,4 +1,4 @@
-import { LessThanOrEqual } from 'typeorm';
+import { In, LessThanOrEqual } from 'typeorm';
 import { AppDataSource } from '../../config/typeorm'
 import { JobCandidateIndustry } from '../../entities/jobCandidateIndustry.entity';
 import { JobEducation } from '../../entities/jobEducation.entity';
@@ -117,7 +117,8 @@ export const jobsList = async (data: any) => {
         id: "DESC",
       },
       where: {
-        ...((data?.data?.expYear > 1) && { totalExpYearEnd: { id: LessThanOrEqual(data?.data?.expYear) } })
+        ...((data?.data?.expYear > 1) && { totalExpYearEnd: { id: LessThanOrEqual(data?.data?.expYear) } }),
+        ...((data?.data?.department !== undefined && data?.data?.department?.length !== 0) && { department: { id: In(data?.data?.department) } })
       },
       relations: {
         company: true,
