@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { fetchJobsList, postJobs, fetchJobDetails } from '../../controllers/admin/jobs.controller';
+import { fetchJobsList, postJobs, fetchJobDetails } from '../../controllers/employer/jobs.controller';
 
 const jobsRouter = Router();
 jobsRouter.get('/list', fetchJobsList);
