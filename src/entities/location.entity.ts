@@ -3,6 +3,7 @@ import { CareerProfile } from './careerProfile.entity';
 import { CareerProfilePreferredLocations } from './careerProfilePreferredLocations.entity';
 import { JobSeekerProfileEmployment } from './jobSeekerProfileEmployment.entity';
 import { Jobs } from './jobs.entity';
+import { Company } from './company.entity';
 
 @Entity()
 export class Location extends BaseEntity {
@@ -20,6 +21,9 @@ export class Location extends BaseEntity {
 
   @OneToMany(type => JobSeekerProfileEmployment, j => j.location)
   jobSeekerProfileEmployment!: JobSeekerProfileEmployment
+
+  @ManyToOne(() => Company, (company) => company.location, { onDelete: 'CASCADE' })
+  company!: Company
 
   @OneToOne(() => Jobs, (jobs) => jobs.jobsLocation)
   jobsLocation!: Jobs
