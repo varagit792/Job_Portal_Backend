@@ -10,7 +10,7 @@ export class Company extends BaseEntity {
   @Column({ unique: true })
   title!: string;
 
-  @Column()
+  @Column({default:false})
   status!: boolean
 
   @Column({ type: "text", nullable:true, default:null})
@@ -31,10 +31,10 @@ export class Company extends BaseEntity {
   @OneToMany(() => Location, (location) => location.company, { nullable:true, createForeignKeyConstraints: true, cascade: true, })
   location!: Location[] | null
 
-  @CreateDateColumn({nullable:true, type: "timestamp", default: () => null, onUpdate: "CURRENT_TIMESTAMP(6)"})
+  @CreateDateColumn()
   createdAt: Date | undefined;
 
-  @UpdateDateColumn({nullable:true, type: "timestamp", default: () => null, onUpdate: "CURRENT_TIMESTAMP(6)"})
+  @UpdateDateColumn()
   updatedAt: Date | undefined;
 
   // @ManyToOne(() => User, user => user.company, { nullable: true, onDelete: "CASCADE" })

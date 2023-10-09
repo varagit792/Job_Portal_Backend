@@ -11,98 +11,69 @@ export default class CompanySeeder implements Seeder {
       {
         title: "TCS",
         companyDescription: "Tata Consultancy Services",
-        createdAt: "2023-09-20 17:23:48.000000",
-        updatedAt: "2023-09-25 17:25:21.348000",
-        status: true,
-        jobs:5, 
+            jobs:5, 
         rating:4.5, 
         reviews:7500
       },
       {
         title: "Infosys",
         companyDescription: "Infosys Ltd",
-        createdAt: "2023-09-20 17:23:48.000000",
-        updatedAt: "2023-09-25 17:25:21.348000",
-        status: true, 
-        jobs:6, 
+             jobs:6, 
         rating:4, 
         reviews:6500
       },
       {
         title: "Capgemini",
         companyDescription: "Capgemini consulting services",
-        createdAt: "2023-09-20 17:23:48.000000",
-        updatedAt: "2023-09-25 17:25:21.348000",
-        status: true, 
-        jobs:7, 
+             jobs:7, 
         rating:3.5, 
         reviews:7800
       },
       {
         title: "Value Labs",
         companyDescription: "Value Labs LLP",
-        createdAt: "2023-09-20 17:23:48.000000",
-        updatedAt: "2023-09-25 17:25:21.348000",
-        status: true, 
-        jobs:3, 
+             jobs:3, 
         rating:2.5, 
         reviews:6600
       },
       {
         title: "Ratna Global Tech",
         companyDescription: "Ratna Global Tech",
-        createdAt: "2023-09-20 17:23:48.000000",
-        updatedAt: "2023-09-25 17:25:21.348000",
-        status: true, 
-        jobs:9, 
+             jobs:9, 
         rating:4.5, 
         reviews:2500
       },
       {
         title: "Ratna Global Tech",
         companyDescription: "Ratna Global Tech",
-        createdAt: "2023-09-20 17:23:48.000000",
-        updatedAt: "2023-09-25 17:25:21.348000",
-        status: true, 
-        jobs:3, 
+             jobs:3, 
         rating:2.5, 
         reviews:500
       },
       {
         title: "Value Labs",
         companyDescription: "Value Labs LLP",
-        createdAt: "2023-09-20 17:23:48.000000",
-        updatedAt: "2023-09-25 17:25:21.348000",
-        status: true, 
-        jobs:6, 
+             jobs:6, 
         rating:3.5, 
         reviews:5500      
       },
       {
         title: "Capgemini",
         companyDescription: "Capgemini consulting services",
-        createdAt: "2023-09-20 17:23:48.000000",
-        updatedAt: "2023-09-25 17:25:21.348000",
-        status: true, 
-        jobs:2, 
+             jobs:2, 
         rating:4.5, 
         reviews:3400
        },
       {
         title: "Infosys",
         companyDescription: "Infosys Ltd",
-        createdAt: "2023-09-20 17:23:48.000000",
-        updatedAt: "2023-09-25 17:25:21.348000",
-        status: true, 
-        jobs:3, 
+             jobs:3, 
         rating:1.5, 
         reviews:6500
        },
       {
         title: "ABB",
         companyDescription: "ABB Limited",
-        createdAt: "2023-09-20 17:23:48.000000",
-        updatedAt: "2023-10-03 23:47:33.023454",
         status: true, 
         jobs:5, 
         rating:3.5, 
@@ -111,8 +82,6 @@ export default class CompanySeeder implements Seeder {
       {
         title: "NCR",
         companyDescription: "NCR",
-        createdAt: "2023-09-20 17:23:48.000000",
-        updatedAt: "2023-10-03 23:47:33.033468",
         status: true, 
         jobs:7, 
         rating:4, 
@@ -121,8 +90,6 @@ export default class CompanySeeder implements Seeder {
       {
         title: "Oracle",
         companyDescription: "Oracle Pvt Ltd",
-        createdAt: "2023-09-20 17:23:48.000000",
-        updatedAt: "2023-10-03 23:47:33.035696",
         status: true, 
         jobs:10, 
         rating:4.5, 
@@ -2759,9 +2726,7 @@ export default class CompanySeeder implements Seeder {
   //     {
   //       title: "TCS",
   //       companyDescription: "Tata Consultancy Services",
-  //       createdAt: "2023-09-20 17:23:48.000000",
-  //       updatedAt: "2023-09-25 17:25:21.348000",
-  //       status: true, 
+  //       , 
   //       jobs:5, 
   //       rating:4.5, 
   //       reviews:7500
@@ -2769,9 +2734,7 @@ export default class CompanySeeder implements Seeder {
   //     {
   //       title: "Infosys",
   //       companyDescription: "Infosys Ltd",
-  //       createdAt: "2023-09-20 17:23:48.000000",
-  //       updatedAt: "2023-09-25 17:25:21.348000",
-  //       status: true, 
+  //       , 
   //       jobs:6, 
   //       rating:4, 
   //       reviews:6500
@@ -2779,9 +2742,7 @@ export default class CompanySeeder implements Seeder {
   //     {
   //       title: "Capgemini",
   //       companyDescription: "Capgemini consulting services",
-  //       createdAt: "2023-09-20 17:23:48.000000",
-  //       updatedAt: "2023-09-25 17:25:21.348000",
-  //       status: true, 
+  //       , 
   //       jobs:7, 
   //       rating:3.5, 
   //       reviews:7800
@@ -2789,9 +2750,7 @@ export default class CompanySeeder implements Seeder {
   //     {
   //       title: "Value Labs",
   //       companyDescription: "Value Labs LLP",
-  //       createdAt: "2023-09-20 17:23:48.000000",
-  //       updatedAt: "2023-09-25 17:25:21.348000",
-  //       status: true, 
+  //       , 
   //       jobs:3, 
   //       rating:2.5, 
   //       reviews:6600
@@ -2799,9 +2758,7 @@ export default class CompanySeeder implements Seeder {
   //     {
   //       title: "Ratna Global Tech",
   //       companyDescription: "Ratna Global Tech",
-  //       createdAt: "2023-09-20 17:23:48.000000",
-  //       updatedAt: "2023-09-25 17:25:21.348000",
-  //       status: true, 
+  //       , 
   //       jobs:9, 
   //       rating:4.5, 
   //       reviews:2500
@@ -2809,9 +2766,7 @@ export default class CompanySeeder implements Seeder {
   //     {
   //       title: "Ratna Global Tech",
   //       companyDescription: "Ratna Global Tech",
-  //       createdAt: "2023-09-20 17:23:48.000000",
-  //       updatedAt: "2023-09-25 17:25:21.348000",
-  //       status: true, 
+  //       , 
   //       jobs:3, 
   //       rating:2.5, 
   //       reviews:500
@@ -2819,9 +2774,7 @@ export default class CompanySeeder implements Seeder {
   //     {
   //       title: "Value Labs",
   //       companyDescription: "Value Labs LLP",
-  //       createdAt: "2023-09-20 17:23:48.000000",
-  //       updatedAt: "2023-09-25 17:25:21.348000",
-  //       status: true, 
+  //       , 
   //       jobs:6, 
   //       rating:3.5, 
   //       reviews:5500      
@@ -2829,9 +2782,7 @@ export default class CompanySeeder implements Seeder {
   //     {
   //       title: "Capgemini",
   //       companyDescription: "Capgemini consulting services",
-  //       createdAt: "2023-09-20 17:23:48.000000",
-  //       updatedAt: "2023-09-25 17:25:21.348000",
-  //       status: true, 
+  //       , 
   //       jobs:2, 
   //       rating:4.5, 
   //       reviews:3400
@@ -2839,9 +2790,7 @@ export default class CompanySeeder implements Seeder {
   //     {
   //       title: "Infosys",
   //       companyDescription: "Infosys Ltd",
-  //       createdAt: "2023-09-20 17:23:48.000000",
-  //       updatedAt: "2023-09-25 17:25:21.348000",
-  //       status: true, 
+  //       , 
   //       jobs:3, 
   //       rating:1.5, 
   //       reviews:6500
@@ -2849,9 +2798,7 @@ export default class CompanySeeder implements Seeder {
   //     {
   //       title: "ABB",
   //       companyDescription: "ABB Limited",
-  //       createdAt: "2023-09-20 17:23:48.000000",
-  //       updatedAt: "2023-10-03 23:47:33.023454",
-  //       status: true, 
+  //             status: true, 
   //       jobs:5, 
   //       rating:3.5, 
   //       reviews:5500
@@ -2859,9 +2806,7 @@ export default class CompanySeeder implements Seeder {
   //     {
   //       title: "NCR",
   //       companyDescription: "NCR",
-  //       createdAt: "2023-09-20 17:23:48.000000",
-  //       updatedAt: "2023-10-03 23:47:33.033468",
-  //       status: true, 
+  //             status: true, 
   //       jobs:7, 
   //       rating:4, 
   //       reviews:8500
@@ -2869,9 +2814,7 @@ export default class CompanySeeder implements Seeder {
   //     {
   //       title: "Oracle",
   //       companyDescription: "Oracle Pvt Ltd",
-  //       createdAt: "2023-09-20 17:23:48.000000",
-  //       updatedAt: "2023-10-03 23:47:33.035696",
-  //       status: true, 
+  //             status: true, 
   //       jobs:10, 
   //       rating:4.5, 
   //       reviews:9500      
