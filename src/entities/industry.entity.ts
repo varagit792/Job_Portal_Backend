@@ -17,10 +17,6 @@ export class Industry extends BaseEntity {
   @OneToOne(() => CareerProfile, (careerProfile) => careerProfile.industry)
   careerProfile!: CareerProfile
 
-
-  @OneToOne(() => Jobs, (jobs) => jobs.companyIndustry)
-  companyIndustry!: Jobs
-
   @OneToOne(() => JobCandidateIndustry, (jobs) => jobs.candidateIndustry)
   candidateIndustry!: JobCandidateIndustry
 
