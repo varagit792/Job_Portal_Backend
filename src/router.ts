@@ -44,6 +44,7 @@ import localityRouter from './routers/locality.router';
 import workModeRouter from './routers/workMode.router';
 import salaryRangeRouter from './routers/salaryRange.router';
 import companiesRouter from './routers/employer/companies.router';
+import companyTypeRouter from './routers/companyType.router';
 
 const router = Router();
 
@@ -92,5 +93,6 @@ router.use(['/jobSeekerProfileEmployment'], jobSeekerProfileEmploymentRouter);
 router.use(['/board'], boardRouter);
 router.use(['/jobs'], jobsRouter);
 router.use(['/companies'], companiesRouter);
+router.use(['/companyType'], companyTypeRouter);
 
 export default router;   

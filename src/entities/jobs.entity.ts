@@ -21,6 +21,7 @@ import { JobLocality } from './jobLocality.entity';
 import { JobEducation } from './jobEducation.entity';
 import { JobCandidateIndustry } from './jobCandidateIndustry.entity';
 import { JobRole } from './jobRole.entity';
+import { CompanyType } from './companyType.entity';
 
 @Entity()
 export class Jobs extends BaseEntity {
@@ -132,17 +133,20 @@ export class Jobs extends BaseEntity {
   @Column({ type: "text" })
   jobDescription: string | undefined;
 
+  @Column({ type: "text" })
+  keyResponsibility: string | undefined;
+
   @OneToOne(() => JobRole, jobRole => jobRole.jobRole, {
     cascade: true, onDelete: 'CASCADE', createForeignKeyConstraints: false
   })
   @JoinColumn({ name: "jobsRole" })
   jobsRole!: JobRole
 
-  @OneToOne(() => Industry, industryType => industryType.companyIndustry, {
+  @OneToOne(() => CompanyType, industryType => industryType.companyType, {
     cascade: true, onDelete: 'CASCADE', createForeignKeyConstraints: false
   })
-  @JoinColumn({ name: "companyIndustry" })
-  companyIndustry!: Industry
+  @JoinColumn({ name: "companyType" })
+  companyType!: CompanyType
 
   @OneToMany(() => JobCandidateIndustry, (jobCandidateIndustry) => jobCandidateIndustry.jobCandidateIndustry, { createForeignKeyConstraints: true, cascade: true })
   jobCandidateIndustry!: JobCandidateIndustry[]
