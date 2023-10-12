@@ -16,6 +16,7 @@ export const saveJobs = async (jobsParams: Jobs) => {
 
   try {
     let jobs: any;
+    const { id, ...updatedJobsParams } = jobsParams
     const jobsRepository = AppDataSource.getRepository(Jobs);
     if (jobsParams?.id) {
       jobs = await jobsRepository.findOne({
@@ -99,7 +100,7 @@ export const saveJobs = async (jobsParams: Jobs) => {
         await appJobCandidateIndustry.save(jbsCandidateIndustry);
       }
     } else {
-      jobs = await jobsRepository.save(jobsParams)
+      jobs = await jobsRepository.save(updatedJobsParams)
     }
     return jobs;
   } catch (error) {
