@@ -19,6 +19,9 @@ export class Company extends BaseEntity {
   @Column({nullable:true, default:null})
   jobs!: number;
 
+  @Column({nullable:true, default:null})
+  employeeCount!: number;
+
   @Column('decimal', { precision: 10, scale: 1 , nullable:true, default:null}) 
   rating!: number;
 
