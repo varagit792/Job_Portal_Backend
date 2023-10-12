@@ -488,13 +488,11 @@ export const jobSeekerSendOtp = async (req: Request, res: Response) => {
       to: `+91${req.user.mobileNumber}`,
       body: `${otp} is your OTP for registration on jobportal.com.`
     }
-
+    
     const msgId = await sendSMS(msgData)
     await updateUser(req.user.id, otpParams);
-    const userData = await fetchUser(req.user.email);
     return res.status(200).json({
-      message: 'otp sent successfully',
-      data: userData
+      message: 'otp sent successfully'
     });
 
   } catch (error: any) {
