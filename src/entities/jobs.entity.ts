@@ -40,13 +40,13 @@ export class Jobs extends BaseEntity {
   @OneToOne(() => TotalExpYear, (totalExpYear) => totalExpYear.totalExpYearStart, {
     cascade: true, onDelete: 'CASCADE', createForeignKeyConstraints: false
   })
-  @JoinColumn({ name: "experienceStartRange" })
+  @JoinColumn({ name: "totalExpYearStart" })
   totalExpYearStart!: TotalExpYear
 
   @OneToOne(() => TotalExpYear, (totalExpYearEnd) => totalExpYearEnd.totalExpYearEnd, {
     cascade: true, onDelete: 'CASCADE', createForeignKeyConstraints: false
   })
-  @JoinColumn({ name: "experienceEndRange" })
+  @JoinColumn({ name: "totalExpYearEnd" })
   totalExpYearEnd!: TotalExpYear
 
   @OneToOne(() => SalaryRange, (salaryRange) => salaryRange.payScaleLowerRange, {
@@ -93,6 +93,9 @@ export class Jobs extends BaseEntity {
   diversityHiring!: boolean;
 
   @Column()
+  hideCompanyRating!: boolean;
+
+  @Column()
   hideSalaryDetails!: boolean;
 
   @Column()
@@ -114,6 +117,13 @@ export class Jobs extends BaseEntity {
   })
   @JoinColumn({ name: "numberSystem" })
   numberSystem!: NumberSystem
+
+
+  @OneToOne(() => EmployeeType, (employmentType) => employmentType.employmentType, {
+    cascade: true, onDelete: 'CASCADE', createForeignKeyConstraints: false
+  })
+  @JoinColumn({ name: "numberSystem" })
+  employmentType!: EmployeeType
 
   @OneToOne(() => Recurrence, (recurrence) => recurrence.recurrence, {
     cascade: true, onDelete: 'CASCADE', createForeignKeyConstraints: false
