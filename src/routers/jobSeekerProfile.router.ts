@@ -16,7 +16,7 @@ import {
   ProfileIndicator,
   jobSeekerMailVerification,
   updateJobSeekerMailVerification,
-  jobSeekerMobileVerify,jobSeekerSendOtp
+  jobSeekerMobileVerify, jobSeekerSendOtp
 } from '../controllers/jobSeekerProfile.controller';
 import passport from '../config/passport';
 import { keySkillsController, keySkillsGetController } from '../controllers/keySkills.controller';
@@ -43,7 +43,7 @@ jobSeekerProfileRouter.delete('/deletePersonalDetailsLanguages', passport.authen
 jobSeekerProfileRouter.post('/emailVerification', passport.authenticate('jwt', { session: false }), jobSeekerMailVerification);
 jobSeekerProfileRouter.get('/emailVerify/:token', updateJobSeekerMailVerification);
 jobSeekerProfileRouter.get('/sendOtp', passport.authenticate('jwt', { session: false }), jobSeekerSendOtp);
-jobSeekerProfileRouter.get('/verifyMobile', passport.authenticate('jwt', { session: false }), jobSeekerMobileVerify);
+jobSeekerProfileRouter.put('/verifyMobile', passport.authenticate('jwt', { session: false }), jobSeekerMobileVerify);
 jobSeekerProfileRouter.get('/profileIndicator', passport.authenticate('jwt', { session: false }), ProfileIndicator);
 
 export default jobSeekerProfileRouter;
