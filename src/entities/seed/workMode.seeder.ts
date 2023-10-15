@@ -9,11 +9,15 @@ export default class WorkModeSeeder implements Seeder {
     const repository = dataSource.getRepository(WorkMode);
     await repository.upsert([
       {
-        title: 'In Office',
+        title: 'Work from office',
         status: true,
       },
       {
-        title: 'Work from Home',
+        title: 'On-site',
+        status: true,
+      },
+      {
+        title: 'Remote',
         status: true,
       },
       {
