@@ -75,6 +75,7 @@ export const allCompanies = async (data: any) => {
         },
         where: {
           ...((data?.data?.department !== undefined && data?.data?.department?.length !== 0) && { department: { id: In(data?.data?.department) } }),
+          ...((data?.data?.location !== undefined && data?.data?.location?.length !== 0) && { location: { id: In(data?.data?.location) } }),
         },
         relations: {
           location: true,
