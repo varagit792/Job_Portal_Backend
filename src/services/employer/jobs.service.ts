@@ -130,6 +130,7 @@ export const jobsList = async (data: any) => {
         ...((data?.data?.location !== undefined && data?.data?.location?.length !== 0) && { jobsLocation: { location: { id: In(data?.data?.location) } } }),
         ...((data?.data?.workMode !== undefined && data?.data?.workMode?.length !== 0) && { workMode: { id: In(data?.data?.workMode) } }),
         ...((data?.data?.salary > 1) && { payScaleUpperRange: { id: LessThanOrEqual(data?.data?.salary) } }),
+        ...((data?.data?.companyType !== undefined && data?.data?.companyType?.length !== 0) && { companyType: { id: In(data?.data?.companyType) } }),
         ...((data?.data?.roleCategory !== undefined && data?.data?.roleCategory?.length !== 0) && { roleCategory: { id: In(data?.data?.roleCategory) } }),
       },
       relations: {
