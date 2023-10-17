@@ -4,8 +4,8 @@ import { allCompanies, getCompanyDetails, saveCompanies } from '../../services/e
 
 export const fetchAllCompanies: RequestHandler = async (req: Request, res: Response) => {
   try {
-    const offset = req?.params?.offset;
-    const result = await allCompanies(offset);
+    const query = req?.query;
+    const result = await allCompanies(query);
     return res.status(200).json({
       data: result
     });
