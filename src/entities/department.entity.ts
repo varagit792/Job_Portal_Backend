@@ -3,6 +3,7 @@ import { JobSeekerProfile } from './jobSeekerProfile.entity';
 import { CareerProfile } from './careerProfile.entity';
 import { JobSeekerProfileEmployment } from './jobSeekerProfileEmployment.entity';
 import { Jobs } from './jobs.entity';
+import { Companies } from './companies.entity';
 
 @Entity()
 export class Department extends BaseEntity {
@@ -25,5 +26,8 @@ export class Department extends BaseEntity {
 
   @OneToOne(() => Jobs, jobs => jobs.department)
   department!: Jobs
+
+  @ManyToOne(() => Companies, companies => companies.department)
+  companies!: Companies
 
 }

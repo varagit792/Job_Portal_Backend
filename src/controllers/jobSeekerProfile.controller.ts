@@ -9,6 +9,8 @@ import { fetchUser, updateUser } from '../services/user.service';
 import { sendEmailVerifyLink } from '../utils/sendEmail';
 import { generateToken } from '../utils/generateToken';
 import { verifyJwtToken } from '../utils/verifyJwtToken';
+import otpGenerator from 'otp-generator';
+import { sendSMS } from '../utils/sendSms';
 export const updateJobSeekerProfileController = async (req: Request, res: Response) => {
   try {
 
@@ -444,3 +446,61 @@ export const updateJobSeekerMailVerification = async (req: Request, res: Respons
     })
   }
 }
+
+export const jobSeekerMobileVerify = async (req: Request, res: Response) => {
+  try {
+    const { mobileOtp } = req.body;
+    const { email } = req.user;
+    const dBOtp = req.user.otp
+
+    if (mobileOtp === dBOtp) {
+      const mobileParams = {
+        isMobileVerified: true,
+        otp: ''
+      }
+      await updateUser(req.user.id, mobileParams);
+      return res.status(200).json({
+        message: 'Mobile successfully validated'
+      });
+    } else {
+      return res.status(400).json({
+        message: 'Otp is not valid'
+      })
+    }
+
+  } catch (error: any) {
+    console.log('error ', error);
+    return res.status(500).json({
+      message: error.message
+    })
+  }
+};
+
+export const jobSeekerSendOtp = async (req: Request, res: Response) => {
+  try {
+
+    const { id } = req.user;
+    const otp = otpGenerator.generate(6, { upperCaseAlphabets: false, specialChars: false, lowerCaseAlphabets: false })
+    const otpParams = {
+      otp
+    }
+    const msgData = {
+      to: `+91${req.user.mobileNumber}`,
+      body: `${otp} is your OTP for registration on jobportal.com.`
+    }
+    
+    const msgId = await sendSMS(msgData)
+    await updateUser(req.user.id, otpParams);
+    return res.status(200).json({
+      message: 'otp sent successfully'
+    });
+
+  } catch (error: any) {
+    console.log('error ', error);
+    return res.status(500).json({
+      message: error.message
+    })
+  }
+}
+
+

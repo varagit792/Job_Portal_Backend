@@ -1,17 +1,19 @@
+import { In } from 'typeorm';
 import { AppDataSource } from '../../config/typeorm'
-import { Company } from '../../entities/company.entity';
+import { Companies } from '../../entities/companies.entity';
 
-export const saveCompanies = async (companiesParams: Company) => {
+export const saveCompanies = async (companiesParams: Companies) => {
   try {
     let companies: any;
-    const companiesRepository = AppDataSource.getRepository(Company);
+    const companiesRepository = AppDataSource.getRepository(Companies);
     if (companiesParams?.id) {
       companies = await companiesRepository.findOne({
         where: {
           id: companiesParams?.id
         },
         relations: {
-          location:true
+          location: true,
+          department:true
         }
       });
 
@@ -29,7 +31,7 @@ export const saveCompanies = async (companiesParams: Company) => {
         companies.location = companiesParams?.location,
         // companies.jobsRole = companiesParams?.jobsRole,
         // companies.industryType = companiesParams?.industryType,
-        // companies.department = companiesParams?.department,
+        companies.department = companiesParams?.department,
         // companies.employeeType = companiesParams?.employeeType,
         // companies.jobType = companiesParams?.jobType,
         // companies.roleCategory = companiesParams?.roleCategory,
@@ -59,38 +61,44 @@ console.log("comapanies-->",companies);
   }
 }
 
-export const allCompanies = async (offset: any = 1) => {
-  const page = Number(process.env.JOB_PER_PAGE);
-  const skip = (page * offset) - page;
+export const allCompanies = async (data: any) => {  
+  const items_per_page = Number(process.env.JOB_PER_PAGE);
+  const skip = (items_per_page * data?.page) - items_per_page;
+  console.log("data--->", data);
+  
   try {
-    const companiesRepository = AppDataSource.getRepository(Company);
-    const companies = await companiesRepository.find({
-      order: {
-        id: "DESC",
-      },
-      relations: {
-        //company: true,
-        // totalExpYearStart: true,
-        // totalExpYearEnd: true,
-        // numberSystem: true,
-        // recurrence: true,
-        location: true,
-        // jobsRole: true,
-        // industryType: true,
-        // department: true,
-        // employeeType: true,
-        // jobType: true,
-        // roleCategory: true,
-        // education: true,
-        //user: true,
-        //jobsKeySkills: { keySkills: true }
-      },
-      skip: (skip),
-      take: (page),
+    const companiesRepository = AppDataSource.getRepository(Companies);
+    if (data?.page) {
+      return await companiesRepository.find({
+        order: {
+          id: "DESC",
+        },
+        where: {
+          ...((data?.data?.department !== undefined && data?.data?.department?.length !== 0) && { department: { id: In(data?.data?.department) } }),
+        },
+        relations: {
+          location: true,
+          department:true
+        },
+        skip: (skip),
+        take: (items_per_page),
+      }); 
+    } else {
+      return await companiesRepository.find({
+        order: {
+          id: "DESC",
+        },
+        where: {
+          ...((data?.data?.department !== undefined && data?.data?.department?.length !== 0) && { department: { id: In(data?.data?.department) } }),
+        },
+        relations: {
+          location: true,
+          department:true
+        },
+      });     
+    }
 
-    });
-
-    return companies;
+    //return companies;
   } catch (error) {
     console.log('error', error);
     throw error;
@@ -100,7 +108,7 @@ export const allCompanies = async (offset: any = 1) => {
 export const getCompanyDetails = async (id: number) => {
 
   try {
-    const companiesRepository = AppDataSource.getRepository(Company);
+    const companiesRepository = AppDataSource.getRepository(Companies);
     const company = await companiesRepository.findOne({
       where: { id },
       relations: {
@@ -112,7 +120,7 @@ export const getCompanyDetails = async (id: number) => {
         location: true,
         // jobsRole: true,
         // industryType: true,
-        // department: true,
+        department: true,
         // employeeType: true,
         // jobType: true,
         // roleCategory: true,
