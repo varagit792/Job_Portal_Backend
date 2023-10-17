@@ -38,6 +38,9 @@ export class User extends BaseEntity {
   @Column({ default: false })
   isMobileVerified!: boolean
 
+  @Column({ default: null, nullable: true })
+  otp!: string
+
   @OneToMany(() => Jobs, (jobs) => jobs.user, { createForeignKeyConstraints: true, cascade: true })
   user!: Jobs[]
 

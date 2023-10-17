@@ -1,12 +1,12 @@
 import { Seeder } from 'typeorm-extension';
 import { DataSource } from 'typeorm';
-import { Company } from '../company.entity';
+import { Companies } from '../companies.entity';
 
-export default class CompanySeeder implements Seeder {
+export default class CompaniesSeeder implements Seeder {
   public async run(
     dataSource: DataSource,
   ): Promise<any> {
-    const repository = dataSource.getRepository(Company);
+    const repository = dataSource.getRepository(Companies);
     await repository.upsert([
       {
         title: "TCS",

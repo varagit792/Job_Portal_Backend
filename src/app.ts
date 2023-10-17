@@ -26,6 +26,9 @@ import path from 'path';
 
 const app: Express = express();
 
+// redisClient.on('error', (err) => console.log('Error while connecting to redis ', err));
+// redisClient.connect().then(() => console.log('connected to redis'));
+
 const corsOptions = {
   origin: true, // Replace with the actual URL of your React app
   // methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
