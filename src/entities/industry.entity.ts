@@ -2,6 +2,7 @@ import { Entity, PrimaryGeneratedColumn, Column, BaseEntity, ManyToOne, OneToOne
 import { CareerProfile } from './careerProfile.entity';
 import { Jobs } from './jobs.entity';
 import { JobCandidateIndustry } from './jobCandidateIndustry.entity';
+import { Companies } from './companies.entity';
 
 @Entity()
 export class Industry extends BaseEntity {
@@ -20,6 +21,6 @@ export class Industry extends BaseEntity {
   @OneToOne(() => JobCandidateIndustry, (jobs) => jobs.candidateIndustry)
   candidateIndustry!: JobCandidateIndustry
 
-
-
+  @ManyToOne(() => Companies, companies => companies.industry)
+  companies!: Companies
 }

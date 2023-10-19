@@ -1,5 +1,6 @@
 import { Entity, PrimaryGeneratedColumn, Column, BaseEntity, ManyToOne, OneToOne } from 'typeorm';
 import { Jobs } from './jobs.entity';
+import { Companies } from './companies.entity';
 
 @Entity()
 export class CompanyType extends BaseEntity {
@@ -14,4 +15,7 @@ export class CompanyType extends BaseEntity {
 
   @OneToOne(() => Jobs, (jobs) => jobs.companyType)
   companyType!: Jobs
+
+  @ManyToOne(() => Companies, companies => companies.companyType)
+  companies!: Companies
 }
