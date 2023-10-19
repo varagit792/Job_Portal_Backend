@@ -153,7 +153,8 @@ export const jobsList = async (data: any) => {
         jobEducation: { education: true },
         jobLocality: { locality: true },
         user: true,
-        jobsKeySkills: { keySkills: true }
+        jobsKeySkills: { keySkills: true },
+        employmentType:true
       },
       skip: (skip),
       take: (page),
