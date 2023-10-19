@@ -1,5 +1,5 @@
 import { Entity, PrimaryGeneratedColumn, Column, BaseEntity, OneToMany, OneToOne, JoinColumn, CreateDateColumn, UpdateDateColumn, ManyToOne } from 'typeorm';
-import { Company } from './company.entity';
+import { Companies } from './companies.entity';
 import { TotalExpYear } from './totalExpYear.entity';
 import { Recurrence } from './recurrence.entity';
 import { NumberSystem } from './numberSystem.entity';
@@ -31,11 +31,11 @@ export class Jobs extends BaseEntity {
   @Column()
   title!: string;
 
-  @OneToOne(() => Company, (company) => company.company, {
+  @OneToOne(() => Companies, (company) => company.company, {
     cascade: true, onDelete: 'CASCADE', createForeignKeyConstraints: false, nullable: true
   })
   @JoinColumn({ name: "company" })
-  company!: Company
+  company!: Companies
 
   @OneToOne(() => TotalExpYear, (totalExpYear) => totalExpYear.totalExpYearStart, {
     cascade: true, onDelete: 'CASCADE', createForeignKeyConstraints: false, nullable: true

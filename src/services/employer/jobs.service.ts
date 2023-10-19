@@ -134,7 +134,9 @@ export const jobsList = async (data: any) => {
         ...((data?.data?.roleCategory !== undefined && data?.data?.roleCategory?.length !== 0) && { roleCategory: { id: In(data?.data?.roleCategory) } }),
       },
       relations: {
-        company: true,
+        company: {
+          location:true
+        },
         totalExpYearStart: true,
         totalExpYearEnd: true,
         numberSystem: true,
