@@ -32,25 +32,25 @@ export class Jobs extends BaseEntity {
   title!: string;
 
   @OneToOne(() => Company, (company) => company.company, {
-    cascade: true, onDelete: 'CASCADE', createForeignKeyConstraints: false
+    cascade: true, onDelete: 'CASCADE', createForeignKeyConstraints: false, nullable: true
   })
   @JoinColumn({ name: "company" })
   company!: Company
 
   @OneToOne(() => TotalExpYear, (totalExpYear) => totalExpYear.totalExpYearStart, {
-    cascade: true, onDelete: 'CASCADE', createForeignKeyConstraints: false
+    cascade: true, onDelete: 'CASCADE', createForeignKeyConstraints: false, nullable: true
   })
   @JoinColumn({ name: "totalExpYearStart" })
   totalExpYearStart!: TotalExpYear
 
   @OneToOne(() => TotalExpYear, (totalExpYearEnd) => totalExpYearEnd.totalExpYearEnd, {
-    cascade: true, onDelete: 'CASCADE', createForeignKeyConstraints: false
+    cascade: true, onDelete: 'CASCADE', createForeignKeyConstraints: false, nullable: true
   })
   @JoinColumn({ name: "totalExpYearEnd" })
   totalExpYearEnd!: TotalExpYear
 
   @OneToOne(() => SalaryRange, (salaryRange) => salaryRange.payScaleLowerRange, {
-    cascade: true, onDelete: 'CASCADE', createForeignKeyConstraints: false
+    cascade: true, onDelete: 'CASCADE', createForeignKeyConstraints: false, nullable: true
   })
   @JoinColumn({ name: "payScaleLowerRange" })
   payScaleLowerRange!: SalaryRange
@@ -86,6 +86,9 @@ export class Jobs extends BaseEntity {
   @Column()
   premiumMBAAll!: boolean;
 
+  @Column({ default: false })
+  isDraft!: boolean;
+
   @Column()
   candidateRelocate!: boolean;
 
@@ -105,7 +108,7 @@ export class Jobs extends BaseEntity {
   includeWalkInDetails!: boolean;
 
   @OneToOne(() => SalaryRange, (salaryRange) => salaryRange.payScaleUpperRange, {
-    cascade: true, onDelete: 'CASCADE', createForeignKeyConstraints: false
+    cascade: true, onDelete: 'CASCADE', createForeignKeyConstraints: false, nullable: true
   })
   @JoinColumn({ name: "payScaleUpperRange" })
   payScaleUpperRange!: SalaryRange
@@ -113,20 +116,20 @@ export class Jobs extends BaseEntity {
 
 
   @OneToOne(() => NumberSystem, (numberSystem) => numberSystem.numberSystem, {
-    cascade: true, onDelete: 'CASCADE', createForeignKeyConstraints: false
+    cascade: true, onDelete: 'CASCADE', createForeignKeyConstraints: false, nullable: true
   })
   @JoinColumn({ name: "numberSystem" })
   numberSystem!: NumberSystem
 
 
   @OneToOne(() => EmployeeType, (employmentType) => employmentType.employmentType, {
-    cascade: true, onDelete: 'CASCADE', createForeignKeyConstraints: false
+    cascade: true, onDelete: 'CASCADE', createForeignKeyConstraints: false, nullable: true
   })
   @JoinColumn({ name: "numberSystem" })
   employmentType!: EmployeeType
 
   @OneToOne(() => Recurrence, (recurrence) => recurrence.recurrence, {
-    cascade: true, onDelete: 'CASCADE', createForeignKeyConstraints: false
+    cascade: true, onDelete: 'CASCADE', createForeignKeyConstraints: false, nullable: true
   })
   @JoinColumn({ name: "recurrence" })
   recurrence!: Recurrence
@@ -147,13 +150,13 @@ export class Jobs extends BaseEntity {
   keyResponsibility: string | undefined;
 
   @OneToOne(() => JobRole, jobRole => jobRole.jobRole, {
-    cascade: true, onDelete: 'CASCADE', createForeignKeyConstraints: false
+    cascade: true, onDelete: 'CASCADE', createForeignKeyConstraints: false, nullable: true
   })
   @JoinColumn({ name: "jobsRole" })
   jobsRole!: JobRole
 
   @OneToOne(() => CompanyType, industryType => industryType.companyType, {
-    cascade: true, onDelete: 'CASCADE', createForeignKeyConstraints: false
+    cascade: true, onDelete: 'CASCADE', createForeignKeyConstraints: false, nullable: true
   })
   @JoinColumn({ name: "companyType" })
   companyType!: CompanyType
@@ -162,19 +165,19 @@ export class Jobs extends BaseEntity {
   jobCandidateIndustry!: JobCandidateIndustry[]
 
   @OneToOne(() => Department, department => department.department, {
-    cascade: true, onDelete: 'CASCADE', createForeignKeyConstraints: false
+    cascade: true, onDelete: 'CASCADE', createForeignKeyConstraints: false, nullable: true
   })
   @JoinColumn({ name: "department" })
   department!: Department
 
   @OneToOne(() => JobType, jobType => jobType.jobsType, {
-    cascade: true, onDelete: 'CASCADE', createForeignKeyConstraints: false
+    cascade: true, onDelete: 'CASCADE', createForeignKeyConstraints: false, nullable: true
   })
   @JoinColumn({ name: "jobsType" })
   jobsType!: JobType
 
   @OneToOne(() => RoleCategory, roleCategory => roleCategory.roleCategory, {
-    cascade: true, onDelete: 'CASCADE', createForeignKeyConstraints: false
+    cascade: true, onDelete: 'CASCADE', createForeignKeyConstraints: false, nullable: true
   })
   @JoinColumn({ name: "roleCategory" })
   roleCategory!: RoleCategory
@@ -183,13 +186,13 @@ export class Jobs extends BaseEntity {
   jobEducation!: JobEducation[]
 
   @OneToOne(() => Currency, currency => currency.jobs, {
-    cascade: true, onDelete: 'CASCADE', createForeignKeyConstraints: false
+    cascade: true, onDelete: 'CASCADE', createForeignKeyConstraints: false, nullable: true
   })
   @JoinColumn({ name: "currency" })
   currency!: Currency
 
   @OneToOne(() => WorkMode, workMode => workMode.jobs, {
-    cascade: true, onDelete: 'CASCADE', createForeignKeyConstraints: false
+    cascade: true, onDelete: 'CASCADE', createForeignKeyConstraints: false, nullable: true
   })
   @JoinColumn({ name: "workMode" })
   workMode!: Currency

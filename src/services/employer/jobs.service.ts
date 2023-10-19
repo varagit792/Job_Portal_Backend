@@ -27,77 +27,84 @@ export const saveJobs = async (jobsParams: Jobs) => {
       });
 
       jobs.id = Number(jobsParams?.id);
-      jobs.title = jobsParams?.title,
-        jobs.jobsType = jobsParams?.jobsType,
-        jobs.department = jobsParams?.department,
-        jobs.roleCategory = jobsParams?.roleCategory,
-        jobs.jobsRole = jobsParams?.jobsRole,
-        jobs.workMode = jobsParams?.workMode,
-        jobs.candidateRelocate = jobsParams?.candidateRelocate,
-        jobs.totalExpYearStart = jobsParams?.totalExpYearStart,
-        jobs.totalExpYearEnd = jobsParams?.totalExpYearEnd,
-        jobs.currency = jobsParams?.currency,
-        jobs.payScaleLowerRange = jobsParams?.payScaleLowerRange,
-        jobs.payScaleUpperRange = jobsParams?.payScaleUpperRange,
-        jobs.numberSystem = jobsParams?.numberSystem,
-        jobs.recurrence = jobsParams?.recurrence,
-        jobs.hideSalaryDetails = jobsParams?.hideSalaryDetails,
-        jobs.companyType = jobsParams?.companyType,
-        jobs.premiumBTech = jobsParams?.premiumBTech,
-        jobs.premiumMBAAll = jobsParams?.premiumMBAAll,
-        jobs.diversityHiring = jobsParams?.diversityHiring,
-        jobs.jobDescription = jobsParams?.jobDescription,
-        jobs.jobsOpening = jobsParams?.jobsOpening,
-        jobs.videoProfile = jobsParams?.videoProfile,
-        jobs.includeWalkInDetails = jobsParams?.includeWalkInDetails,
-        jobs.notifyMeAbout = jobsParams?.notifyMeAbout,
-        jobs.notificationEmailAddress1 = jobsParams?.notificationEmailAddress1,
-        jobs.notificationEmailAddress2 = jobsParams?.notificationEmailAddress2,
-        jobs.company = jobsParams?.company,
-        jobs.companyWebsite = jobsParams?.companyWebsite,
-        jobs.aboutCompany = jobsParams?.aboutCompany,
-        jobs.companyAddress = jobsParams?.companyAddress,
+      jobs.title = jobsParams?.title ? jobsParams?.title : jobs.title,
+        jobs.jobsType = jobsParams?.jobsType ? jobsParams?.jobsType : jobs.jobsType,
+        jobs.department = jobsParams?.department ? jobsParams?.department : jobs.department,
+        jobs.roleCategory = jobsParams?.roleCategory ? jobsParams?.roleCategory : jobs.roleCategory,
+        jobs.jobsRole = jobsParams?.jobsRole ? jobsParams?.jobsRole : jobs.jobsRole,
+        jobs.workMode = jobsParams?.workMode ? jobsParams?.workMode : jobs.workMode,
+        jobs.candidateRelocate = jobsParams?.candidateRelocate ? jobsParams?.candidateRelocate : jobs.candidateRelocate,
+        jobs.totalExpYearStart = jobsParams?.totalExpYearStart ? jobsParams?.totalExpYearStart : jobs.totalExpYearStart,
+        jobs.totalExpYearEnd = jobsParams?.totalExpYearEnd ? jobsParams?.totalExpYearEnd : jobs.totalExpYearEnd,
+        jobs.currency = jobsParams?.currency ? jobsParams?.currency : jobs.currency,
+        jobs.payScaleLowerRange = jobsParams?.payScaleLowerRange ? jobsParams?.payScaleLowerRange : jobs.payScaleLowerRange,
+        jobs.payScaleUpperRange = jobsParams?.payScaleUpperRange ? jobsParams?.payScaleUpperRange : jobs.payScaleUpperRange,
+        jobs.numberSystem = jobsParams?.numberSystem ? jobsParams?.numberSystem : jobs.numberSystem,
+        jobs.recurrence = jobsParams?.recurrence ? jobsParams?.recurrence : jobs.recurrence,
+        jobs.hideSalaryDetails = jobsParams?.hideSalaryDetails ? jobsParams?.hideSalaryDetails : jobs.hideSalaryDetails,
+        jobs.companyType = jobsParams?.companyType ? jobsParams?.companyType : jobs.companyType,
+        jobs.premiumBTech = jobsParams?.premiumBTech ? jobsParams?.premiumBTech : jobs.premiumBTech,
+        jobs.premiumMBAAll = jobsParams?.premiumMBAAll ? jobsParams?.premiumMBAAll : jobs.premiumMBAAll,
+        jobs.diversityHiring = jobsParams?.diversityHiring ? jobsParams?.diversityHiring : jobs.diversityHiring,
+        jobs.jobDescription = jobsParams?.jobDescription ? jobsParams?.jobDescription : jobs.jobDescription,
+        jobs.keyResponsibility = jobsParams?.keyResponsibility ? jobsParams?.keyResponsibility : jobs.keyResponsibility,
+        jobs.jobsOpening = jobsParams?.jobsOpening ? jobsParams?.jobsOpening : jobs.jobsOpening,
+        jobs.videoProfile = jobsParams?.videoProfile ? jobsParams?.videoProfile : jobs.videoProfile,
+        jobs.includeWalkInDetails = jobsParams?.includeWalkInDetails ? jobsParams?.includeWalkInDetails : jobs.includeWalkInDetails,
+        jobs.notifyMeAbout = jobsParams?.notifyMeAbout ? jobsParams?.notifyMeAbout : jobs.notifyMeAbout,
+        jobs.notificationEmailAddress1 = jobsParams?.notificationEmailAddress1 ? jobsParams?.notificationEmailAddress1 : jobs.notificationEmailAddress1,
+        jobs.notificationEmailAddress2 = jobsParams?.notificationEmailAddress2 ? jobsParams?.notificationEmailAddress2 : jobs.notificationEmailAddress2,
+        jobs.company = jobsParams?.company ? jobsParams?.company : jobs.company,
+        jobs.companyWebsite = jobsParams?.companyWebsite ? jobsParams?.companyWebsite : jobs.companyWebsite,
+        jobs.aboutCompany = jobsParams?.aboutCompany ? jobsParams?.aboutCompany : jobs.aboutCompany,
+        jobs.companyAddress = jobsParams?.companyAddress ? jobsParams?.companyAddress : jobs.companyAddress,
         jobs = await jobsRepository.save(jobs);
 
-      await appJobsKeySkills.delete({ jobsKeySkills: jobsParams.id as any });
-      for (let i = 0; i < jobsParams.jobsKeySkills.length; i++) {
-        let jobsSkills: any = new Object();
-        jobsSkills.jobsKeySkills = jobsParams.id;
-        jobsSkills.preferred = jobsParams.jobsKeySkills[i].preferred;
-        jobsSkills.keySkills = jobsParams.jobsKeySkills[i].keySkills;
-        await appJobsKeySkills.save(jobsSkills);
+      if (jobsParams?.jobsKeySkills) {
+        await appJobsKeySkills.delete({ jobsKeySkills: jobsParams.id as any });
+        for (let i = 0; i < jobsParams.jobsKeySkills.length; i++) {
+          let jobsSkills: any = new Object();
+          jobsSkills.jobsKeySkills = jobsParams.id;
+          jobsSkills.preferred = jobsParams.jobsKeySkills[i].preferred;
+          jobsSkills.keySkills = jobsParams.jobsKeySkills[i].keySkills;
+          await appJobsKeySkills.save(jobsSkills);
+        }
       }
-
-      await appJobLocation.delete({ jobsLocation: jobsParams.id as any });
-      for (let i = 0; i < jobsParams.jobsLocation.length; i++) {
-        let jbsLocation: any = new Object();
-        jbsLocation.jobsLocation = jobsParams.id;
-        jbsLocation.location = jobsParams.jobsLocation[i].location;
-        await appJobLocation.save(jbsLocation);
+      if (jobsParams?.jobsLocation) {
+        await appJobLocation.delete({ jobsLocation: jobsParams.id as any });
+        for (let i = 0; i < jobsParams.jobsLocation.length; i++) {
+          let jbsLocation: any = new Object();
+          jbsLocation.jobsLocation = jobsParams.id;
+          jbsLocation.location = jobsParams.jobsLocation[i].location;
+          await appJobLocation.save(jbsLocation);
+        }
       }
-
-      await appJobLocality.delete({ jobLocality: jobsParams.id as any });
-      for (let i = 0; i < jobsParams.jobLocality.length; i++) {
-        let jbsLocality: any = new Object();
-        jbsLocality.jobLocality = jobsParams.id;
-        jbsLocality.locality = jobsParams.jobLocality[i].locality;
-        await appJobLocality.save(jbsLocality);
+      if (jobsParams?.jobLocality) {
+        await appJobLocality.delete({ jobLocality: jobsParams.id as any });
+        for (let i = 0; i < jobsParams.jobLocality.length; i++) {
+          let jbsLocality: any = new Object();
+          jbsLocality.jobLocality = jobsParams.id;
+          jbsLocality.locality = jobsParams.jobLocality[i].locality;
+          await appJobLocality.save(jbsLocality);
+        }
       }
-
-      await appJobEducation.delete({ jobEducation: jobsParams.id as any });
-      for (let i = 0; i < jobsParams.jobEducation.length; i++) {
-        let jbsEducation: any = new Object();
-        jbsEducation.jobEducation = jobsParams.id;
-        jbsEducation.education = jobsParams.jobEducation[i].education;
-        await appJobEducation.save(jbsEducation);
+      if (jobsParams?.jobEducation) {
+        await appJobEducation.delete({ jobEducation: jobsParams.id as any });
+        for (let i = 0; i < jobsParams.jobEducation.length; i++) {
+          let jbsEducation: any = new Object();
+          jbsEducation.jobEducation = jobsParams.id;
+          jbsEducation.education = jobsParams.jobEducation[i].education;
+          await appJobEducation.save(jbsEducation);
+        }
       }
-
-      await appJobCandidateIndustry.delete({ candidateIndustry: jobsParams.id as any });
-      for (let i = 0; i < jobsParams.jobCandidateIndustry.length; i++) {
-        let jbsCandidateIndustry: any = new Object();
-        jbsCandidateIndustry.jobCandidateIndustry = jobsParams.id;
-        jbsCandidateIndustry.candidateIndustry = jobsParams.jobCandidateIndustry[i].candidateIndustry;
-        await appJobCandidateIndustry.save(jbsCandidateIndustry);
+      if (jobsParams?.jobCandidateIndustry) {
+        await appJobCandidateIndustry.delete({ candidateIndustry: jobsParams.id as any });
+        for (let i = 0; i < jobsParams.jobCandidateIndustry.length; i++) {
+          let jbsCandidateIndustry: any = new Object();
+          jbsCandidateIndustry.jobCandidateIndustry = jobsParams.id;
+          jbsCandidateIndustry.candidateIndustry = jobsParams.jobCandidateIndustry[i].candidateIndustry;
+          await appJobCandidateIndustry.save(jbsCandidateIndustry);
+        }
       }
     } else {
       jobs = await jobsRepository.save(updatedJobsParams)
@@ -146,7 +153,8 @@ export const jobsList = async (data: any) => {
         jobEducation: { education: true },
         jobLocality: { locality: true },
         user: true,
-        jobsKeySkills: { keySkills: true }
+        jobsKeySkills: { keySkills: true },
+        employmentType:true
       },
       skip: (skip),
       take: (page),
@@ -175,6 +183,7 @@ export const getJobDetails = async (id: number) => {
         jobsRole: true,
         workMode: true,
         department: true,
+        employmentType: true,
         jobCandidateIndustry: { candidateIndustry: true },
         currency: true,
         payScaleLowerRange: true,
