@@ -1,8 +1,8 @@
 import { Entity, PrimaryGeneratedColumn, Column, BaseEntity, ManyToOne, OneToOne, JoinColumn } from 'typeorm';
-import { Company } from './company.entity';
 import { City } from './city.entity';
 import { State } from './state.entity';
 import { User } from './user.entity';
+import { Companies } from './companies.entity';
 
 @Entity()
 export class Employment extends BaseEntity {
@@ -15,9 +15,9 @@ export class Employment extends BaseEntity {
   @Column({ default: null })
   totalExperience!: string
 
-  @OneToOne(() => Company)
+  @OneToOne(() => Companies)
   @JoinColumn()
-  company!: Company
+  company!: Companies
 
   @Column({ default: null })
   jobTitle!: string

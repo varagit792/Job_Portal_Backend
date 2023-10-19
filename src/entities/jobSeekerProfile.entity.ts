@@ -14,8 +14,8 @@ import { PersonalDetails } from './personalDetails.entity';
 import { JobSeekerProfileEmployment } from './jobSeekerProfileEmployment.entity';
 import { CareerProfile } from './careerProfile.entity';
 import { JobTitle } from './jobTitle.entity';
-import { Company } from './company.entity';
 import { JobSeekerProfileKeySkills } from './jobSeekerProfileKeySkills.entity';
+import { Companies } from './companies.entity';
 
 @Entity()
 export class JobSeekerProfile extends BaseEntity {
@@ -93,9 +93,9 @@ export class JobSeekerProfile extends BaseEntity {
   @JoinColumn()
   currentJobTitle!: JobRole | null
 
-  @OneToOne(() => Company, { nullable: true, onDelete: 'SET NULL', onUpdate: 'CASCADE' })
+  @OneToOne(() => Companies, { nullable: true, onDelete: 'SET NULL', onUpdate: 'CASCADE' })
   @JoinColumn()
-  currentCompany!: Company | null
+  currentCompany!: Companies | null
 
   @OneToMany(() => Education, (education) => education.jobSeekerProfile, { createForeignKeyConstraints: true, cascade: true })
   educations!: Education[]
