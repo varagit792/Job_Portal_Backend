@@ -2,6 +2,8 @@ import { Entity, PrimaryGeneratedColumn, Column, BaseEntity, OneToMany, OneToOne
 import { Jobs } from './jobs.entity';
 import { Location } from './location.entity';
 import { Department } from './department.entity';
+import { CompanyType } from './companyType.entity';
+import { Industry } from './industry.entity';
 
 @Entity()
 export class Companies extends BaseEntity {
@@ -40,6 +42,12 @@ export class Companies extends BaseEntity {
 
   @OneToMany(() => Department, (department) => department.companies, { nullable:true, createForeignKeyConstraints: true, cascade: true, })
   department!: Department[] | null
+
+  @OneToMany(() => CompanyType, (comapanyType) => comapanyType.companies, { nullable:true, createForeignKeyConstraints: true, cascade: true, })
+  companyType!: CompanyType[] | null
+
+  @OneToMany(() => Industry, (industry) => industry.companies, { nullable:true, createForeignKeyConstraints: true, cascade: true, })
+  industry!: Industry[] | null
 
   @CreateDateColumn()
   createdAt: Date | undefined;

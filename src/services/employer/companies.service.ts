@@ -13,7 +13,9 @@ export const saveCompanies = async (companiesParams: Companies) => {
         },
         relations: {
           location: true,
-          department:true
+          department: true,
+          companyType: true,
+          industry:true
         }
       });
 
@@ -23,14 +25,14 @@ export const saveCompanies = async (companiesParams: Companies) => {
         // companies.payScaleLowerRange = companiesParams?.payScaleLowerRange,
         // companies.jobsOpening = companiesParams?.jobsOpening,
         // companies.userType = companiesParams?.userType,
-        // companies.company = companiesParams?.company,
+        companies.companyType = companiesParams?.companyType,
         // companies.totalExpYearStart = companiesParams?.totalExpYearStart,
         // companies.totalExpYearEnd = companiesParams?.totalExpYearEnd,
         // companies.numberSystem = companiesParams?.numberSystem,
         // companies.recurrence = companiesParams?.recurrence,
         companies.location = companiesParams?.location,
         // companies.jobsRole = companiesParams?.jobsRole,
-        // companies.industryType = companiesParams?.industryType,
+        companies.industry = companiesParams?.industry,
         companies.department = companiesParams?.department,
         // companies.employeeType = companiesParams?.employeeType,
         // companies.jobType = companiesParams?.jobType,
@@ -69,37 +71,50 @@ export const allCompanies = async (data: any) => {
   try {
     const companiesRepository = AppDataSource.getRepository(Companies);
     if (data?.page) {
-      return await companiesRepository.find({
+      const companies = await companiesRepository.find({
         order: {
           id: "DESC",
         },
         where: {
           ...((data?.data?.department !== undefined && data?.data?.department?.length !== 0) && { department: { id: In(data?.data?.department) } }),
           ...((data?.data?.location !== undefined && data?.data?.location?.length !== 0) && { location: { id: In(data?.data?.location) } }),
+          ...((data?.data?.companyType !== undefined && data?.data?.companyType?.length !== 0) && { companyType: { id: In(data?.data?.companyType) } }),
+          ...((data?.data?.industry !== undefined && data?.data?.industry?.length !== 0) && { industry: { id: In(data?.data?.industry) } }),
         },
         relations: {
           location: true,
-          department:true
+          department: true,
+          companyType: true,
+          industry:true
+          
         },
         skip: (skip),
         take: (items_per_page),
       }); 
+      console.log("companiess-->", companies);
+      
+      return companies;
     } else {
-      return await companiesRepository.find({
+      const companies =  await companiesRepository.find({
         order: {
           id: "DESC",
         },
         where: {
           ...((data?.data?.department !== undefined && data?.data?.department?.length !== 0) && { department: { id: In(data?.data?.department) } }),
+          ...((data?.data?.location !== undefined && data?.data?.location?.length !== 0) && { location: { id: In(data?.data?.location) } }),
+          ...((data?.data?.companyType !== undefined && data?.data?.companyType?.length !== 0) && { companyType: { id: In(data?.data?.companyType) } }),
+          ...((data?.data?.industry !== undefined && data?.data?.industry?.length !== 0) && { industry: { id: In(data?.data?.industry) } }),
         },
         relations: {
           location: true,
-          department:true
+          department: true,
+          companyType: true,
+          industry:true
         },
-      });     
+      });
+      console.log("companiess-->", companies);
+      return companies;
     }
-
-    //return companies;
   } catch (error) {
     console.log('error', error);
     throw error;
@@ -120,7 +135,7 @@ export const getCompanyDetails = async (id: number) => {
         // recurrence: true,
         location: true,
         // jobsRole: true,
-        // industryType: true,
+        industry: true,
         department: true,
         // employeeType: true,
         // jobType: true,
