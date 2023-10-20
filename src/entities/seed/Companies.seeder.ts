@@ -14,7 +14,8 @@ export default class CompaniesSeeder implements Seeder {
         jobs: 5,           
         employeeCount:50000,
         rating:4.5, 
-        reviews:7500
+        reviews: 7500,
+        location:[{id:1},{id:3}]
       },
       {
         title: "Infosys",
@@ -22,7 +23,8 @@ export default class CompaniesSeeder implements Seeder {
              jobs:6,             
         employeeCount:50000, 
         rating:4, 
-        reviews:6500
+        reviews: 6500,
+        location: [{ id: 5 }, { id: 9}]
       },
       {
         title: "Capgemini",
@@ -30,7 +32,8 @@ export default class CompaniesSeeder implements Seeder {
              jobs:7,             
         employeeCount:50000, 
         rating:3.5, 
-        reviews:7800
+        reviews: 7800,
+        location: [{ id: 3 }, { id: 6 }]
       },
       {
         title: "Value Labs",
@@ -38,7 +41,8 @@ export default class CompaniesSeeder implements Seeder {
              jobs:3,             
         employeeCount:50000, 
         rating:2.5, 
-        reviews:6600
+        reviews: 6600,
+        location: [{ id: 1 }, { id: 3 }]
       },
       {
         title: "Ratna Global Tech",
@@ -46,7 +50,8 @@ export default class CompaniesSeeder implements Seeder {
              jobs:9,             
         employeeCount:50000, 
         rating:4.5, 
-        reviews:2500
+        reviews: 2500,
+        location: [{ id: 1 }, { id: 3 }]
       },
       {
         title: "Ratna Global Tech",
@@ -54,7 +59,8 @@ export default class CompaniesSeeder implements Seeder {
              jobs:3,             
         employeeCount:50000, 
         rating:2.5, 
-        reviews:500
+        reviews: 500,
+        location: [{ id: 1 }, { id: 3 }]
       },
       {
         title: "Value Labs",
@@ -62,7 +68,8 @@ export default class CompaniesSeeder implements Seeder {
              jobs:6,             
         employeeCount:50000, 
         rating:3.5, 
-        reviews:5500      
+        reviews: 5500,
+        location: [{ id: 10 }, { id: 13 }]
       },
       {
         title: "Capgemini",

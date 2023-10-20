@@ -1,5 +1,5 @@
 import { AppDataSource } from "../config/typeorm";
-import { Company } from "../entities/company.entity";
+import { Companies } from "../entities/companies.entity";
 
 // export const companyList = async () => {
 //   try {
@@ -17,7 +17,7 @@ import { Company } from "../entities/company.entity";
 
 export const companyList = async () => {
   try {
-    const companiesRepository = AppDataSource.getRepository(Company);
+    const companiesRepository = AppDataSource.getRepository(Companies);
     const companies = await companiesRepository.find({
       relations: {
         location: true,
