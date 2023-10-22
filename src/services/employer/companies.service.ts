@@ -80,6 +80,7 @@ export const allCompanies = async (data: any) => {
           ...((data?.data?.location !== undefined && data?.data?.location?.length !== 0) && { location: { id: In(data?.data?.location) } }),
           ...((data?.data?.companyType !== undefined && data?.data?.companyType?.length !== 0) && { companyType: { id: In(data?.data?.companyType) } }),
           ...((data?.data?.industry !== undefined && data?.data?.industry?.length !== 0) && { industry: { id: In(data?.data?.industry) } }),
+          ...((data?.data?.company !== undefined && data?.data?.company?.length !== 0) && { id: In(data?.data?.company) }),
         },
         relations: {
           location: true,
@@ -104,6 +105,7 @@ export const allCompanies = async (data: any) => {
           ...((data?.data?.location !== undefined && data?.data?.location?.length !== 0) && { location: { id: In(data?.data?.location) } }),
           ...((data?.data?.companyType !== undefined && data?.data?.companyType?.length !== 0) && { companyType: { id: In(data?.data?.companyType) } }),
           ...((data?.data?.industry !== undefined && data?.data?.industry?.length !== 0) && { industry: { id: In(data?.data?.industry) } }),
+          ...((data?.data?.company !== undefined && data?.data?.company?.length !== 0) && { id: In(data?.data?.company)  }),
         },
         relations: {
           location: true,
