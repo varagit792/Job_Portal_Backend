@@ -31,10 +31,13 @@ export class Jobs extends BaseEntity {
   @Column()
   title!: string;
 
-  @OneToOne(() => Companies, (company) => company.company, {
-    cascade: true, onDelete: 'CASCADE', createForeignKeyConstraints: false, nullable: true
-  })
-  @JoinColumn({ name: "company" })
+  // @OneToOne(() => Companies, (company) => company.company, {
+  //   cascade: true, onDelete: 'CASCADE', createForeignKeyConstraints: false, nullable: true
+  // })
+  // @JoinColumn({ name: "company" })
+    // company!: Companies
+    
+  @ManyToOne(() => Companies, companies => companies.jobs, { nullable: true, onDelete: "CASCADE" })
   company!: Companies
 
   @OneToOne(() => TotalExpYear, (totalExpYear) => totalExpYear.totalExpYearStart, {
