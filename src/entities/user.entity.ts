@@ -46,6 +46,6 @@ export class User extends BaseEntity {
   // user!: Jobs[]
 
   @ManyToOne(() => Companies, (companies) => companies.user, { createForeignKeyConstraints: true, cascade: true })
-  companies!: Companies[]
+  companies!: Companies
 
 }

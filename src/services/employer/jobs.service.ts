@@ -136,7 +136,7 @@ export const jobsList = async (data: any) => {
       relations: {
         company: {
           location: true,
-          user:true
+          user: true
         },
         totalExpYearStart: true,
         totalExpYearEnd: true,
@@ -157,7 +157,7 @@ export const jobsList = async (data: any) => {
         jobLocality: { locality: true },
         //user: true,
         jobsKeySkills: { keySkills: true },
-        employmentType:true
+        employmentType: true
       },
       skip: (skip),
       take: (page),
@@ -176,7 +176,10 @@ export const getJobDetails = async (id: number) => {
     const job = await jobsRepository.findOne({
       where: { id },
       relations: {
-        company: true,
+        company: {
+          user: true
+        },
+        // company: true,
         totalExpYearStart: true,
         totalExpYearEnd: true,
         numberSystem: true,
@@ -195,7 +198,7 @@ export const getJobDetails = async (id: number) => {
         roleCategory: true,
         jobEducation: { education: true },
         jobLocality: { locality: true },
-        user: true,
+        // user: true,
         jobsKeySkills: { keySkills: true }
       },
     });
