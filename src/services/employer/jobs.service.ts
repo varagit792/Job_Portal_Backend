@@ -135,7 +135,8 @@ export const jobsList = async (data: any) => {
       },
       relations: {
         company: {
-          location:true
+          location: true,
+          user:true
         },
         totalExpYearStart: true,
         totalExpYearEnd: true,
@@ -154,7 +155,7 @@ export const jobsList = async (data: any) => {
         roleCategory: true,
         jobEducation: { education: true },
         jobLocality: { locality: true },
-        user: true,
+        //user: true,
         jobsKeySkills: { keySkills: true },
         employmentType:true
       },
