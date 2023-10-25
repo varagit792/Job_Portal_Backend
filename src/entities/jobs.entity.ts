@@ -35,8 +35,8 @@ export class Jobs extends BaseEntity {
   //   cascade: true, onDelete: 'CASCADE', createForeignKeyConstraints: false, nullable: true
   // })
   // @JoinColumn({ name: "company" })
-    // company!: Companies
-    
+  // company!: Companies
+
   @ManyToOne(() => Companies, companies => companies.jobs, { nullable: true, onDelete: "CASCADE" })
   company!: Companies
 
@@ -206,8 +206,8 @@ export class Jobs extends BaseEntity {
   @UpdateDateColumn()
   updatedAt: Date | undefined;
 
-  @ManyToOne(() => Jobs, jobs => jobs.user, { nullable: true, onDelete: "CASCADE" })
-  user!: Jobs
+  // @ManyToOne(() => Jobs, jobs => jobs.user, { nullable: true, onDelete: "CASCADE" })
+  // user!: Jobs
 
   @Column()
   status!: boolean
