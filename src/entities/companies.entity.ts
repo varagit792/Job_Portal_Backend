@@ -4,6 +4,7 @@ import { Location } from './location.entity';
 import { Department } from './department.entity';
 import { CompanyType } from './companyType.entity';
 import { Industry } from './industry.entity';
+import { User } from './user.entity';
 
 @Entity()
 export class Companies extends BaseEntity {
@@ -16,14 +17,17 @@ export class Companies extends BaseEntity {
   @Column({default:false})
   status!: boolean
 
-  @ManyToOne(() => Companies, companies => companies.user, { nullable: true, onDelete: "CASCADE" })
-  user!: Companies
+  @OneToMany(() => User, user => user.companies, { nullable: true, onDelete: "CASCADE" })
+  user!: User
 
   @Column({ type: "text", nullable:true, default:null})
   companyDescription: string | undefined;
 
-  @Column({nullable:true, default:null})
-  jobs!: number;
+  // @Column({nullable:true, default:null})
+  // jobs!: number;
+
+  @OneToMany(() => Jobs, (jobs) => jobs.company, { nullable: true, createForeignKeyConstraints: true, cascade: true })
+  jobs!: Jobs[] | null
 
   @Column({nullable:true, default:null})
   employeeCount!: number;

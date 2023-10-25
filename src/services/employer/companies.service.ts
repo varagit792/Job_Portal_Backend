@@ -15,7 +15,8 @@ export const saveCompanies = async (companiesParams: Companies) => {
           location: true,
           department: true,
           companyType: true,
-          industry:true
+          industry: true,
+          jobs:true
         }
       });
 
@@ -23,7 +24,7 @@ export const saveCompanies = async (companiesParams: Companies) => {
       companies.title = companiesParams?.title,
         companies.companyDescription = companiesParams?.companyDescription,
         // companies.payScaleLowerRange = companiesParams?.payScaleLowerRange,
-        // companies.jobsOpening = companiesParams?.jobsOpening,
+        companies.jobs = companiesParams?.jobs,
         // companies.userType = companiesParams?.userType,
         companies.companyType = companiesParams?.companyType,
         // companies.totalExpYearStart = companiesParams?.totalExpYearStart,
@@ -86,8 +87,8 @@ export const allCompanies = async (data: any) => {
           location: true,
           department: true,
           companyType: true,
-          industry:true
-          
+          industry: true,
+          jobs:true          
         },
         skip: (skip),
         take: (items_per_page),
@@ -111,7 +112,8 @@ export const allCompanies = async (data: any) => {
           location: true,
           department: true,
           companyType: true,
-          industry:true
+          industry: true,
+          jobs:true
         },
       });
       console.log("companiess-->", companies);
@@ -139,6 +141,7 @@ export const getCompanyDetails = async (id: number) => {
         // jobsRole: true,
         industry: true,
         department: true,
+        jobs:true,
         // employeeType: true,
         // jobType: true,
         // roleCategory: true,
