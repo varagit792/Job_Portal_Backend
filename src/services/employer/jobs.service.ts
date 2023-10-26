@@ -136,7 +136,6 @@ export const jobsList = async (data: any) => {
       relations: {
         company: {
           location: true,
-          user: true
         },
         totalExpYearStart: true,
         totalExpYearEnd: true,
