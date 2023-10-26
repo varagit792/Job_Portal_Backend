@@ -16,7 +16,7 @@ export const saveCompanies = async (companiesParams: Companies) => {
           department: true,
           companyType: true,
           industry: true,
-          jobs:true
+          jobs: true
         }
       });
 
@@ -41,17 +41,17 @@ export const saveCompanies = async (companiesParams: Companies) => {
         // companies.education = companiesParams?.education,
         // companies.education = companiesParams?.education,
         //companies.user = companiesParams?.user
-      // companiesParams?.jobsKeySkills?.forEach((child: any) => {
-      //   if (child.id) {
-      //     const updatedChild = jobsParams?.jobsKeySkills?.find((item) => Number(item?.jobsKeySkills) === Number(child?.jobsKeySkills));
-      //     if (updatedChild) {
-      //       child.jobsKeySkills.jobsKeySkills = updatedChild?.jobsKeySkills?.jobsKeySkills,
-      //         child.jobsKeySkills.preferred = child?.jobsKeySkills?.preferred
+        // companiesParams?.jobsKeySkills?.forEach((child: any) => {
+        //   if (child.id) {
+        //     const updatedChild = jobsParams?.jobsKeySkills?.find((item) => Number(item?.jobsKeySkills) === Number(child?.jobsKeySkills));
+        //     if (updatedChild) {
+        //       child.jobsKeySkills.jobsKeySkills = updatedChild?.jobsKeySkills?.jobsKeySkills,
+        //         child.jobsKeySkills.preferred = child?.jobsKeySkills?.preferred
 
-      //     }
-      //   }
-      // });
-console.log("comapanies-->",companies);
+        //     }
+        //   }
+        // });
+        console.log("comapanies-->", companies);
 
       companies = await companiesRepository.save(companies);
     } else {
@@ -64,11 +64,11 @@ console.log("comapanies-->",companies);
   }
 }
 
-export const allCompanies = async (data: any) => {  
+export const allCompanies = async (data: any) => {
   const items_per_page = Number(process.env.JOB_PER_PAGE);
   const skip = (items_per_page * data?.page) - items_per_page;
   console.log("data--->", data);
-  
+
   try {
     const companiesRepository = AppDataSource.getRepository(Companies);
     if (data?.page) {
@@ -88,16 +88,16 @@ export const allCompanies = async (data: any) => {
           department: true,
           companyType: true,
           industry: true,
-          jobs:true          
+          jobs: true
         },
         skip: (skip),
         take: (items_per_page),
-      }); 
+      });
       console.log("companiess-->", companies);
-      
+
       return companies;
     } else {
-      const companies =  await companiesRepository.find({
+      const companies = await companiesRepository.find({
         order: {
           id: "DESC",
         },
@@ -106,14 +106,14 @@ export const allCompanies = async (data: any) => {
           ...((data?.data?.location !== undefined && data?.data?.location?.length !== 0) && { location: { id: In(data?.data?.location) } }),
           ...((data?.data?.companyType !== undefined && data?.data?.companyType?.length !== 0) && { companyType: { id: In(data?.data?.companyType) } }),
           ...((data?.data?.industry !== undefined && data?.data?.industry?.length !== 0) && { industry: { id: In(data?.data?.industry) } }),
-          ...((data?.data?.company !== undefined && data?.data?.company?.length !== 0) && { id: In(data?.data?.company)  }),
+          ...((data?.data?.company !== undefined && data?.data?.company?.length !== 0) && { id: In(data?.data?.company) }),
         },
         relations: {
           location: true,
           department: true,
           companyType: true,
           industry: true,
-          jobs:true
+          jobs: true
         },
       });
       console.log("companiess-->", companies);
@@ -141,7 +141,7 @@ export const getCompanyDetails = async (id: number) => {
         // jobsRole: true,
         industry: true,
         department: true,
-        jobs:true,
+        jobs: true,
         // employeeType: true,
         // jobType: true,
         // roleCategory: true,
@@ -158,4 +158,26 @@ export const getCompanyDetails = async (id: number) => {
   }
 }
 
-
+export const employerCompanyList = async (data: any) => {
+  const page = Number(process.env.JOB_PER_PAGE);
+  const skip = (page * data?.page) - page;
+  try {
+    const companiesRepository = AppDataSource.getRepository(Companies);
+    let company = await companiesRepository.find({
+      order: {
+        id: "DESC",
+      },
+      where: { user: { id: data?.data?.user?.id } },
+      relations: {
+        user: true,
+        jobs: true,
+      },
+      skip: (skip),
+      take: (page),
+    });
+    return company;
+  } catch (error) {
+    console.log('error', error);
+    throw error;
+  }
+}
