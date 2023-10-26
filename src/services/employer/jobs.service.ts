@@ -177,7 +177,8 @@ export const getJobDetails = async (id: number) => {
       where: { id },
       relations: {
         company: {
-          user: true
+          user: true,
+          location: true
         },
         // company: true,
         totalExpYearStart: true,
