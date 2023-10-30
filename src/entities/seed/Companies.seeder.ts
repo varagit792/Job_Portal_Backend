@@ -11,7 +11,7 @@ export default class CompaniesSeeder implements Seeder {
       {
         title: "TCS",
         companyDescription: "Tata Consultancy Services",
-        jobs: 5,           
+        //jobs: 5,           
         employeeCount:50000,
         rating:4.5, 
         reviews: 7500,
@@ -20,7 +20,7 @@ export default class CompaniesSeeder implements Seeder {
       {
         title: "Infosys",
         companyDescription: "Infosys Ltd",
-             jobs:6,             
+             //jobs:6,             
         employeeCount:50000, 
         rating:4, 
         reviews: 6500,
@@ -29,7 +29,7 @@ export default class CompaniesSeeder implements Seeder {
       {
         title: "Capgemini",
         companyDescription: "Capgemini consulting services",
-             jobs:7,             
+             //jobs:7,             
         employeeCount:50000, 
         rating:3.5, 
         reviews: 7800,
@@ -38,7 +38,7 @@ export default class CompaniesSeeder implements Seeder {
       {
         title: "Value Labs",
         companyDescription: "Value Labs LLP",
-             jobs:3,             
+             //jobs:3,             
         employeeCount:50000, 
         rating:2.5, 
         reviews: 6600,
@@ -47,7 +47,7 @@ export default class CompaniesSeeder implements Seeder {
       {
         title: "Ratna Global Tech",
         companyDescription: "Ratna Global Tech",
-             jobs:9,             
+             //jobs:9,             
         employeeCount:50000, 
         rating:4.5, 
         reviews: 2500,
@@ -56,7 +56,7 @@ export default class CompaniesSeeder implements Seeder {
       {
         title: "Ratna Global Tech",
         companyDescription: "Ratna Global Tech",
-             jobs:3,             
+             //jobs:3,             
         employeeCount:50000, 
         rating:2.5, 
         reviews: 500,
@@ -65,7 +65,7 @@ export default class CompaniesSeeder implements Seeder {
       {
         title: "Value Labs",
         companyDescription: "Value Labs LLP",
-             jobs:6,             
+             //jobs:6,             
         employeeCount:50000, 
         rating:3.5, 
         reviews: 5500,
@@ -74,7 +74,7 @@ export default class CompaniesSeeder implements Seeder {
       {
         title: "Capgemini",
         companyDescription: "Capgemini consulting services",
-             jobs:2,             
+             //jobs:2,             
         employeeCount:50000, 
         rating:4.5, 
         reviews:3400
@@ -82,7 +82,7 @@ export default class CompaniesSeeder implements Seeder {
       {
         title: "Infosys",
         companyDescription: "Infosys Ltd",
-             jobs:3,             
+             //jobs:3,             
         employeeCount:50000, 
         rating:1.5, 
         reviews:6500
@@ -91,7 +91,7 @@ export default class CompaniesSeeder implements Seeder {
         title: "ABB",
         companyDescription: "ABB Limited",
         status: true, 
-        jobs:5,        
+        //jobs:5,        
         employeeCount:50000, 
         rating:3.5, 
         reviews:5500
@@ -100,7 +100,7 @@ export default class CompaniesSeeder implements Seeder {
         title: "NCR",
         companyDescription: "NCR",
         status: true, 
-        jobs:7,        
+        //jobs:7,        
         employeeCount:50000, 
         rating:4, 
         reviews:8500
@@ -109,7 +109,7 @@ export default class CompaniesSeeder implements Seeder {
         title: "Oracle",
         companyDescription: "Oracle Pvt Ltd",
         status: true, 
-        jobs:10,        
+        //jobs:10,        
         employeeCount:50000,
         rating:4.5, 
         reviews:9500      

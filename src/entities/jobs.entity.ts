@@ -33,10 +33,13 @@ export class Jobs extends BaseEntity {
   @Column()
   title!: string;
 
-  @OneToOne(() => Companies, (company) => company.company, {
-    cascade: true, onDelete: 'CASCADE', createForeignKeyConstraints: false, nullable: true
-  })
-  @JoinColumn({ name: "company" })
+  // @OneToOne(() => Companies, (company) => company.company, {
+  //   cascade: true, onDelete: 'CASCADE', createForeignKeyConstraints: false, nullable: true
+  // })
+  // @JoinColumn({ name: "company" })
+  // company!: Companies
+
+  @ManyToOne(() => Companies, companies => companies.jobs, { nullable: true, onDelete: "CASCADE" })
   company!: Companies
 
   @OneToOne(() => TotalExpYear, (totalExpYear) => totalExpYear.totalExpYearStart, {
@@ -205,8 +208,8 @@ export class Jobs extends BaseEntity {
   @UpdateDateColumn()
   updatedAt: Date | undefined;
 
-  @ManyToOne(() => Jobs, jobs => jobs.user, { nullable: true, onDelete: "CASCADE" })
-  user!: Jobs
+  // @ManyToOne(() => Jobs, jobs => jobs.user, { nullable: true, onDelete: "CASCADE" })
+  // user!: Jobs
 
   @OneToOne(() => JobStatus, jobStatus => jobStatus.jobStatus, {
     cascade: true, onDelete: 'CASCADE', createForeignKeyConstraints: false, nullable: true
