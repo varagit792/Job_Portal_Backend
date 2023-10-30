@@ -41,6 +41,8 @@ export const saveJobs = async (jobsParams: Jobs) => {
         jobs.payScaleUpperRange = jobsParams?.payScaleUpperRange ? jobsParams?.payScaleUpperRange : jobs.payScaleUpperRange,
         jobs.numberSystem = jobsParams?.numberSystem ? jobsParams?.numberSystem : jobs.numberSystem,
         jobs.recurrence = jobsParams?.recurrence ? jobsParams?.recurrence : jobs.recurrence,
+        jobs.jobStatus = jobsParams?.jobStatus ? jobsParams?.jobStatus : jobs.jobStatus,
+        jobs.jobExpiry = jobsParams?.jobExpiry ? jobsParams?.jobExpiry : jobs.jobExpiry,
         jobs.hideSalaryDetails = jobsParams?.hideSalaryDetails ? jobsParams?.hideSalaryDetails : jobs.hideSalaryDetails,
         jobs.companyType = jobsParams?.companyType ? jobsParams?.companyType : jobs.companyType,
         jobs.premiumBTech = jobsParams?.premiumBTech ? jobsParams?.premiumBTech : jobs.premiumBTech,
@@ -135,12 +137,14 @@ export const jobsList = async (data: any) => {
       },
       relations: {
         company: {
-          location:true
+          location: true
         },
         totalExpYearStart: true,
         totalExpYearEnd: true,
         numberSystem: true,
         recurrence: true,
+        jobExpiry: true,
+        jobStatus: true,
         jobsLocation: { location: true },
         companyType: true,
         jobsRole: true,
@@ -156,7 +160,7 @@ export const jobsList = async (data: any) => {
         jobLocality: { locality: true },
         user: true,
         jobsKeySkills: { keySkills: true },
-        employmentType:true
+        employmentType: true
       },
       skip: (skip),
       take: (page),
@@ -180,6 +184,8 @@ export const getJobDetails = async (id: number) => {
         totalExpYearEnd: true,
         numberSystem: true,
         recurrence: true,
+        jobExpiry: true,
+        jobStatus: true,
         jobsLocation: { location: true },
         companyType: true,
         jobsRole: true,
