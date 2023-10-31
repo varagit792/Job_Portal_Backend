@@ -1,4 +1,4 @@
-import { Request, Response } from 'express';
+import { NextFunction, Request, Response } from 'express';
 import { getEducation, saveEducation, updateJobSeekerProfile, getJobSeekerProfile, saveCareerProfile, getCareerProfile, savePersonalDetails, updateJobSeekerProfileBasicDetails, deleteLanguages } from '../services/jobSeekerProfile.service';
 import { JobSeekerProfile } from '../entities/jobSeekerProfile.entity';
 import multer from 'multer';
@@ -419,7 +419,7 @@ export const jobSeekerMailVerification = async (req: Request, res: Response) => 
   }
 }
 
-export const updateJobSeekerMailVerification = async (req: Request, res: Response) => {
+export const updateJobSeekerMailVerification = async (req: Request, res: Response,next:NextFunction) => {
   try {
 
     const token = req.params.token;
@@ -430,9 +430,11 @@ export const updateJobSeekerMailVerification = async (req: Request, res: Respons
         isEmailVerified: true
       }
       const mailData = await updateUser(userData.id, emailParams);
-      return res.status(200).json({
-        message: 'Email successfully verified'
-      });
+      const token = await generateToken(userData);
+      res.cookie('token', token);
+      res.cookie('name', userData?.name)
+      res.redirect('http://localhost:3000/homePage');
+      next();
     } else {
       return res.status(400).json({
         message: 'User not present'
