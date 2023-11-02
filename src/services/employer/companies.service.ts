@@ -170,7 +170,10 @@ export const employerCompanyList = async (data: any) => {
       where: { user: { id: data?.data?.user?.id } },
       relations: {
         user: true,
-        jobs: true,
+        jobs: {
+          jobStatus: true,
+          jobExpiry:true
+        },
       },
       skip: (skip),
       take: (page),

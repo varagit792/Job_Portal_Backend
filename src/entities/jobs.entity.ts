@@ -1,4 +1,4 @@
-import { Entity, PrimaryGeneratedColumn, Column, BaseEntity, OneToMany, OneToOne, JoinColumn, CreateDateColumn, UpdateDateColumn, ManyToOne } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, BaseEntity, OneToMany, OneToOne, JoinColumn, CreateDateColumn, UpdateDateColumn, ManyToOne, JoinTable } from 'typeorm';
 import { Companies } from './companies.entity';
 import { TotalExpYear } from './totalExpYear.entity';
 import { Recurrence } from './recurrence.entity';
@@ -40,6 +40,7 @@ export class Jobs extends BaseEntity {
   // company!: Companies
 
   @ManyToOne(() => Companies, companies => companies.jobs, { nullable: true, onDelete: "CASCADE" })
+  @JoinTable()
   company!: Companies
 
   @OneToOne(() => TotalExpYear, (totalExpYear) => totalExpYear.totalExpYearStart, {
