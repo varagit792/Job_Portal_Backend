@@ -159,8 +159,6 @@ export const getCompanyDetails = async (id: number) => {
 }
 
 export const employerCompanyList = async (data: any) => {
-  const page = Number(process.env.JOB_PER_PAGE);
-  const skip = (page * data?.page) - page;
   try {
     const companiesRepository = AppDataSource.getRepository(Companies);
     let company = await companiesRepository.find({
@@ -170,10 +168,11 @@ export const employerCompanyList = async (data: any) => {
       where: { user: { id: data?.data?.user?.id } },
       relations: {
         user: true,
-        jobs: true,
-      },
-      skip: (skip),
-      take: (page),
+        jobs: {
+          jobStatus: true,
+          jobExpiry: true
+        },
+      }
     });
     return company;
   } catch (error) {

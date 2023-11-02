@@ -44,24 +44,15 @@ export default class CompaniesSeeder implements Seeder {
         reviews: 6600,
         location: [{ id: 1 }, { id: 3 }]
       },
-      {
-        title: "Ratna Global Tech",
-        companyDescription: "Ratna Global Tech",
-             //jobs:9,             
-        employeeCount:50000, 
-        rating:4.5, 
-        reviews: 2500,
-        location: [{ id: 1 }, { id: 3 }]
-      },
-      {
-        title: "Ratna Global Tech",
-        companyDescription: "Ratna Global Tech",
-             //jobs:3,             
-        employeeCount:50000, 
-        rating:2.5, 
-        reviews: 500,
-        location: [{ id: 1 }, { id: 3 }]
-      },
+      // {
+      //   title: "Ratna Global Tech",
+      //   companyDescription: "Ratna Global Tech",
+      //        //jobs:9,             
+      //   employeeCount:50000, 
+      //   rating:4.5, 
+      //   reviews: 2500,
+      //   location: [{ id: 1 }, { id: 3 }]
+      // },
       {
         title: "Value Labs",
         companyDescription: "Value Labs LLP",
