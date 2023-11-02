@@ -1,4 +1,4 @@
-import { Entity, PrimaryGeneratedColumn, Column, BaseEntity, ManyToOne, OneToOne, OneToMany } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, BaseEntity, ManyToOne, OneToOne, OneToMany, ManyToMany } from 'typeorm';
 import { CareerProfile } from './careerProfile.entity';
 import { CareerProfilePreferredLocations } from './careerProfilePreferredLocations.entity';
 import { JobSeekerProfileEmployment } from './jobSeekerProfileEmployment.entity';
@@ -24,7 +24,7 @@ export class Location extends BaseEntity {
   @OneToMany(type => JobSeekerProfileEmployment, j => j.location)
   jobSeekerProfileEmployment!: JobSeekerProfileEmployment
 
-  @ManyToOne(() => Companies, (company) => company.location, { onDelete: 'CASCADE' })
+  @ManyToMany(() => Companies, (company) => company.location, { onDelete: 'CASCADE' })
   company!: Companies
 
   @OneToOne(() => JobLocation, (jobs) => jobs.location)

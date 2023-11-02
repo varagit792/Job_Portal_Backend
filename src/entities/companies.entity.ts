@@ -1,4 +1,4 @@
-import { Entity, PrimaryGeneratedColumn, Column, BaseEntity, OneToMany, OneToOne, JoinColumn, CreateDateColumn, UpdateDateColumn, ManyToOne } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, BaseEntity, OneToMany, OneToOne, JoinColumn, CreateDateColumn, UpdateDateColumn, ManyToOne, JoinTable, ManyToMany } from 'typeorm';
 import { Jobs } from './jobs.entity';
 import { Location } from './location.entity';
 import { Department } from './department.entity';
@@ -41,7 +41,8 @@ export class Companies extends BaseEntity {
   // @OneToOne(() => Jobs, (jobs) => jobs.company)
   // company!: Jobs
 
-  @OneToMany(() => Location, (location) => location.company, { nullable: true, createForeignKeyConstraints: true, cascade: true, })
+  @ManyToMany(() => Location, (location) => location.company, { nullable: true, createForeignKeyConstraints: true, cascade: true, })
+  @JoinTable()
   location!: Location[] | null
 
   @OneToMany(() => Department, (department) => department.companies, { nullable: true, createForeignKeyConstraints: true, cascade: true, })
