@@ -434,7 +434,6 @@ export const updateJobSeekerMailVerification = async (req: Request, res: Respons
       res.cookie('token', token);
       res.cookie('name', userData?.name)
       res.redirect('http://localhost:3000/homePage');
-      next();
     } else {
       return res.status(400).json({
         message: 'User not present'
@@ -482,7 +481,7 @@ export const jobSeekerSendOtp = async (req: Request, res: Response) => {
   try {
 
     const { id } = req.user;
-    const otp = otpGenerator.generate(6, { upperCaseAlphabets: false, specialChars: false, lowerCaseAlphabets: false })
+    const otp = otpGenerator.generate(4, { upperCaseAlphabets: false, specialChars: false, lowerCaseAlphabets: false })
     const otpParams = {
       otp
     }
