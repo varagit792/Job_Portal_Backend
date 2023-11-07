@@ -33,6 +33,10 @@ export default class TotalExpYearSeeder implements Seeder {
         status: true,
       },
       {
+        title: '6 Year',
+        status: true,
+      },
+      {
         title: '7 Year',
         status: true,
       },
