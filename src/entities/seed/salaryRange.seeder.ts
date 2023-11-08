@@ -13,15 +13,7 @@ export default class SalaryRangeSeeder implements Seeder {
         status: true,
       },
       {
-        title: '1.5',
-        status: true,
-      },
-      {
         title: '2',
-        status: true,
-      },
-      {
-        title: '2.5',
         status: true,
       },
       {
@@ -29,15 +21,7 @@ export default class SalaryRangeSeeder implements Seeder {
         status: true,
       },
       {
-        title: '3.5',
-        status: true,
-      },
-      {
         title: '4',
-        status: true,
-      },
-      {
-        title: '4.5',
         status: true,
       },
       {
@@ -45,15 +29,7 @@ export default class SalaryRangeSeeder implements Seeder {
         status: true,
       },
       {
-        title: '5.5',
-        status: true,
-      },
-      {
         title: '6',
-        status: true,
-      },
-      {
-        title: '6.5',
         status: true,
       },
       {
@@ -61,15 +37,7 @@ export default class SalaryRangeSeeder implements Seeder {
         status: true,
       },
       {
-        title: '7.5',
-        status: true,
-      },
-      {
         title: '8',
-        status: true,
-      },
-      {
-        title: '8.5',
         status: true,
       },
       {
@@ -77,15 +45,7 @@ export default class SalaryRangeSeeder implements Seeder {
         status: true,
       },
       {
-        title: '9.5',
-        status: true,
-      },
-      {
         title: '10',
-        status: true,
-      },
-      {
-        title: '10.5',
         status: true,
       },
       {
@@ -93,15 +53,7 @@ export default class SalaryRangeSeeder implements Seeder {
         status: true,
       },
       {
-        title: '11.5',
-        status: true,
-      },
-      {
         title: '12',
-        status: true,
-      },
-      {
-        title: '12.5',
         status: true,
       },
       {
@@ -109,23 +61,11 @@ export default class SalaryRangeSeeder implements Seeder {
         status: true,
       },
       {
-        title: '13.5',
-        status: true,
-      },
-      {
         title: '14',
         status: true,
       },
       {
-        title: '14.5',
-        status: true,
-      },
-      {
         title: '15',
-        status: true,
-      },
-      {
-        title: '15.5',
         status: true,
       },
       {
@@ -146,6 +86,22 @@ export default class SalaryRangeSeeder implements Seeder {
       },
       {
         title: '20',
+        status: true,
+      },
+      {
+        title: '21',
+        status: true,
+      },
+      {
+        title: '22',
+        status: true,
+      },
+      {
+        title: '23',
+        status: true,
+      },
+      {
+        title: '24',
         status: true,
       },
       {
@@ -194,10 +150,6 @@ export default class SalaryRangeSeeder implements Seeder {
       },
       {
         title: '36',
-        status: true,
-      },
-      {
-        title: '37',
         status: true,
       },
       {
@@ -252,46 +204,6 @@ export default class SalaryRangeSeeder implements Seeder {
         title: '50',
         status: true,
       },
-      {
-        title: '56',
-        status: true,
-      },
-      {
-        title: '57',
-        status: true,
-      },
-      {
-        title: '58',
-        status: true,
-      },
-      {
-        title: '59',
-        status: true,
-      },
-      {
-        title: '60',
-        status: true,
-      },
-      {
-        title: '61',
-        status: true,
-      },
-      {
-        title: '62',
-        status: true,
-      },
-      {
-        title: '63',
-        status: true,
-      },
-      {
-        title: '64',
-        status: true,
-      },
-      {
-        title: '65',
-        status: true,
-      }
     ],
       ["id"]);
   }
