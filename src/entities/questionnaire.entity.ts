@@ -15,13 +15,13 @@ export class Questionnaire extends BaseEntity {
   questionType!: string;
 
   @Column()
-  characterLimit!: number;
+  characterLimit!: string;
 
   @Column()
   requiredCheck!: string;
 
   @Column()
-  rangeMax!: number;
+  rangeMax!: string;
 
   @ManyToOne(() => Jobs, jobs => jobs.questionnaire, { nullable: true, onDelete: "CASCADE" })
   questionnaire!: Jobs
