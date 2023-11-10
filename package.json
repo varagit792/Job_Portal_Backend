@@ -6,8 +6,8 @@
   "scripts": {
     "build": "rimraf ./build && tsc",
     "start:dev": "npx nodemon",
-    "hbs":"copyfiles views/**/*.hbs dist/",
-    "start": " postcss ./public/styles/tailwind.css -o ./public/styles/style.css &&  npx tailwindcss -i ./public/styles/style.css -o ./dist/output.css   && npm run build && node dist/index.js ",
+    "hbs": "copyfiles views/**/*.hbs dist/",
+    "start": " postcss ./src/public/styles/tailwind.css -o ./src/public/styles/style.css &&   npm run build && node dist/index.js ",
     "lint": "eslint . --ext .ts",
     "prettier-format": "run-script-os",
     "prettier-format:win32": "prettier --config .prettierrc \"./src/**/*.ts\" --write",

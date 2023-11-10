@@ -62,20 +62,22 @@ app.use(bodyParser.urlencoded({ extended: true, limit: process.env.FILE_LIMIT })
 app.use(bodyParser.json());
 app.use(logger('dev'));
 
+//set the base path for root directory.
+const basePath = path.resolve(__dirname, '..');
 //serve the local files of resume and profile in frontend.
 app.use('/uploadResume', express.static(path.resolve(__dirname, `..${path.sep}uploadResume`)));
 app.use('/uploadProfilePicture', express.static(path.resolve(__dirname, `..${path.sep}uploadProfilePicture`)));
+const layoutsDir = path.join(__dirname, '..', 'src', 'views', 'layouts');
+const partialsDir = path.join(__dirname, '..', 'src', 'views', 'layouts');
 app.engine('handlebars', engine({
   defaultLayout: 'index',
   extname: 'hbs',
-  layoutsDir: path.join(__dirname, './views/layouts'),
-  partialsDir: path.join(__dirname, './views')
+  layoutsDir: layoutsDir,
+  partialsDir: partialsDir
 }));
 app.set('view engine', 'handlebars');
-// app.set('views', path.join(__dirname, `..${path.sep}src${path.sep}views`));
-app.set('views', path.join(__dirname, 'src', './views'));
-  app.use(express.static(path.resolve(__dirname, `..${path.sep}public`)));
-console.log('path', `..${path.sep}src${path.sep}views`)
+app.set('views', path.join(__dirname, '..', 'src', 'views'));
+app.use(express.static(path.resolve(__dirname, '..', 'src', 'public')));
 //parent router
 app.use(router);
 
@@ -92,7 +94,7 @@ app.get('/', (req, res) => {
 
   // const templateSource = fs.readFileSync(filePath, 'utf-8');
   // const template = handleBar.compile(templateSource);
-  res.render('index',data);
+  res.render('index', data);
 
 });
 /// catch 404 and forward to error handler
