@@ -11,6 +11,9 @@ import { runSeeders } from 'typeorm-extension';
 import logger from 'morgan';
 import 'dotenv/config';
 import path from 'path';
+import fs from 'fs';
+import { engine } from 'express-handlebars';
+import handleBar from 'handlebars';
 
 (async () => {
   AppDataSource.initialize().then(() => {
@@ -59,12 +62,41 @@ app.use(bodyParser.urlencoded({ extended: true, limit: process.env.FILE_LIMIT })
 app.use(bodyParser.json());
 app.use(logger('dev'));
 
+//set the base path for root directory.
+const basePath = path.resolve(__dirname, '..');
 //serve the local files of resume and profile in frontend.
 app.use('/uploadResume', express.static(path.resolve(__dirname, `..${path.sep}uploadResume`)));
 app.use('/uploadProfilePicture', express.static(path.resolve(__dirname, `..${path.sep}uploadProfilePicture`)));
+const layoutsDir = path.join(__dirname, '..', 'src', 'views', 'layouts');
+const partialsDir = path.join(__dirname, '..', 'src', 'views', 'layouts');
+app.engine('handlebars', engine({
+  defaultLayout: 'index',
+  extname: 'hbs',
+  layoutsDir: layoutsDir,
+  partialsDir: partialsDir
+}));
+app.set('view engine', 'handlebars');
+app.set('views', path.join(__dirname, '..', 'src', 'views'));
+app.use(express.static(path.resolve(__dirname, '..', 'src', 'public')));
 //parent router
 app.use(router);
 
+app.get('/', (req, res) => {
+  const data = {
+    title: 'My Page',
+    heading: 'Welcome to my website',
+    content: 'This is some content for the page.',
+  };
+
+  // const directoryPath = './src/views';
+  // const fileName = 'homeTemplate.hbs';
+  // const filePath = path.join(directoryPath, fileName);
+
+  // const templateSource = fs.readFileSync(filePath, 'utf-8');
+  // const template = handleBar.compile(templateSource);
+  res.render('index', data);
+
+});
 /// catch 404 and forward to error handler
 app.use((req, res, next: NextFunction) => {
   const err = new Error('Invalid API service');
