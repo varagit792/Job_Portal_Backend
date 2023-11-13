@@ -24,6 +24,7 @@ import { JobRole } from './jobRole.entity';
 import { CompanyType } from './companyType.entity';
 import { JobStatus } from './jobStatus.entity';
 import { JobExpiry } from './jobExpiry.entity';
+import { Questionnaire } from './questionnaire.entity';
 
 @Entity()
 export class Jobs extends BaseEntity {
@@ -190,6 +191,9 @@ export class Jobs extends BaseEntity {
 
   @OneToMany(() => JobEducation, (education) => education.jobEducation, { createForeignKeyConstraints: true, cascade: true })
   jobEducation!: JobEducation[]
+
+  @OneToMany(() => Questionnaire, (questionnaire) => questionnaire.questionnaire, { createForeignKeyConstraints: true, cascade: true })
+  questionnaire!: Questionnaire[]
 
   @OneToOne(() => Currency, currency => currency.jobs, {
     cascade: true, onDelete: 'CASCADE', createForeignKeyConstraints: false, nullable: true
