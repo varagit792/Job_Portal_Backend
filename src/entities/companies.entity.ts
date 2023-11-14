@@ -23,6 +23,15 @@ export class Companies extends BaseEntity {
   @Column({ type: "text", nullable: true, default: null })
   companyDescription: string | undefined;
 
+  @Column({ type: "text", nullable: true, default: null })
+  companyAddress: string | undefined;
+
+  @Column({ type: "text", nullable: true, default: null })
+  websiteUrl: string | undefined;
+
+  @Column({ type: "text", nullable: true, default: null })
+  companyImage: string | undefined;
+
   // @Column({nullable:true, default:null})
   // jobs!: number;
 
