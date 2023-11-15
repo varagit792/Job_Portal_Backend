@@ -32,7 +32,7 @@ export class Questionnaire extends BaseEntity {
   @OneToMany(() => MultipleChoiceQuestionnaire, (multipleChoice) => multipleChoice.multipleSelection, { createForeignKeyConstraints: true, cascade: true })
   multipleSelection!: MultipleChoiceQuestionnaire[]
 
-  @Column()
+  @Column({ default: true })
   status!: boolean
 
 }
