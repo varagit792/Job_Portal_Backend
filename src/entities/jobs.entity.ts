@@ -25,6 +25,7 @@ import { CompanyType } from './companyType.entity';
 import { JobStatus } from './jobStatus.entity';
 import { JobExpiry } from './jobExpiry.entity';
 import { Questionnaire } from './questionnaire.entity';
+import { ApplyJobs } from './applyJobs.entity';
 
 @Entity()
 export class Jobs extends BaseEntity {
@@ -213,8 +214,8 @@ export class Jobs extends BaseEntity {
   @UpdateDateColumn()
   updatedAt: Date | undefined;
 
-  // @ManyToOne(() => Jobs, jobs => jobs.user, { nullable: true, onDelete: "CASCADE" })
-  // user!: Jobs
+  @OneToOne(() => ApplyJobs, (applyJobs) => applyJobs.jobs)
+  jobs!: Jobs
 
   @OneToOne(() => JobStatus, jobStatus => jobStatus.jobStatus, {
     cascade: true, onDelete: 'CASCADE', createForeignKeyConstraints: false, nullable: true
