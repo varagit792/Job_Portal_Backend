@@ -1,5 +1,6 @@
-import { Entity, PrimaryGeneratedColumn, Column, BaseEntity, ManyToOne } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, BaseEntity, ManyToOne, OneToOne } from 'typeorm';
 import { Questionnaire } from './questionnaire.entity';
+import { MultipleChoiceQuestionnaireAnswer } from './multipleChoiceQuestionnaireAnswer.entity';
 
 @Entity()
 export class MultipleChoiceQuestionnaire extends BaseEntity {
@@ -11,6 +12,9 @@ export class MultipleChoiceQuestionnaire extends BaseEntity {
 
   @ManyToOne(() => Questionnaire, questionnaire => questionnaire.multipleSelection, { nullable: true, onDelete: "CASCADE" })
   multipleSelection!: Questionnaire
+
+  @OneToOne(() => MultipleChoiceQuestionnaireAnswer, (multipleChoiceQuestionnaire) => multipleChoiceQuestionnaire.multipleChoiceQuestionnaire)
+  multipleChoiceQuestionnaire!: MultipleChoiceQuestionnaireAnswer
 
   @Column()
   status!: boolean
