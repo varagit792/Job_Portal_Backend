@@ -1,5 +1,4 @@
 import { AppDataSource } from "../config/typeorm";
-import { Company } from "../entities/company.entity";
 import { HighestQualification } from "../entities/highestQualification.entity";
 
 export const highestQualificationList = async () => {

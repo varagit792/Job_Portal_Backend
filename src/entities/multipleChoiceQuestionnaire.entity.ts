@@ -17,6 +17,7 @@ export class MultipleChoiceQuestionnaire extends BaseEntity {
   multipleChoiceQuestionnaire!: MultipleChoiceQuestionnaireAnswer
 
   @Column()
+  @Column({ default: true })
   status!: boolean
 
 }
