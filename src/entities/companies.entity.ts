@@ -50,14 +50,15 @@ export class Companies extends BaseEntity {
   // @OneToOne(() => Jobs, (jobs) => jobs.company)
   // company!: Jobs
 
-  @ManyToMany(() => Location, (location) => location.company, { nullable: true, createForeignKeyConstraints: true, cascade: true, })
+  @ManyToMany(() => Location)
+    //, (location) => location.company, { nullable: true, createForeignKeyConstraints: true, cascade: true, })
   @JoinTable()
   location!: Location[] | null
 
   @OneToMany(() => Department, (department) => department.companies, { nullable: true, createForeignKeyConstraints: true, cascade: true, })
   department!: Department[] | null
 
-  @OneToMany(() => CompanyType, (comapanyType) => comapanyType.companies, { nullable: true, createForeignKeyConstraints: true, cascade: true, })
+  @OneToMany(() => CompanyType, (companyType) => companyType.companies, { nullable: true, createForeignKeyConstraints: true, cascade: true, })
   companyType!: CompanyType[] | null
 
   @OneToMany(() => Industry, (industry) => industry.companies, { nullable: true, createForeignKeyConstraints: true, cascade: true, })

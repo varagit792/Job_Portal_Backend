@@ -1,5 +1,4 @@
 import { AppDataSource } from "../config/typeorm";
-import { Company } from "../entities/company.entity";
 import { Specialization } from "../entities/specialization.entity";
 
 export const specializationList = async () => {

@@ -12,7 +12,7 @@ export class MultipleChoiceQuestionnaire extends BaseEntity {
   @ManyToOne(() => Questionnaire, questionnaire => questionnaire.multipleSelection, { nullable: true, onDelete: "CASCADE" })
   multipleSelection!: Questionnaire
 
-  @Column()
+  @Column({ default: true })
   status!: boolean
 
 }
