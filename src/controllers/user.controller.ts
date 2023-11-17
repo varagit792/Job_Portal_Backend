@@ -9,6 +9,9 @@ import { generateToken } from '../utils/generateToken';
 import { User } from '../entities/user.entity';
 import { SaveOptions, RemoveOptions } from 'typeorm';
 import 'dotenv/config';
+import { saveStagingEmailTemplates } from '../services/stagingEmailTemplates.service';
+import { StagingEmailTemplates } from '../entities/stagingTemplates.entity';
+import { Container } from 'postcss';
 
 interface OutParams extends User {
   jobSeekProfileId?: number,
@@ -53,6 +56,12 @@ export const registerUser: RequestHandler = async (req: Request, res: Response, 
     const fileName = req.file?.filename
     const user = await saveUser(userParams);
 
+    const stagingTemplateParams = {
+      email: user.email,
+      templateType: 'emailVerify'
+    };
+   
+    await saveStagingEmailTemplates(stagingTemplateParams as any)
     const OutPutData: OutParams = {
       ...user,
       hasId: function (): boolean {
