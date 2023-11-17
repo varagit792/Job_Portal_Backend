@@ -48,6 +48,7 @@ import companyTypeRouter from './routers/companyType.router';
 import jobExpiryRouter from './routers/jobExpiry.router';
 import jobStatusRouter from './routers/jobStatus.router';
 import assetsRouter from './routers/assets.router';
+import applyJobsRouter from './routers/applyJob.router';
 const router = Router();
 
 router.use(['/auth'], authRouter);
@@ -99,5 +100,6 @@ router.use(['/companyType'], companyTypeRouter);
 router.use('/jobExpiry', jobExpiryRouter);
 router.use('/jobStatus', jobStatusRouter);
 router.use(['/assets'], assetsRouter);
+router.use(['/applyJob'], applyJobsRouter);
 
 export default router;   

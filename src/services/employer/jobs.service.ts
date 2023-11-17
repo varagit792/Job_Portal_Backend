@@ -175,6 +175,7 @@ export const jobsList = async (data: any) => {
         ...((data?.data?.salary > 1) && { payScaleUpperRange: { id: LessThanOrEqual(data?.data?.salary) } }),
         ...((data?.data?.companyType !== undefined && data?.data?.companyType?.length !== 0) && { companyType: { id: In(data?.data?.companyType) } }),
         ...((data?.data?.roleCategory !== undefined && data?.data?.roleCategory?.length !== 0) && { roleCategory: { id: In(data?.data?.roleCategory) } }),
+        ...((data?.data?.keySkills !== undefined && data?.data?.keySkills?.length !== 0) && { jobsKeySkills: { keySkills: { id: In(data?.data?.keySkills) } } }),
       },
       relations: {
         company: {
@@ -202,7 +203,8 @@ export const jobsList = async (data: any) => {
         jobLocality: { locality: true },
         //user: true,
         jobsKeySkills: { keySkills: true },
-        employmentType: true
+        employmentType: true,
+        
       },
       skip: (skip),
       take: (page),

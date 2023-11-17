@@ -168,9 +168,19 @@ export const employerCompanyList = async (data: any) => {
       where: { user: { id: data?.data?.user?.id } },
       relations: {
         user: true,
+        location: true,
         jobs: {
           jobStatus: true,
-          jobExpiry: true
+          jobExpiry: true,
+          totalExpYearStart: true,
+          totalExpYearEnd: true,
+          payScaleLowerRange: true,
+          payScaleUpperRange: true,
+          jobsLocation: {
+            location:true
+          },
+          workMode: true,
+          employmentType:true
         },
       }
     });

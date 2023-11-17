@@ -18,11 +18,11 @@ export default class JobStatusSeeder implements Seeder {
         statusValue: 0,
         status: true,
       },
-      {
-        title: 'Pending',
-        statusValue: 2,
-        status: true,
-      }
+      // {
+      //   title: 'Pending',
+      //   statusValue: 2,
+      //   status: true,
+      // }
 
     ],
       ["id"]);

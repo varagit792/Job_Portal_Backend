@@ -1,7 +1,8 @@
-import { Entity, PrimaryGeneratedColumn, Column, BaseEntity, ManyToOne, OneToMany } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, BaseEntity, ManyToOne, OneToMany, OneToOne } from 'typeorm';
 import { SingleChoiceQuestionnaire } from './singleChoiceQuestionnaire.entity';
 import { MultipleChoiceQuestionnaire } from './multipleChoiceQuestionnaire.entity';
 import { Jobs } from './jobs.entity';
+import { QuestionnaireAnswer } from './questionnaireAnswer.entity';
 
 @Entity()
 export class Questionnaire extends BaseEntity {
@@ -32,7 +33,10 @@ export class Questionnaire extends BaseEntity {
   @OneToMany(() => MultipleChoiceQuestionnaire, (multipleChoice) => multipleChoice.multipleSelection, { createForeignKeyConstraints: true, cascade: true })
   multipleSelection!: MultipleChoiceQuestionnaire[]
 
-  @Column()
+  @OneToOne(() => QuestionnaireAnswer, (questionnaire) => questionnaire.questionnaire)
+  questionnaireAnswer!: QuestionnaireAnswer
+
+  @Column({ default: true })
   status!: boolean
 
 }

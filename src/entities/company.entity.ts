@@ -31,8 +31,8 @@ export class Company extends BaseEntity {
   @OneToOne(() => Jobs, (jobs) => jobs.company)
   company!: Jobs
 
-  @OneToMany(() => Location, (location) => location.company, { nullable:true, createForeignKeyConstraints: true, cascade: true, })
-  location!: Location[] | null
+  // @OneToMany(() => Location, (location) => location.company, { nullable:true, createForeignKeyConstraints: true, cascade: true, })
+  // location!: Location[] | null
 
   @CreateDateColumn()
   createdAt: Date | undefined;

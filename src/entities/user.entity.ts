@@ -2,6 +2,7 @@ import { Entity, PrimaryGeneratedColumn, Column, BaseEntity, OneToOne, JoinColum
 import { JobSeekerProfile } from './jobSeekerProfile.entity';
 import { Jobs } from './jobs.entity';
 import { Companies } from './companies.entity';
+import { ApplyJobs } from './applyJobs.entity';
 
 @Entity()
 export class User extends BaseEntity {
@@ -42,8 +43,8 @@ export class User extends BaseEntity {
   @Column({ default: null, nullable: true })
   otp!: string
 
-  // @OneToMany(() => Jobs, (jobs) => jobs.user, { createForeignKeyConstraints: true, cascade: true })
-  // user!: Jobs[]
+  @OneToOne(() => ApplyJobs, (applyJobs) => applyJobs.user)
+  user!: ApplyJobs
 
   @ManyToOne(() => Companies, (companies) => companies.user, { createForeignKeyConstraints: true, cascade: true })
   companies!: Companies

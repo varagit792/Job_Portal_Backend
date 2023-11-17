@@ -1,5 +1,4 @@
 import { AppDataSource } from "../config/typeorm";
-import { Company } from "../entities/company.entity";
 import { TotalExpMonth } from "../entities/totalExpMonth.entity";
 
 export const totalExpMonthList = async () => {
