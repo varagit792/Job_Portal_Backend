@@ -91,7 +91,10 @@ export const registerUser: RequestHandler = async (req: Request, res: Response, 
           jobSeekerType,
           id: user.id,
           resumePath: resumePath,
-          resumeFile: fileName
+          resumeFile: fileName,
+          user: {
+            id: user.id
+          }
         }
         const jobSeeker = await saveJobSeekerProfile(jobSeekerParams);
         OutPutData.jobSeekProfileId = jobSeeker.id

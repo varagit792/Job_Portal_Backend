@@ -11,10 +11,8 @@ export class JobSeekerProfileKeySkills extends BaseEntity {
   @ManyToOne(() => JobSeekerProfile, (jobSeekerProfile) => jobSeekerProfile.keySkills, { onDelete: 'CASCADE' })
   jobSeekerProfileKeySkills!: JobSeekerProfile
 
-  @OneToOne(() => KeySkills)
+  @ManyToOne(() => KeySkills,{onDelete:'SET NULL',onUpdate:'CASCADE'})
   @JoinColumn()
   profileKeySkills!: KeySkills
-
-
 
 }

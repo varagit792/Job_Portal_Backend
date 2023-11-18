@@ -14,6 +14,7 @@ import path from 'path';
 import fs from 'fs';
 import { engine } from 'express-handlebars';
 import { sweepEmailTemplatesDb } from './schedulers/emailVerifyScheduler';
+import { sweepJobSeekerProfileDb } from './schedulers/jobSeekerAlertsScheduler';
 
 (async () => {
   AppDataSource.initialize().then(() => {
@@ -67,6 +68,7 @@ app.use(bodyParser.urlencoded({ extended: true, limit: process.env.FILE_LIMIT })
 app.use(bodyParser.json());
 app.use(logger('dev'));
 sweepEmailTemplatesDb();
+sweepJobSeekerProfileDb();
 //set the base path for root directory.
 const basePath = path.resolve(__dirname, '..');
 //serve the local files of resume and profile in frontend.
