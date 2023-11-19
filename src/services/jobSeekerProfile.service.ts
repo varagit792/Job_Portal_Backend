@@ -4,8 +4,9 @@ import { Education } from '../entities/education.entity';
 import { CareerProfile } from '../entities/careerProfile.entity';
 import { PersonalDetails } from '../entities/personalDetails.entity';
 import { Language } from '../entities/language.entity';
-import { Repository } from 'typeorm';
+import { In, Repository } from 'typeorm';
 import 'dotenv/config';
+import { Jobs } from '../entities/jobs.entity';
 
 type Params = {
   jobSeekerType: string
@@ -332,7 +333,8 @@ export const sweepBatchJobSeekerProfiles = async () => {
         console.log('in break ', data.length);
         break;
       }
-      console.log('data ', JSON.parse(JSON.stringify(data)));
+     
+      await processFetchedJobSeekerData(data);
       cursor = data[data.length - 1]?.id
     }
 
@@ -346,17 +348,53 @@ export const processFetchedJobSeekerData = async (data: JobSeekerProfile[]) => {
   try {
 
     const jobSeekerSkills = data.map((jobSeekerProfile) => {
-      // const keySkills = jobSeekerProfile.keySkills.map((jobKeySkill) =>
-      //   jobKeySkill.jobSeekerProfileKeySkills.keySkills.
-      // )
+      const keySkills = jobSeekerProfile.keySkills.map((jobKeySkill) =>
+        jobKeySkill.profileKeySkills.id
+      )
       const jobSeekerSkillsData = {
         email: jobSeekerProfile.user.email,
+        keySkills: keySkills
       }
+
+ 
       return jobSeekerSkillsData;
     })
+    const limit = Number(process.env.JOB_PER_PAGE);
+
+    const jobsRepository = AppDataSource.getRepository(Jobs);
+    
+    for (const jobSeeker of jobSeekerSkills) {
+      await fetchJobsListForJobSeeker(jobsRepository, limit, jobSeeker);
+    }
 
   } catch (error) {
     console.log('error in processFetched jobSeeker data ', error);
+    throw error;
+  }
+}
+
+export const fetchJobsListForJobSeeker = async (jobsRepository: Repository<Jobs>, limit: number, jobSeekerSkills: { email: string, keySkills: number[] }) => {
+ 
+  try {
+    const jobsList = await jobsRepository.find({
+      order: {
+        id: "DESC",
+      },
+      where: {
+        jobsKeySkills: {
+          keySkills: { id: In(jobSeekerSkills.keySkills) }
+        }
+      },
+      relations: {
+        jobsKeySkills: {
+        keySkills:true
+        },
+        company: true
+    }
+    });
+ 
+  } catch (error) {
+    console.log('error in fetch jobsList for jobSeeker')
     throw error;
   }
 }
