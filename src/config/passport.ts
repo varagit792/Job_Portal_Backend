@@ -44,6 +44,7 @@ passport.use(new GoogleStrategy({
       // if no user exists , create the user in db
       user.accountId = profile.id;
       user.accountType = 'google';
+      user.userType = 'jobSeeker';
       user.email = profile.emails[0].value;
       user.name = profile.name.givenName;
       user.isEmailVerified = true;
