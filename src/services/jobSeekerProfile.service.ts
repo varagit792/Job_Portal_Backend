@@ -7,6 +7,7 @@ import { Language } from '../entities/language.entity';
 import { In, Repository } from 'typeorm';
 import 'dotenv/config';
 import { Jobs } from '../entities/jobs.entity';
+import { sendRecommendedJobAlerts } from '../utils/sendEmail';
 
 type Params = {
   jobSeekerType: string
@@ -353,13 +354,13 @@ export const processFetchedJobSeekerData = async (data: JobSeekerProfile[]) => {
       )
       const jobSeekerSkillsData = {
         email: jobSeekerProfile.user.email,
+        name:jobSeekerProfile.user.name,
         keySkills: keySkills
       }
 
- 
       return jobSeekerSkillsData;
     })
-    const limit = Number(process.env.JOB_PER_PAGE);
+    const limit = Number(process.env.BATCH_SIZE);
 
     const jobsRepository = AppDataSource.getRepository(Jobs);
     
@@ -373,7 +374,7 @@ export const processFetchedJobSeekerData = async (data: JobSeekerProfile[]) => {
   }
 }
 
-export const fetchJobsListForJobSeeker = async (jobsRepository: Repository<Jobs>, limit: number, jobSeekerSkills: { email: string, keySkills: number[] }) => {
+export const fetchJobsListForJobSeeker = async (jobsRepository: Repository<Jobs>, limit: number, jobSeekerSkills: { email: string, name:string,keySkills: number[] }) => {
  
   try {
     const jobsList = await jobsRepository.find({
@@ -389,9 +390,18 @@ export const fetchJobsListForJobSeeker = async (jobsRepository: Repository<Jobs>
         jobsKeySkills: {
         keySkills:true
         },
-        company: true
-    }
+        company: true,
+        jobsLocation: {
+          location:true
+        }
+      },
+      take:limit
     });
+
+    // console.log('jobs ', JSON.stringify(jobsList));
+    if (jobsList.length > 0) {
+      sendRecommendedJobAlerts(jobSeekerSkills.email, jobSeekerSkills.name, jobsList);
+   }
  
   } catch (error) {
     console.log('error in fetch jobsList for jobSeeker')
