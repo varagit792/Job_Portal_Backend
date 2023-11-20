@@ -50,7 +50,9 @@ passport.use(new GoogleStrategy({
       user.isEmailVerified = true;
       const userData = await user.save();
       const jobSeekerParams = {
-        userId: userData.id,
+        user: {
+          id: userData.id
+        },
         id: userData.id,
         jobSeekerType: 'Fresher',
         resumePath: '',

@@ -15,6 +15,7 @@ export const jwtSign = async (req: Request, res: Response, next: NextFunction) =
     res.cookie('token', token);
     res.cookie('name', user?.name);
     res.cookie('userType', user?.userType);
+    res.cookie('userId', user.id);
     res.redirect('http://localhost:3000/homePage');
     next();
   } catch (error) {

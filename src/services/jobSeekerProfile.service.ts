@@ -4,13 +4,18 @@ import { Education } from '../entities/education.entity';
 import { CareerProfile } from '../entities/careerProfile.entity';
 import { PersonalDetails } from '../entities/personalDetails.entity';
 import { Language } from '../entities/language.entity';
+import { In, Repository } from 'typeorm';
+import 'dotenv/config';
+import { Jobs } from '../entities/jobs.entity';
 
 type Params = {
-  userId: number,
   jobSeekerType: string
   id: number;
   resumePath: string;
-  resumeFile?: string
+  resumeFile?: string;
+  user: {
+    id: number;
+  }
 }
 
 export const saveJobSeekerProfile = async (jobSeekerParams: Params) => {
@@ -293,3 +298,103 @@ export const updateJobSeekerProfileBasicDetails = async (id: number, jobSeekerPa
   }
 }
 
+export const jobSeekerProfileSweepWithCursor = async (jobSeekerProfileRepository: Repository<JobSeekerProfile>, batchSize: number, cursor: number | null) => {
+  try {
+    console.log('fetch cursor for jobSeekerProfile ', cursor);
+    const queryBuilder = jobSeekerProfileRepository.createQueryBuilder('JobSeekerProfile')
+      .orderBy('JobSeekerProfile.id')
+      .take(batchSize)
+      .leftJoinAndSelect('JobSeekerProfile.keySkills', 'keySkill')
+      .leftJoinAndSelect('keySkill.profileKeySkills', 'profileKeySkills')
+      .leftJoinAndSelect('JobSeekerProfile.user', 'users');
+
+    if (cursor) {
+      queryBuilder.where('JobSeekerProfile.id > :cursor', { cursor })
+    }
+    queryBuilder.andWhere('JobSeekerProfile.isSubscribedForAlerts = :isSubscribedForAlerts', { isSubscribedForAlerts: true })
+    return queryBuilder.getMany();
+  } catch (error) {
+    console.log('error in sweep of jobSeekerProfile with cursor ', error);
+    throw error;
+  }
+}
+
+
+export const sweepBatchJobSeekerProfiles = async () => {
+  try {
+
+    let cursor = null;
+    const jobSeekerProfileRepository = AppDataSource.getRepository(JobSeekerProfile);
+    let batchSize = Number(process.env.BATCH_SIZE);
+
+    while (true) {
+      const data = await jobSeekerProfileSweepWithCursor(jobSeekerProfileRepository, batchSize, cursor);
+      if (data.length === 0) {
+        console.log('in break ', data.length);
+        break;
+      }
+     
+      await processFetchedJobSeekerData(data);
+      cursor = data[data.length - 1]?.id
+    }
+
+  } catch (error) {
+    console.log('error in sweepBatchJobSeeker ', error);
+    throw error;
+  }
+}
+
+export const processFetchedJobSeekerData = async (data: JobSeekerProfile[]) => {
+  try {
+
+    const jobSeekerSkills = data.map((jobSeekerProfile) => {
+      const keySkills = jobSeekerProfile.keySkills.map((jobKeySkill) =>
+        jobKeySkill.profileKeySkills.id
+      )
+      const jobSeekerSkillsData = {
+        email: jobSeekerProfile.user.email,
+        keySkills: keySkills
+      }
+
+ 
+      return jobSeekerSkillsData;
+    })
+    const limit = Number(process.env.JOB_PER_PAGE);
+
+    const jobsRepository = AppDataSource.getRepository(Jobs);
+    
+    for (const jobSeeker of jobSeekerSkills) {
+      await fetchJobsListForJobSeeker(jobsRepository, limit, jobSeeker);
+    }
+
+  } catch (error) {
+    console.log('error in processFetched jobSeeker data ', error);
+    throw error;
+  }
+}
+
+export const fetchJobsListForJobSeeker = async (jobsRepository: Repository<Jobs>, limit: number, jobSeekerSkills: { email: string, keySkills: number[] }) => {
+ 
+  try {
+    const jobsList = await jobsRepository.find({
+      order: {
+        id: "DESC",
+      },
+      where: {
+        jobsKeySkills: {
+          keySkills: { id: In(jobSeekerSkills.keySkills) }
+        }
+      },
+      relations: {
+        jobsKeySkills: {
+        keySkills:true
+        },
+        company: true
+    }
+    });
+ 
+  } catch (error) {
+    console.log('error in fetch jobsList for jobSeeker')
+    throw error;
+  }
+}

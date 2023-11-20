@@ -3,21 +3,21 @@ import { ApplyJobs } from '../entities/applyJobs.entity';
 export const saveApplyJob = async (applyJobParams: any) => {
 
   try {
+
     let applyJob: any;
     const { id, ...updatedApplyJobParams } = applyJobParams
-    const applyJobRepository = AppDataSource.getRepository(ApplyJobs);
-    let [countApplyJob, count] = await applyJobRepository.findAndCount({
-      where: {
-        user: updatedApplyJobParams.user,
-        jobs: updatedApplyJobParams.jobs
-      }
-    });
+    const userRepository = AppDataSource.getRepository(ApplyJobs);
+    const countApplyJob = await userRepository.createQueryBuilder("applyJobs")
+      .where("applyJobs.applyUser = :user ", { user: Number(updatedApplyJobParams.params.user) })
+      .andWhere("applyJobs.jobs=:jobs", { jobs: Number(updatedApplyJobParams.params.jobs) })
+      .getCount();
 
-    if (count === 0) {
-      applyJob = await applyJobRepository.save(updatedApplyJobParams)
-      return { count: count, applyJob: applyJob };
+    if (!countApplyJob) {
+      const applyJobRepository = AppDataSource.getRepository(ApplyJobs);
+      applyJob = await applyJobRepository.save(updatedApplyJobParams.params)
+      return { count: 0, applyJob: applyJob };
     } else {
-      return { count: count, applyJob: countApplyJob };
+      return { count: 1, applyJob: countApplyJob };
     }
   } catch (error) {
     console.log('error', error);
@@ -25,16 +25,35 @@ export const saveApplyJob = async (applyJobParams: any) => {
   }
 }
 
-export const getCountApplicantWithList = async (id: any) => {
+export const getCountApplicant = async (id: any) => {
   try {
-    const applyJobRepository = AppDataSource.getRepository(ApplyJobs);
-    let [countApplyJob, count] = await applyJobRepository.findAndCount({
+    const userRepository = AppDataSource.getRepository(ApplyJobs);
+    const countApplyJob = await userRepository.createQueryBuilder("applyJobs")
+      .where("applyJobs.jobs = :jobs ", { jobs: Number(id) })
+      .getCount();
+
+    return { count: countApplyJob };
+  } catch (error) {
+    console.log('error', error);
+    throw error;
+  }
+}
+export const getApplicantList = async (id: any) => {
+  try {
+    const applyJobsRepository = AppDataSource.getRepository(ApplyJobs);
+    let applyJobs = await applyJobsRepository.find({
+      order: {
+        id: "DESC",
+      },
       where: {
         jobs: id
+      },
+      relations: {
+        multipleChoiceQuestionnaireAnswer: { multipleChoiceQuestionnaire: true },
+        questionnaireAnswer: { questionnaire: true },
       }
     });
-
-    return { count: count, applyJob: countApplyJob };
+    return applyJobs;
   } catch (error) {
     console.log('error', error);
     throw error;
