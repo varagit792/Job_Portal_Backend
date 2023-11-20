@@ -31,7 +31,7 @@ export class User extends BaseEntity {
   userType!: string
 
   @OneToOne(() => JobSeekerProfile)
-  @JoinColumn()
+  @JoinColumn({ name:'jobSeekerProfileId',referencedColumnName:'id'})
   jobSeekerProfile!: JobSeekerProfile
 
   @Column({ default: false })

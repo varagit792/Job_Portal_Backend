@@ -85,15 +85,15 @@ export class JobSeekerProfile extends BaseEntity {
   @JoinColumn()
   industry!: Industry
 
-  @OneToOne(() => NoticePeriod, { nullable: true, onDelete: 'SET NULL', onUpdate: 'CASCADE' })
+  @ManyToOne(() => NoticePeriod, { nullable: true, onDelete: 'SET NULL', onUpdate: 'CASCADE' })
   @JoinColumn()
   noticePeriod!: NoticePeriod | null
 
-  @OneToOne(() => JobTitle, { nullable: true, onDelete: 'SET NULL', onUpdate: 'CASCADE' })
+  @ManyToOne(() => JobTitle, { nullable: true, onDelete: 'SET NULL', onUpdate: 'CASCADE' })
   @JoinColumn()
-  currentJobTitle!: JobRole | null
+  currentJobTitle!: JobRole[] | null
 
-  @OneToOne(() => Companies, { nullable: true, onDelete: 'SET NULL', onUpdate: 'CASCADE' })
+  @ManyToOne(() => Companies, { nullable: true, onDelete: 'SET NULL', onUpdate: 'CASCADE' })
   @JoinColumn()
   currentCompany!: Companies | null
 
@@ -107,7 +107,7 @@ export class JobSeekerProfile extends BaseEntity {
   personalDetails: PersonalDetails | undefined;
 
   @OneToOne(() => User)
-  @JoinColumn()
+  @JoinColumn({name:'userId', referencedColumnName:'id'})
   user!: User
 
   @OneToOne(() => CareerProfile, (careerProfile) => careerProfile.jobSeekerProfile)
@@ -117,4 +117,7 @@ export class JobSeekerProfile extends BaseEntity {
   profileLastUpdated!: Date
   @UpdateDateColumn({ type: 'timestamp', default: () => null, onUpdate: "CURRENT_TIMESTAMP(6)", nullable: true })
   resumeLastUpdated!: Date
+
+  @Column({default:true})
+  isSubscribedForAlerts!: boolean
 }

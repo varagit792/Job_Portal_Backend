@@ -9,6 +9,7 @@ import { generateToken } from '../utils/generateToken';
 import { User } from '../entities/user.entity';
 import { SaveOptions, RemoveOptions } from 'typeorm';
 import 'dotenv/config';
+import { saveStagingEmailTemplates } from '../services/stagingEmailTemplates.service';
 
 interface OutParams extends User {
   jobSeekProfileId?: number,
@@ -53,6 +54,12 @@ export const registerUser: RequestHandler = async (req: Request, res: Response, 
     const fileName = req.file?.filename
     const user = await saveUser(userParams);
 
+    const stagingTemplateParams = {
+      email: user.email,
+      templateType: 'emailVerify'
+    };
+   
+    await saveStagingEmailTemplates(stagingTemplateParams as any)
     const OutPutData: OutParams = {
       ...user,
       hasId: function (): boolean {
@@ -82,7 +89,10 @@ export const registerUser: RequestHandler = async (req: Request, res: Response, 
           jobSeekerType,
           id: user.id,
           resumePath: resumePath,
-          resumeFile: fileName
+          resumeFile: fileName,
+          user: {
+            id: user.id
+          }
         }
         const jobSeeker = await saveJobSeekerProfile(jobSeekerParams);
         OutPutData.jobSeekProfileId = jobSeeker.id
