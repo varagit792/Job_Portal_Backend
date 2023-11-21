@@ -419,7 +419,7 @@ export const jobSeekerMailVerification = async (req: Request, res: Response) => 
   }
 }
 
-export const updateJobSeekerMailVerification = async (req: Request, res: Response,next:NextFunction) => {
+export const updateJobSeekerMailVerification = async (req: Request, res: Response, next: NextFunction) => {
   try {
 
     const token = req.params.token;
@@ -489,7 +489,7 @@ export const jobSeekerSendOtp = async (req: Request, res: Response) => {
       to: `+91${req.user.mobileNumber}`,
       body: `${otp} is your OTP for registration on jobportal.com.`
     }
-    
+
     const msgId = await sendSMS(msgData)
     await updateUser(req.user.id, otpParams);
     return res.status(200).json({
@@ -499,6 +499,36 @@ export const jobSeekerSendOtp = async (req: Request, res: Response) => {
   } catch (error: any) {
     console.log('error ', error);
     return res.status(500).json({
+      message: error.message
+    })
+  }
+}
+
+export const recommendedJobSeekerAlert = async (req: Request, res: Response, next: NextFunction) => {
+  try {
+
+    const token = req.params.token;
+    const jobId = req.params.jobId;
+    const decoded: any = await verifyJwtToken(token);
+    const userData = await fetchUser(decoded.email)
+    if (userData) {
+      // const emailParams = {
+      //   isEmailVerified: true
+      // }
+      // const mailData = await updateUser(userData.id, emailParams);
+      // const token = await generateToken(userData);
+      res.cookie('token', token);
+      res.cookie('name', userData?.name)
+      res.redirect(`http://localhost:3000/allJobs/jobDescription/${jobId}`);
+    } else {
+      return res.status(400).json({
+        message: 'User not present'
+      });
+    };
+
+  } catch (error: any) {
+    console.log('error', error);
+    res.status(500).json({
       message: error.message
     })
   }
