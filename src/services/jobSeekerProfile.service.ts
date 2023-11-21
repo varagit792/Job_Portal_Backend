@@ -402,7 +402,7 @@ export const fetchJobsListForJobSeeker = async (jobsRepository: Repository<Jobs>
     const token = await generateToken(jobSeekerSkills.user);
 
     const jobLinksList = jobsList.map((job) => {
-      const jobLink = `http://localhost:4000/jobSeeker/recomemmendJobAlert/${token}/${job.id}`
+      const jobLink = `http://localhost:4000/jobSeekerProfile/recomemmendedJobAlert/${token}/${job.id}`
       const jobData = { ...job, jobLink: jobLink };
       return jobData;
     })
