@@ -25,21 +25,21 @@
       padding: 0.5rem 1rem;
     }
 
-    body>.list-main-div {
-      padding: 10rem 30rem;
+    .list-main-div {
+      padding: 0rem 10rem;
     }
 
-    body>.main-div {
-      padding: 2rem 30rem;
+    .main-div {
+      padding: 5rem 10rem;
       background: #e6e4dc;
     }
 
-    body>.main-div>h1 {
+    .main-div h1 {
       text-align: center;
       font-size: 1.5rem;
     }
 
-    body>.main-div>p {
+    .main-div p {
       text-align: center;
     }
 
@@ -129,95 +129,8 @@
       height: 1.5rem;
     }
 
- a {
+    a {
       text-decoration: none;
-    }
-    @media only screen and (max-width: 480px) {
-      * {
-        font-size: 10px;
-      }
-
-      body>.list-main-div {
-        padding: 0 5rem;
-      }
-
-      body>.main-div {
-        padding: 1rem 5rem;
-      }
-
-      .listTable tr .img_wrapper img {
-        width: 4rem;
-      }
-    }
-
-    @media (min-width: 480px) {
-      * {
-        font-size: 8px;
-      }
-
-      body>.list-main-div {
-        padding: 0 8rem;
-      }
-
-      body>.main-div {
-        padding: 1.5rem 8rem;
-      }
-    }
-
-    @media (min-width: 600px) {
-      * {
-        font-size: 10px;
-      }
-
-      body>.list-main-div {
-        padding: 0 10rem;
-      }
-
-      body>.main-div {
-        padding: 2rem 10rem;
-      }
-    }
-
-    @media (min-width: 801px) {
-      * {
-        font-size: 12px;
-      }
-
-      body>.list-main-div {
-        padding: 0 12rem;
-      }
-
-      body>.main-div {
-        padding: 2rem 12rem;
-      }
-    }
-
-    @media (min-width: 1025px) {
-      * {
-        font-size: 14px;
-      }
-
-      body>.list-main-div {
-        padding: 0 14rem;
-      }
-
-      body>.main-div {
-        padding: 2rem 14rem;
-      }
-    }
-
-    @media (min-width: 1281px) and (max-width: 1920px) {
-      * {
-        font-size: 16px;
-      }
-
-      body>.list-main-div {
-        padding: 0 30rem;
-      }
-
-      body>.main-div {
-        padding: 2rem 30rem;
-      }
     }
   </style>
 </head>
@@ -277,16 +190,16 @@
             <span>Hybrid</span>
             <span>-</span>
             <span>
-                   
+
               {{jobsLocation.[0].location.title}}
-                   
+
             </span>
           </td>
         </tr>
       </table>
     </a>
     {{/each}}
-   
+
     <table cellpadding="0" cellspacing="0" align="center">
       <tr>
         <td>
