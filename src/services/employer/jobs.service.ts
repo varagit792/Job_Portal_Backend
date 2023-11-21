@@ -9,6 +9,7 @@ import { Jobs } from '../../entities/jobs.entity';
 import { Questionnaire } from '../../entities/questionnaire.entity';
 import { SingleChoiceQuestionnaire } from '../../entities/singleChoiceQuestionnaire.entity';
 import { MultipleChoiceQuestionnaire } from '../../entities/multipleChoiceQuestionnaire.entity';
+import { data } from 'autoprefixer';
 const appJobsKeySkills = AppDataSource.getRepository(JobsKeySkills);
 const appJobLocation = AppDataSource.getRepository(JobLocation);
 const appJobLocality = AppDataSource.getRepository(JobLocality);
@@ -107,7 +108,7 @@ export const saveJobs = async (jobsParams: Jobs) => {
         }
       }
       if (jobsParams?.jobCandidateIndustry) {
-        await appJobCandidateIndustry.delete({ candidateIndustry: jobsParams.id as any });
+        await appJobCandidateIndustry.delete({ jobCandidateIndustry: jobsParams.id as any });
         for (let i = 0; i < jobsParams.jobCandidateIndustry.length; i++) {
           let jbsCandidateIndustry: any = new Object();
           jbsCandidateIndustry.jobCandidateIndustry = jobsParams.id;
@@ -118,6 +119,8 @@ export const saveJobs = async (jobsParams: Jobs) => {
 
       if (jobsParams?.questionnaire) {
         await appJobsQuestionnaire.delete({ questionnaire: jobsParams.id as any });
+
+
         for (let i = 0; i < jobsParams.questionnaire.length; i++) {
           let questionnaire: any = new Object();
           questionnaire.questionnaire = jobsParams.id;
@@ -126,24 +129,26 @@ export const saveJobs = async (jobsParams: Jobs) => {
           questionnaire.characterLimit = jobsParams.questionnaire[i]?.characterLimit;
           questionnaire.requiredCheck = jobsParams.questionnaire[i].requiredCheck;
           questionnaire.rangeMax = jobsParams.questionnaire[i].rangeMax;
-          await appJobsQuestionnaire.save(questionnaire);
+          let insert = await AppDataSource.createQueryBuilder().insert().into(Questionnaire).values(questionnaire).execute()
+
 
           // This for Single choice questionnaire update
-          if (jobsParams?.questionnaire[i]?.singleSelection) {
-            for (let iSingle = 0; iSingle < jobsParams.questionnaire[i]?.singleSelection.length; i++) {
+          if (jobsParams?.questionnaire[i]?.singleSelection?.length > 0) {
+            for (const iSingle in jobsParams.questionnaire[i]?.singleSelection) {
               let singleQuestionnaire: any = new Object();
-              singleQuestionnaire.questionnaire[i].singleSelection = jobsParams.questionnaire[i].id;
-              singleQuestionnaire.questionnaire[i].singleSelection[iSingle].option = jobsParams.questionnaire[i].singleSelection[iSingle].option;
+              singleQuestionnaire.singleSelection = insert.raw.insertId;
+              singleQuestionnaire.option = jobsParams.questionnaire[i].singleSelection[iSingle].option;
               await appJobsSingleChoiceQuestionnaire.save(singleQuestionnaire);
             }
+
           }
 
           // This for Multiple choice questionnaire update
-          if (jobsParams?.questionnaire[i]?.multipleSelection) {
-            for (let iSMultiple = 0; iSMultiple < jobsParams.questionnaire[i]?.multipleSelection.length; i++) {
+          if (jobsParams?.questionnaire[i]?.multipleSelection?.length > 0) {
+            for (const iSMultiple in jobsParams.questionnaire[i]?.multipleSelection) {
               let multipleQuestionnaire: any = new Object();
-              multipleQuestionnaire.questionnaire[i].multipleSelection = jobsParams.questionnaire[i].id;
-              multipleQuestionnaire.questionnaire[i].multipleSelection[iSMultiple].option = jobsParams.questionnaire[i].multipleSelection[iSMultiple].option;
+              multipleQuestionnaire.multipleSelection = insert.raw.insertId;
+              multipleQuestionnaire.option = jobsParams.questionnaire[i].multipleSelection[iSMultiple].option;
               await appJobsMultipleChoiceQuestionnaire.save(multipleQuestionnaire);
             }
           }
@@ -204,7 +209,7 @@ export const jobsList = async (data: any) => {
         //user: true,
         jobsKeySkills: { keySkills: true },
         employmentType: true,
-        
+
       },
       skip: (skip),
       take: (page),
@@ -241,7 +246,8 @@ export const getJobDetails = async (id: number) => {
         department: true,
         employmentType: true,
         jobCandidateIndustry: { candidateIndustry: true },
-        questionnaire: { singleSelection: true, multipleSelection: true },
+        questionnaire: { singleSelection: true, multipleSelection: true, },
+
         currency: true,
         payScaleLowerRange: true,
         payScaleUpperRange: true,
