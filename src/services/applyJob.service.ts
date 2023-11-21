@@ -27,6 +27,7 @@ export const saveApplyJob = async (applyJobParams: any) => {
 
 export const getCountApplicant = async (id: any) => {
   try {
+
     const userRepository = AppDataSource.getRepository(ApplyJobs);
     const countApplyJob = await userRepository.createQueryBuilder("applyJobs")
       .where("applyJobs.jobs = :jobs ", { jobs: Number(id) })
