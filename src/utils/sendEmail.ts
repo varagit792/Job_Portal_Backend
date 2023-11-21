@@ -3,6 +3,7 @@ import * as fs from 'fs/promises';
 import path from 'path';
 import handleBars from 'handlebars';
 import 'dotenv/config';
+import { Jobs } from '../entities/jobs.entity';
 
 export const sendEmailVerifyLink = async (mailParams:any) => {
   try {
@@ -36,3 +37,32 @@ export const sendEmailVerifyLink = async (mailParams:any) => {
   }
 }
 
+
+export const sendRecommendedJobAlerts = async (email: string, name:string,jobsList: any) => {
+  try {
+    
+    const __dirname = path.resolve();
+
+    let hbsPathForRecommendedJobs = path.join(__dirname, 'src', 'views', 'layouts', 'recommendedJobsAlert.hbs');
+   
+    const recommendedJobsContent = await fs.readFile(hbsPathForRecommendedJobs, 'utf-8');
+   
+    const data = {
+      jobs: jobsList,
+      name:name
+    }
+    const template = handleBars.compile(recommendedJobsContent);
+    const htmlContent = template(data);
+    const info = await transport.sendMail({
+      from: 'admin@jobportal.com',
+      // to: 'srinivasreddy.pamireddy@ratnaglobaltech.com',
+      to: email,
+      subject: 'Recommended jobs alert',
+      html: htmlContent
+    });
+    console.log('info id', info.response);
+    return info;
+  } catch (error) {
+    console.log('error in send job alerts ', error);
+  }
+}
