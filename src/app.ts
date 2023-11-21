@@ -13,7 +13,8 @@ import 'dotenv/config';
 import path from 'path';
 import fs from 'fs';
 import { engine } from 'express-handlebars';
-import handleBar from 'handlebars';
+import { sweepEmailTemplatesDb } from './schedulers/emailVerifyScheduler';
+import { sweepJobSeekerProfileDb } from './schedulers/jobSeekerAlertsScheduler';
 
 (async () => {
   AppDataSource.initialize().then(() => {
@@ -31,7 +32,12 @@ const app: Express = express();
 
 // redisClient.on('error', (err) => console.log('Error while connecting to redis ', err));
 // redisClient.connect().then(() => console.log('connected to redis'));
-
+process.on('uncaughtException', (error) => {
+  console.error('uncaughtException: ', error);
+});
+process.on('unhandledRejection', (error, promise) => {
+  console.error('unhandledRejection', error);
+});
 const corsOptions = {
   origin: true, // Replace with the actual URL of your React app
   // methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
@@ -61,7 +67,8 @@ app.use(passport.session());
 app.use(bodyParser.urlencoded({ extended: true, limit: process.env.FILE_LIMIT }));
 app.use(bodyParser.json());
 app.use(logger('dev'));
-
+sweepEmailTemplatesDb();
+sweepJobSeekerProfileDb();
 //set the base path for root directory.
 const basePath = path.resolve(__dirname, '..');
 //serve the local files of resume and profile in frontend.
