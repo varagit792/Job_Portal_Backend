@@ -8,6 +8,8 @@ import { In, Repository } from 'typeorm';
 import 'dotenv/config';
 import { Jobs } from '../entities/jobs.entity';
 import { sendRecommendedJobAlerts } from '../utils/sendEmail';
+import { User } from '../entities/user.entity';
+import { generateToken } from '../utils/generateToken';
 
 type Params = {
   jobSeekerType: string
@@ -353,8 +355,7 @@ export const processFetchedJobSeekerData = async (data: JobSeekerProfile[]) => {
         jobKeySkill.profileKeySkills.id
       )
       const jobSeekerSkillsData = {
-        email: jobSeekerProfile.user.email,
-        name:jobSeekerProfile.user.name,
+       user:jobSeekerProfile.user,
         keySkills: keySkills
       }
 
@@ -374,7 +375,7 @@ export const processFetchedJobSeekerData = async (data: JobSeekerProfile[]) => {
   }
 }
 
-export const fetchJobsListForJobSeeker = async (jobsRepository: Repository<Jobs>, limit: number, jobSeekerSkills: { email: string, name:string,keySkills: number[] }) => {
+export const fetchJobsListForJobSeeker = async (jobsRepository: Repository<Jobs>, limit: number, jobSeekerSkills: { user:User,keySkills: number[] }) => {
  
   try {
     const jobsList = await jobsRepository.find({
@@ -398,9 +399,16 @@ export const fetchJobsListForJobSeeker = async (jobsRepository: Repository<Jobs>
       take:limit
     });
 
-    // console.log('jobs ', JSON.stringify(jobsList));
+    const token = await generateToken(jobSeekerSkills.user);
+
+    const jobLinksList = jobsList.map((job) => {
+      const jobLink = `http://localhost:4000/jobSeeker/recomemmendJobAlert/${token}/${job.id}`
+      const jobData = { ...job, jobLink: jobLink };
+      return jobData;
+    })
+    // console.log('jobs ', JSON.stringify(jobLinksList));
     if (jobsList.length > 0) {
-      sendRecommendedJobAlerts(jobSeekerSkills.email, jobSeekerSkills.name, jobsList);
+      sendRecommendedJobAlerts(jobSeekerSkills.user.email, jobSeekerSkills.user.name, jobLinksList);
    }
  
   } catch (error) {
@@ -408,3 +416,4 @@ export const fetchJobsListForJobSeeker = async (jobsRepository: Repository<Jobs>
     throw error;
   }
 }
+

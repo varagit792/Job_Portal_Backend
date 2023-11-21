@@ -129,6 +129,9 @@
       height: 1.5rem;
     }
 
+ a {
+      text-decoration: none;
+    }
     @media only screen and (max-width: 480px) {
       * {
         font-size: 10px;
@@ -251,7 +254,7 @@
   </div>
   <div class="list-main-div">
     {{#each jobs}}
-    <a>
+    <a href={{jobLink}}>
       <table cellpadding="0" cellspacing="0" class="listTable">
         <tr>
           <td rowspan="4" class="img_wrapper">
@@ -265,7 +268,7 @@
         </tr>
         <tr>
           <td>
-            <h4>{{jobDescription}}</h4>
+            <h4>{{company.title}}</h4>
           </td>
         </tr>
         <tr>
