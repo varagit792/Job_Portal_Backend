@@ -9,7 +9,6 @@ import { Jobs } from '../../entities/jobs.entity';
 import { Questionnaire } from '../../entities/questionnaire.entity';
 import { SingleChoiceQuestionnaire } from '../../entities/singleChoiceQuestionnaire.entity';
 import { MultipleChoiceQuestionnaire } from '../../entities/multipleChoiceQuestionnaire.entity';
-import { data } from 'autoprefixer';
 const appJobsKeySkills = AppDataSource.getRepository(JobsKeySkills);
 const appJobLocation = AppDataSource.getRepository(JobLocation);
 const appJobLocality = AppDataSource.getRepository(JobLocality);
