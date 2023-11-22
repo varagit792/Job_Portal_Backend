@@ -7,10 +7,12 @@ import { promisify } from 'util';
 import 'dotenv/config';
 import { fetchUser, updateUser } from '../services/user.service';
 import { sendEmailVerifyLink } from '../utils/sendEmail';
-import { generateToken } from '../utils/generateToken';
+import { generateToken, generateTokenForEmailLink } from '../utils/generateToken';
 import { verifyJwtToken } from '../utils/verifyJwtToken';
 import otpGenerator from 'otp-generator';
 import { sendSMS } from '../utils/sendSms';
+import { TokenExpiredError } from 'jsonwebtoken';
+import path from 'path';
 export const updateJobSeekerProfileController = async (req: Request, res: Response) => {
   try {
 
@@ -400,7 +402,7 @@ export const ProfileIndicator = async (req: Request, res: Response) => {
 export const jobSeekerMailVerification = async (req: Request, res: Response) => {
   try {
 
-    const token = await generateToken(req.user);
+    const token = await generateTokenForEmailLink(req.user);
     const link = `http://localhost:4000/jobSeekerProfile/emailVerify/${token}`
     const mailParams = {
       email: req.user.email,
@@ -431,20 +433,17 @@ export const updateJobSeekerMailVerification = async (req: Request, res: Respons
     const decoded: any = await verifyJwtToken(token);
     const userData = await fetchUser(decoded.email)
     if (userData) {
-      const emailParams = {
-        isEmailVerified: true
-      }
       if (userData.emailVerifyLink !== '') {
-        const mailData = await updateUser(userData.id, emailParams);
         const updateParams = {
-          emailVerifyLink:''
+          emailVerifyLink: '',
+          isEmailVerified: true
         }
         await updateUser(userData.id, updateParams);
         res.redirect('http://localhost:3000/emailSuccess');
       } else {
         res.redirect('http://localhost:3000/emailAlreadyVerified');
       }
-      
+
     } else {
       return res.status(400).json({
         message: 'User not present'
@@ -453,6 +452,15 @@ export const updateJobSeekerMailVerification = async (req: Request, res: Respons
 
   } catch (error: any) {
     console.log('error', error);
+    if (error instanceof TokenExpiredError) {
+      // const __dirname = path.resolve();
+      // const hbsPathForVerification = path.join('src', 'view', 'layouts', 'verificationExpired.hbs');
+      // console.log('hbs path ', hbsPathForVerification);
+      // return res.render(hbsPathForVerification);
+      res.status(400).json({
+        message: "Email verification link expired! please request new link again"
+      })
+    }
     res.status(500).json({
       message: error.message
     })
