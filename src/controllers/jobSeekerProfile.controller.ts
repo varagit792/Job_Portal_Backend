@@ -401,10 +401,15 @@ export const jobSeekerMailVerification = async (req: Request, res: Response) => 
   try {
 
     const token = await generateToken(req.user);
+    const link = `http://localhost:4000/jobSeekerProfile/emailVerify/${token}`
     const mailParams = {
       email: req.user.email,
-      token
+      link
     }
+    const userParams = {
+      emailVerifyLink: link
+    }
+    await updateUser(req.user.id, userParams);
     const mailData = await sendEmailVerifyLink(mailParams);
 
     return res.status(200).json({
@@ -429,11 +434,17 @@ export const updateJobSeekerMailVerification = async (req: Request, res: Respons
       const emailParams = {
         isEmailVerified: true
       }
-      const mailData = await updateUser(userData.id, emailParams);
-      const token = await generateToken(userData);
-      res.cookie('token', token);
-      res.cookie('name', userData?.name)
-      res.redirect('http://localhost:3000/homePage');
+      if (userData.emailVerifyLink !== '') {
+        const mailData = await updateUser(userData.id, emailParams);
+        const updateParams = {
+          emailVerifyLink:''
+        }
+        await updateUser(userData.id, updateParams);
+        res.redirect('http://localhost:3000/emailSuccess');
+      } else {
+        res.redirect('http://localhost:3000/emailAlreadyVerified');
+      }
+      
     } else {
       return res.status(400).json({
         message: 'User not present'
@@ -512,13 +523,6 @@ export const recommendedJobSeekerAlert = async (req: Request, res: Response, nex
     const decoded: any = await verifyJwtToken(token);
     const userData = await fetchUser(decoded.email)
     if (userData) {
-      // const emailParams = {
-      //   isEmailVerified: true
-      // }
-      // const mailData = await updateUser(userData.id, emailParams);
-      // const token = await generateToken(userData);
-      res.cookie('token', token);
-      res.cookie('name', userData?.name)
       res.redirect(`http://localhost:3000/allJobs/jobDescription/${jobId}`);
     } else {
       return res.status(400).json({

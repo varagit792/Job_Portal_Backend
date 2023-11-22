@@ -3,7 +3,6 @@ import * as fs from 'fs/promises';
 import path from 'path';
 import handleBars from 'handlebars';
 import 'dotenv/config';
-import { Jobs } from '../entities/jobs.entity';
 
 export const sendEmailVerifyLink = async (mailParams:any) => {
   try {
@@ -17,7 +16,7 @@ export const sendEmailVerifyLink = async (mailParams:any) => {
       title: 'My Page',
       heading: 'Welcome to my website',
       content: 'This is some content for the page.',
-      link: `http://localhost:4000/jobSeekerProfile/emailVerify/${mailParams.token}`,
+      link: mailParams.link,
     };
    
     const htmlContent = template(data);
