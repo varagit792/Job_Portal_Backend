@@ -407,8 +407,9 @@ export const fetchJobsListForJobSeeker = async (jobsRepository: Repository<Jobs>
       return jobData;
     })
     // console.log('jobs ', JSON.stringify(jobLinksList));
+    const jobLinkAll = `http://localhost:4000/jobSeekerProfile/recomemmendedJobAlertAll/${token}`;
     if (jobsList.length > 0) {
-      sendRecommendedJobAlerts(jobSeekerSkills.user.email, jobSeekerSkills.user.name, jobLinksList);
+      sendRecommendedJobAlerts(jobSeekerSkills.user.email, jobSeekerSkills.user.name, jobLinksList,jobLinkAll);
    }
  
   } catch (error) {

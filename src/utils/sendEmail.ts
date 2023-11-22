@@ -37,7 +37,7 @@ export const sendEmailVerifyLink = async (mailParams:any) => {
 }
 
 
-export const sendRecommendedJobAlerts = async (email: string, name:string,jobsList: any) => {
+export const sendRecommendedJobAlerts = async (email: string, name: string, jobsList: any, jobLinkAll:string) => {
   try {
     
     const __dirname = path.resolve();
@@ -46,9 +46,11 @@ export const sendRecommendedJobAlerts = async (email: string, name:string,jobsLi
    
     const recommendedJobsContent = await fs.readFile(hbsPathForRecommendedJobs, 'utf-8');
    
+    // console.log('jobslist ', JSON.stringify(jobsList), jobLinkAll);
     const data = {
       jobs: jobsList,
-      name:name
+      name: name,
+      jobLinkAll:jobLinkAll
     }
     const template = handleBars.compile(recommendedJobsContent);
     const htmlContent = template(data);

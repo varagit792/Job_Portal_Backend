@@ -546,4 +546,25 @@ export const recommendedJobSeekerAlert = async (req: Request, res: Response, nex
   }
 }
 
+export const recommendedJobSeekerAlertForAllJobs = async (req: Request, res: Response, next: NextFunction) => {
+  try {
+
+    const token = req.params.token;
+    const decoded: any = await verifyJwtToken(token);
+    const userData = await fetchUser(decoded.email)
+    if (userData) {
+      res.redirect(`http://localhost:3000/allJobs`);
+    } else {
+      return res.status(400).json({
+        message: 'User not present'
+      });
+    };
+
+  } catch (error: any) {
+    console.log('error', error);
+    res.status(500).json({
+      message: error.message
+    })
+  }
+}
 
