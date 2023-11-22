@@ -16,7 +16,7 @@ import {
   ProfileIndicator,
   jobSeekerMailVerification,
   updateJobSeekerMailVerification,
-  jobSeekerMobileVerify, jobSeekerSendOtp, recommendedJobSeekerAlert
+  jobSeekerMobileVerify, jobSeekerSendOtp, recommendedJobSeekerAlert, recommendedJobSeekerAlertForAllJobs
 } from '../controllers/jobSeekerProfile.controller';
 import passport from '../config/passport';
 import { keySkillsController, keySkillsGetController } from '../controllers/keySkills.controller';
@@ -46,5 +46,6 @@ jobSeekerProfileRouter.get('/sendOtp', passport.authenticate('jwt', { session: f
 jobSeekerProfileRouter.put('/verifyMobile', passport.authenticate('jwt', { session: false }), jobSeekerMobileVerify);
 jobSeekerProfileRouter.get('/profileIndicator', passport.authenticate('jwt', { session: false }), ProfileIndicator);
 jobSeekerProfileRouter.get('/recomemmendedJobAlert/:token/:jobId', recommendedJobSeekerAlert);
+jobSeekerProfileRouter.get('/recomemmendedJobAlertAll/:token',recommendedJobSeekerAlertForAllJobs);
 
 export default jobSeekerProfileRouter;
