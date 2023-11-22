@@ -49,4 +49,7 @@ export class User extends BaseEntity {
   @ManyToOne(() => Companies, (companies) => companies.user, { createForeignKeyConstraints: true, cascade: true })
   companies!: Companies
 
+  @Column({ default: null, nullable: true })
+  emailVerifyLink!: string;
+
 }

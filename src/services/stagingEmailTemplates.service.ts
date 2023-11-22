@@ -2,7 +2,7 @@ import { AppDataSource } from '../config/typeorm';
 import { StagingEmailTemplates } from '../entities/stagingTemplates.entity';
 import 'dotenv/config';
 import { generateToken } from '../utils/generateToken';
-import { fetchUser } from './user.service';
+import { fetchUser, updateUser } from './user.service';
 import { sendEmailVerifyLink } from '../utils/sendEmail';
 import { Repository } from 'typeorm';
 
@@ -69,11 +69,15 @@ export const processFetchedTemplateData = async (data: StagingEmailTemplates[]):
       const user = await fetchUser(stagingTemplates.email);
       if (user) {
         const token = await generateToken(user);
+        const link = `http://localhost:4000/jobSeekerProfile/emailVerify/${token}`
         const mailParams = {
           email: stagingTemplates.email,
-          token: token
+          link
         }
-        // await delay(2000);
+        const userParams = {
+          emailVerifyLink: link
+        }
+        await updateUser(user.id, userParams);
         sendEmailVerifyLink(mailParams);
       }
     }
