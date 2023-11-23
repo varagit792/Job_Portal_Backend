@@ -9,6 +9,22 @@ export default class DepartmentSeeder implements Seeder {
     const repository = dataSource.getRepository(Department);
     await repository.upsert([
       {
+        title: 'DBA / Data warehousing',
+        status: true,
+      },
+      {
+        title: 'DevOps',
+        status: true,
+      },
+      {
+        title: 'Quality Assurance and Testing',
+        status: true,
+      },
+      {
+        title: 'Software Development',
+        status: true,
+      },
+      {
         title: 'BFSI, Investments & Trading',
         status: true,
       },

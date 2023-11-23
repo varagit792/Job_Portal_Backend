@@ -8,216 +8,181 @@ export default class IndustrySeeder implements Seeder {
   ): Promise<any> {
     const repository = dataSource.getRepository(Industry);
     await repository.upsert([
+
       {
-        title: 'Extermination/Pest Control',
+        title: 'IT Services',
         status: true,
       },
       {
-        title: 'Farming(Animal Production)',
+        title: 'IT Services & Consulting',
         status: true,
       },
       {
-        title: 'Farming(Crop Production)',
+        title: 'BPM',
         status: true,
       },
       {
-        title: 'Fishing/Hunting',
+        title: 'Analytics / KPO / Research',
         status: true,
       },
       {
-        title: 'Landscape Services',
+        title: 'BPO / Call Centre',
         status: true,
       },
       {
-        title: 'Lawn care Services',
+        title: 'Technology',
         status: true,
       },
       {
-        title: 'Other (Agriculture & Forestry/Wildlife)',
+        title: 'Electronic Components / Semiconductors',
         status: true,
       },
       {
-        title: 'Consultant',
+        title: 'Electronics Manufacturing',
         status: true,
       },
       {
-        title: 'Employment Office',
+        title: 'Electronic Manufacturing Services (EMS)',
         status: true,
       },
       {
-        title: 'Fundraisers',
+        title: 'Electronics Manufacturing',
         status: true,
       },
       {
-        title: 'Going out of Business Sales',
+        title: 'Emerging Technologies',
         status: true,
       },
       {
-        title: 'Marketing/Advertising',
+        title: '3D Printing',
         status: true,
       },
       {
-        title: 'Non Profit Organization',
+        title: 'Emerging Technologies',
         status: true,
       },
       {
-        title: 'Notary Public',
+        title: 'AI/ML',
         status: true,
       },
       {
-        title: 'Online Business',
+        title: 'Emerging Technologies',
         status: true,
       },
       {
-        title: 'Other (Business & Information)',
+        title: 'AR/VR',
         status: true,
       },
       {
-        title: 'Publishing Services',
+        title: 'Emerging Technologies',
         status: true,
       },
       {
-        title: 'Record Business',
+        title: 'Blockchain',
         status: true,
       },
       {
-        title: 'Retail Sales',
+        title: 'Emerging Technologies',
         status: true,
       },
       {
-        title: 'Technology Services',
+        title: 'Cloud',
         status: true,
       },
       {
-        title: 'Telemarketing',
+        title: 'Emerging Technologies',
         status: true,
       },
       {
-        title: 'Travel Agency',
+        title: 'Cybersecurity',
         status: true,
       },
       {
-        title: 'Video Production',
+        title: 'Emerging Technologies',
         status: true,
       },
       {
-        title: 'AC & Heating',
+        title: 'Drones/Robotics',
         status: true,
       },
       {
-        title: 'Architect',
+        title: 'Emerging Technologies',
         status: true,
       },
       {
-        title: 'Building Construction',
+        title: 'IoT',
         status: true,
       },
       {
-        title: 'Building Inspection',
+        title: 'Emerging Technologies',
         status: true,
       },
       {
-        title: 'Concrete Manufacturing',
+        title: 'Nanotechnology',
         status: true,
       },
       {
-        title: 'Contractor',
+        title: 'Emerging Technologies',
         status: true,
       },
       {
-        title: 'Engineering/Drafting',
+        title: 'Hardware & Networking',
         status: true,
       },
       {
-        title: 'Equipment Rental',
+        title: 'Internet',
         status: true,
       },
       {
-        title: 'Other (Construction/Utilities/Contracting)',
+        title: 'E-Commerce',
         status: true,
       },
       {
-        title: 'Plumbing',
+        title: 'Internet',
         status: true,
       },
       {
-        title: 'Remodeling',
+        title: 'OTT',
         status: true,
       },
       {
-        title: 'Repair/Maintenance',
+        title: 'Internet',
         status: true,
       },
       {
-        title: 'Child Care Services',
+        title: 'Software Product',
         status: true,
       },
       {
-        title: 'College/Universities',
+        title: 'BFSI',
         status: true,
       },
       {
-        title: 'Cosmetology School',
+        title: 'Banking',
         status: true,
       },
       {
-        title: 'Elementary & Secondary Education',
+        title: 'Financial Services',
         status: true,
       },
       {
-        title: 'GED Certification',
+        title: 'Asset Management',
         status: true,
       },
       {
-        title: 'Other (Education)',
+        title: 'Financial Services',
         status: true,
       },
       {
-        title: 'Private School',
+        title: 'Broking',
         status: true,
       },
       {
-        title: 'Real Estate School',
+        title: 'Financial Services',
         status: true,
       },
       {
-        title: 'Technical School',
-        status: true,
-      },
-      {
-        title: 'Trade School',
-        status: true,
-      },
-      {
-        title: 'Tutoring Services',
-        status: true,
-      },
-      {
-        title: 'Vocational Schoo',
-        status: true,
-      },
-      {
-        title: 'Accountant',
-        status: true,
-      },
-      {
-        title: 'Auditing',
-        status: true,
-      },
-      {
-        title: 'Bank/Credit Union',
-        status: true,
-      },
-      {
-        title: 'Bookkeeping',
-        status: true,
-      },
-      {
-        title: 'Cash Advances',
-        status: true,
-      },
-      {
-        title: 'Collection Agency',
+        title: 'FinTech / Payments',
         status: true,
       },
       {
@@ -225,469 +190,1241 @@ export default class IndustrySeeder implements Seeder {
         status: true,
       },
       {
-        title: 'Investor',
+        title: 'Investment Banking / Venture Capital / Private Equity',
         status: true,
       },
       {
-        title: 'Other (Finance & Insurance)',
+        title: 'NBFC',
         status: true,
       },
       {
-        title: 'Pawn Brokers',
+        title: 'Micro Finance',
         status: true,
       },
       {
-        title: 'Tax Preparation',
+        title: 'NBFC',
         status: true,
       },
       {
-        title: 'Alcohol/Tobacco Sales',
+        title: 'Education',
         status: true,
       },
       {
-        title: 'Alcoholic Beverage Manufacturing',
+        title: 'Education / Training',
         status: true,
       },
       {
-        title: 'Bakery',
+        title: 'E-Learning / EdTech',
         status: true,
       },
       {
-        title: 'Caterer',
+        title: 'Manufacturing & Production',
         status: true,
       },
       {
-        title: 'Food/Beverage Manufacturing',
+        title: 'Auto Components',
         status: true,
       },
       {
-        title: 'Grocery/Convenience Store(Gas Station)',
+        title: 'Tyre',
         status: true,
       },
       {
-        title: 'Grocery/Convenience Store(No Gas Station)',
+        title: 'Auto Components',
         status: true,
       },
       {
-        title: 'Hotels/Motels(Casino)',
+        title: 'Automobile',
         status: true,
       },
       {
-        title: 'Hotels/Motels(No Casino)',
+        title: 'Automobile Dealers',
         status: true,
       },
       {
-        title: 'Mobile Food Services',
+        title: 'Automobile',
         status: true,
       },
       {
-        title: 'Other (Food & Hospitality)',
+        title: 'Electric Vehicle (EV)',
         status: true,
       },
       {
-        title: 'Restaurant/Bar',
+        title: 'Automobile',
         status: true,
       },
       {
-        title: 'Specialty Food(Fruit/Vegetables)',
+        title: 'Building Material',
         status: true,
       },
       {
-        title: 'Specialty Food(Meat)',
+        title: 'Cement',
         status: true,
       },
       {
-        title: 'Specialty Food(Seafood)',
+        title: 'Building Material',
         status: true,
       },
       {
-        title: 'Tobacco Product Manufacturing',
+        title: 'Ceramic',
         status: true,
       },
       {
-        title: 'Truck Stop',
+        title: 'Building Material',
         status: true,
       },
       {
-        title: 'Vending Machine',
+        title: 'Glass',
         status: true,
       },
       {
-        title: 'Auctioneer',
+        title: 'Building Material',
         status: true,
       },
       {
-        title: 'Boxing/Wrestling',
+        title: 'Chemicals',
         status: true,
       },
       {
-        title: 'Casino/Video Gaming',
+        title: 'Paints',
         status: true,
       },
       {
-        title: 'Other (Gaming)',
+        title: 'Chemicals',
         status: true,
       },
       {
-        title: 'Racetrack',
+        title: 'Defence & Aerospace',
         status: true,
       },
       {
-        title: 'Sports Agent',
+        title: 'Electrical Equipment',
         status: true,
       },
       {
-        title: 'Acupuncturist',
+        title: 'Fertilizers / Pesticides / Agro chemicals',
         status: true,
       },
       {
-        title: 'Athletic Trainer',
+        title: 'Industrial Automation',
         status: true,
       },
       {
-        title: 'Child/Youth Services',
+        title: 'Industrial Equipment / Machinery',
         status: true,
       },
       {
-        title: 'Chiropractic Office',
+        title: 'Construction Equipment',
         status: true,
       },
       {
-        title: 'Dentistry',
+        title: 'Industrial Equipment / Machinery',
         status: true,
       },
       {
-        title: 'Electrolysis',
+        title: 'Machine Tools',
         status: true,
       },
       {
-        title: 'Embalmer',
+        title: 'Industrial Equipment / Machinery',
         status: true,
       },
       {
-        title: 'Emergency Medical Services',
+        title: 'Iron & Steel',
         status: true,
       },
       {
-        title: 'Emergency Medical Transportation',
+        title: 'Metals & Mining',
         status: true,
       },
       {
-        title: 'Hearing Aid Dealers',
+        title: 'Packaging & Containers',
         status: true,
       },
       {
-        title: 'Home Health Services',
+        title: 'Petrochemical / Plastics / Rubber',
         status: true,
       },
       {
-        title: 'Hospital',
+        title: 'Pulp & Paper',
         status: true,
       },
       {
-        title: 'Massage Therapy',
+        title: 'Infrastructure, Transport & Real Estate',
         status: true,
       },
       {
-        title: 'Medical Office',
+        title: 'Aviation',
         status: true,
       },
       {
-        title: 'Mental Health Services',
+        title: 'Courier / Logistics',
         status: true,
       },
       {
-        title: 'Non Emergency Medical Transportation',
+        title: 'Logistics Tech',
         status: true,
       },
       {
-        title: 'Optometry',
+        title: 'Courier / Logistics',
         status: true,
       },
       {
-        title: 'Other (Health Services)',
+        title: 'Engineering & Construction',
         status: true,
       },
       {
-        title: 'Pharmacy',
+        title: 'Oil & Gas',
         status: true,
       },
       {
-        title: 'Physical Therapy',
+        title: 'Ports & Shipping',
         status: true,
       },
       {
-        title: 'Physicians Office',
+        title: 'Shipbuilding',
         status: true,
       },
       {
-        title: 'Radiology',
+        title: 'Ports & Shipping',
         status: true,
       },
       {
-        title: 'Residential Care Facility',
+        title: 'Power',
         status: true,
       },
       {
-        title: 'Speech/Occupational Therapy',
+        title: 'Hydro',
         status: true,
       },
       {
-        title: 'Substance Abuse Services',
+        title: 'Power',
         status: true,
       },
       {
-        title: 'Veterinary Medicine',
+        title: 'Nuclear',
         status: true,
       },
       {
-        title: 'Vocational Rehabilitation',
+        title: 'Power',
         status: true,
       },
       {
-        title: 'Wholesale Drug Distribution',
+        title: 'Solar',
         status: true,
       },
       {
-        title: 'Automotive Part Sales',
+        title: 'Power',
         status: true,
       },
       {
-        title: 'Car Wash/Detailing',
+        title: 'Wind',
         status: true,
       },
       {
-        title: 'Motor Vehicle Rental',
+        title: 'Power',
         status: true,
       },
       {
-        title: 'Motor Vehicle Repair',
+        title: 'Railways',
         status: true,
       },
       {
-        title: 'New Motor Vehicle Sales',
+        title: 'Real Estate',
         status: true,
       },
       {
-        title: 'Other (Motor Vehicle)',
+        title: 'Co-working',
         status: true,
       },
       {
-        title: 'Recreational Vehicle Sales',
+        title: 'Real Estate',
         status: true,
       },
       {
-        title: 'Used Motor Vehicle Sales',
+        title: 'Urban Transport',
         status: true,
       },
       {
-        title: 'Conservation Organizations',
+        title: 'Water Treatment / Waste Management',
         status: true,
       },
       {
-        title: 'Environmental Health',
+        title: 'Consumer, Retail & Hospitality',
         status: true,
       },
       {
-        title: 'Land Surveying',
+        title: 'Beauty & Personal Care',
         status: true,
       },
       {
-        title: 'Oil & Gas Distribution',
+        title: 'Beverage',
         status: true,
       },
       {
-        title: 'Oil & Gas Extraction/Production',
+        title: 'Brewery / Distillery',
         status: true,
       },
       {
-        title: 'Other (Natural Resources/Environmental)',
+        title: 'Beverage',
         status: true,
       },
       {
-        title: 'Pipeline',
+        title: 'Consumer Electronics & Appliances',
         status: true,
       },
       {
-        title: 'Water Well Drilling',
+        title: 'Fitness & Wellness',
         status: true,
       },
       {
-        title: 'Other(Business Type Not Listed)',
+        title: 'FMCG',
         status: true,
       },
       {
-        title: 'Animal Boarding',
+        title: 'Tobacco',
         status: true,
       },
       {
-        title: 'Barber Shop',
+        title: 'FMCG',
         status: true,
       },
       {
-        title: 'Beauty Salon',
+        title: 'Food Processing',
         status: true,
       },
       {
-        title: 'Cemetery',
+        title: 'Dairy',
         status: true,
       },
       {
-        title: 'Diet Center',
+        title: 'Food Processing',
         status: true,
       },
       {
-        title: 'Dry cleaning/Laundry',
+        title: 'Meat / Poultry',
         status: true,
       },
       {
-        title: 'Entertainment/Party Rentals',
+        title: 'Food Processing',
         status: true,
       },
       {
-        title: 'Event Planning',
+        title: 'Sugar',
         status: true,
       },
       {
-        title: 'Fitness Center',
+        title: 'Food Processing',
         status: true,
       },
       {
-        title: 'Florist',
+        title: 'Furniture & Furnishing',
         status: true,
       },
       {
-        title: 'Funeral Director',
+        title: 'Gems & Jewellery',
         status: true,
       },
       {
-        title: 'Janitorial/Cleaning Services',
+        title: 'Hotels & Restaurants',
         status: true,
       },
       {
-        title: 'Massage/Day Spa',
+        title: 'Leather',
         status: true,
       },
       {
-        title: 'Nail Salon',
+        title: 'Retail',
         status: true,
       },
       {
-        title: 'Other (Personal Services)',
+        title: 'Textile & Apparel',
         status: true,
       },
       {
-        title: 'Personal Assistant',
+        title: 'Fashion',
         status: true,
       },
       {
-        title: 'Photography',
+        title: 'Textile & Apparel',
         status: true,
       },
       {
-        title: 'Tanning Salon',
+        title: 'Handicraft',
         status: true,
       },
       {
-        title: 'Home Inspection',
+        title: 'Textile & Apparel',
         status: true,
       },
       {
-        title: 'Interior Design',
+        title: 'Home Textile',
         status: true,
       },
       {
-        title: 'Manufactured Housing',
+        title: 'Textile & Apparel',
         status: true,
       },
       {
-        title: 'Mortgage Company',
+        title: 'Technical Textile',
         status: true,
       },
       {
-        title: 'Other (Real Estate & Housing)',
+        title: 'Textile & Apparel',
         status: true,
       },
       {
-        title: 'Property Management',
+        title: 'Yarn & Fabric',
         status: true,
       },
       {
-        title: 'Real Estate Broker/Agent',
+        title: 'Textile & Apparel',
         status: true,
       },
       {
-        title: 'Warehouse/Storage',
+        title: 'Travel & Tourism',
         status: true,
       },
       {
-        title: 'Attorney',
+        title: 'Healthcare & Life Sciences',
         status: true,
       },
       {
-        title: 'Bail Bonds',
+        title: 'Biotechnology',
         status: true,
       },
       {
-        title: 'Court Reporter',
+        title: 'Clinical Research / Contract Research',
         status: true,
       },
       {
-        title: 'Drug Screening',
+        title: 'Medical Devices & Equipment',
         status: true,
       },
       {
-        title: 'Locksmith',
+        title: 'Medical Services / Hospital',
         status: true,
       },
       {
-        title: 'Other (Safety/Security & Legal)',
+        title: 'Diagnostics',
         status: true,
       },
       {
-        title: 'Private Investigator',
+        title: 'Medical Services / Hospital',
         status: true,
       },
       {
-        title: 'Security Guard',
+        title: 'Pharmaceutical & Life Sciences',
         status: true,
       },
       {
-        title: 'Security System Services',
+        title: 'Media, Entertainment & Telecom',
         status: true,
       },
       {
-        title: 'Air Transportation',
+        title: 'Advertising & Marketing',
         status: true,
       },
       {
-        title: 'Boat Services',
+        title: 'Digital Marketing',
         status: true,
       },
       {
-        title: 'Limousine Services',
+        title: 'Advertising & Marketing',
         status: true,
       },
       {
-        title: 'Other (Transportation)',
+        title: 'Public Relations',
         status: true,
       },
       {
-        title: 'Taxi Services',
+        title: 'Advertising & Marketing',
         status: true,
       },
       {
-        title: 'Towing',
+        title: 'Animation & VFX',
         status: true,
       },
       {
-        title: 'Truck Transportation(Fuel)',
+        title: 'Events / Live Entertainment',
         status: true,
       },
       {
-        title: 'Truck Transportation(Non Fuel)',
+        title: 'Film / Music / Entertainment',
+        status: true,
+      },
+      {
+        title: 'Gaming',
+        status: true,
+      },
+      {
+        title: 'Printing & Publishing',
+        status: true,
+      },
+      {
+        title: 'Sports / Leisure & Recreation',
+        status: true,
+      },
+      {
+        title: 'Telecom / ISP',
+        status: true,
+      },
+      {
+        title: 'TV / Radio',
+        status: true,
+      },
+      {
+        title: 'Professional Services',
+        status: true,
+      },
+      {
+        title: 'Accounting / Auditing',
+        status: true,
+      },
+      {
+        title: 'Architecture / Interior Design',
+        status: true,
+      },
+      {
+        title: 'Content Development / Language',
+        status: true,
+      },
+      {
+        title: 'Design',
+        status: true,
+      },
+      {
+        title: 'Facility Management Services',
+        status: true,
+      },
+      {
+        title: 'Law Enforcement / Security Services',
+        status: true,
+      },
+      {
+        title: 'Legal',
+        status: true,
+      },
+      {
+        title: 'Management Consulting',
+        status: true,
+      },
+      {
+        title: 'Recruitment / Staffing',
+        status: true,
+      },
+      {
+        title: 'Miscellaneous',
+        status: true,
+      },
+      {
+        title: 'Agriculture / Forestry / Fishing',
+        status: true,
+      },
+      {
+        title: 'Agri-tech',
+        status: true,
+      },
+      {
+        title: 'Agriculture / Forestry / Fishing',
+        status: true,
+      },
+      {
+        title: 'Government / Public Administration',
+        status: true,
+      },
+      {
+        title: 'Import & Export',
+        status: true,
+      },
+      {
+        title: 'Miscellaneous',
+        status: true,
+      },
+      {
+        title: 'NGO / Social Services / Industry Associations',
         status: true,
       }
+      // {
+      //   title: 'Extermination/Pest Control',
+      //   status: true,
+      // },
+      // {
+      //   title: 'Farming(Animal Production)',
+      //   status: true,
+      // },
+      // {
+      //   title: 'Farming(Crop Production)',
+      //   status: true,
+      // },
+      // {
+      //   title: 'Fishing/Hunting',
+      //   status: true,
+      // },
+      // {
+      //   title: 'Landscape Services',
+      //   status: true,
+      // },
+      // {
+      //   title: 'Lawn care Services',
+      //   status: true,
+      // },
+      // {
+      //   title: 'Other (Agriculture & Forestry/Wildlife)',
+      //   status: true,
+      // },
+      // {
+      //   title: 'Consultant',
+      //   status: true,
+      // },
+      // {
+      //   title: 'Employment Office',
+      //   status: true,
+      // },
+      // {
+      //   title: 'Fundraisers',
+      //   status: true,
+      // },
+      // {
+      //   title: 'Going out of Business Sales',
+      //   status: true,
+      // },
+      // {
+      //   title: 'Marketing/Advertising',
+      //   status: true,
+      // },
+      // {
+      //   title: 'Non Profit Organization',
+      //   status: true,
+      // },
+      // {
+      //   title: 'Notary Public',
+      //   status: true,
+      // },
+      // {
+      //   title: 'Online Business',
+      //   status: true,
+      // },
+      // {
+      //   title: 'Other (Business & Information)',
+      //   status: true,
+      // },
+      // {
+      //   title: 'Publishing Services',
+      //   status: true,
+      // },
+      // {
+      //   title: 'Record Business',
+      //   status: true,
+      // },
+      // {
+      //   title: 'Retail Sales',
+      //   status: true,
+      // },
+      // {
+      //   title: 'Technology Services',
+      //   status: true,
+      // },
+      // {
+      //   title: 'Telemarketing',
+      //   status: true,
+      // },
+      // {
+      //   title: 'Travel Agency',
+      //   status: true,
+      // },
+      // {
+      //   title: 'Video Production',
+      //   status: true,
+      // },
+      // {
+      //   title: 'AC & Heating',
+      //   status: true,
+      // },
+      // {
+      //   title: 'Architect',
+      //   status: true,
+      // },
+      // {
+      //   title: 'Building Construction',
+      //   status: true,
+      // },
+      // {
+      //   title: 'Building Inspection',
+      //   status: true,
+      // },
+      // {
+      //   title: 'Concrete Manufacturing',
+      //   status: true,
+      // },
+      // {
+      //   title: 'Contractor',
+      //   status: true,
+      // },
+      // {
+      //   title: 'Engineering/Drafting',
+      //   status: true,
+      // },
+      // {
+      //   title: 'Equipment Rental',
+      //   status: true,
+      // },
+      // {
+      //   title: 'Other (Construction/Utilities/Contracting)',
+      //   status: true,
+      // },
+      // {
+      //   title: 'Plumbing',
+      //   status: true,
+      // },
+      // {
+      //   title: 'Remodeling',
+      //   status: true,
+      // },
+      // {
+      //   title: 'Repair/Maintenance',
+      //   status: true,
+      // },
+      // {
+      //   title: 'Child Care Services',
+      //   status: true,
+      // },
+      // {
+      //   title: 'College/Universities',
+      //   status: true,
+      // },
+      // {
+      //   title: 'Cosmetology School',
+      //   status: true,
+      // },
+      // {
+      //   title: 'Elementary & Secondary Education',
+      //   status: true,
+      // },
+      // {
+      //   title: 'GED Certification',
+      //   status: true,
+      // },
+      // {
+      //   title: 'Other (Education)',
+      //   status: true,
+      // },
+      // {
+      //   title: 'Private School',
+      //   status: true,
+      // },
+      // {
+      //   title: 'Real Estate School',
+      //   status: true,
+      // },
+      // {
+      //   title: 'Technical School',
+      //   status: true,
+      // },
+      // {
+      //   title: 'Trade School',
+      //   status: true,
+      // },
+      // {
+      //   title: 'Tutoring Services',
+      //   status: true,
+      // },
+      // {
+      //   title: 'Vocational Schoo',
+      //   status: true,
+      // },
+      // {
+      //   title: 'Accountant',
+      //   status: true,
+      // },
+      // {
+      //   title: 'Auditing',
+      //   status: true,
+      // },
+      // {
+      //   title: 'Bank/Credit Union',
+      //   status: true,
+      // },
+      // {
+      //   title: 'Bookkeeping',
+      //   status: true,
+      // },
+      // {
+      //   title: 'Cash Advances',
+      //   status: true,
+      // },
+      // {
+      //   title: 'Collection Agency',
+      //   status: true,
+      // },
+      // {
+      //   title: 'Insurance',
+      //   status: true,
+      // },
+      // {
+      //   title: 'Investor',
+      //   status: true,
+      // },
+      // {
+      //   title: 'Other (Finance & Insurance)',
+      //   status: true,
+      // },
+      // {
+      //   title: 'Pawn Brokers',
+      //   status: true,
+      // },
+      // {
+      //   title: 'Tax Preparation',
+      //   status: true,
+      // },
+      // {
+      //   title: 'Alcohol/Tobacco Sales',
+      //   status: true,
+      // },
+      // {
+      //   title: 'Alcoholic Beverage Manufacturing',
+      //   status: true,
+      // },
+      // {
+      //   title: 'Bakery',
+      //   status: true,
+      // },
+      // {
+      //   title: 'Caterer',
+      //   status: true,
+      // },
+      // {
+      //   title: 'Food/Beverage Manufacturing',
+      //   status: true,
+      // },
+      // {
+      //   title: 'Grocery/Convenience Store(Gas Station)',
+      //   status: true,
+      // },
+      // {
+      //   title: 'Grocery/Convenience Store(No Gas Station)',
+      //   status: true,
+      // },
+      // {
+      //   title: 'Hotels/Motels(Casino)',
+      //   status: true,
+      // },
+      // {
+      //   title: 'Hotels/Motels(No Casino)',
+      //   status: true,
+      // },
+      // {
+      //   title: 'Mobile Food Services',
+      //   status: true,
+      // },
+      // {
+      //   title: 'Other (Food & Hospitality)',
+      //   status: true,
+      // },
+      // {
+      //   title: 'Restaurant/Bar',
+      //   status: true,
+      // },
+      // {
+      //   title: 'Specialty Food(Fruit/Vegetables)',
+      //   status: true,
+      // },
+      // {
+      //   title: 'Specialty Food(Meat)',
+      //   status: true,
+      // },
+      // {
+      //   title: 'Specialty Food(Seafood)',
+      //   status: true,
+      // },
+      // {
+      //   title: 'Tobacco Product Manufacturing',
+      //   status: true,
+      // },
+      // {
+      //   title: 'Truck Stop',
+      //   status: true,
+      // },
+      // {
+      //   title: 'Vending Machine',
+      //   status: true,
+      // },
+      // {
+      //   title: 'Auctioneer',
+      //   status: true,
+      // },
+      // {
+      //   title: 'Boxing/Wrestling',
+      //   status: true,
+      // },
+      // {
+      //   title: 'Casino/Video Gaming',
+      //   status: true,
+      // },
+      // {
+      //   title: 'Other (Gaming)',
+      //   status: true,
+      // },
+      // {
+      //   title: 'Racetrack',
+      //   status: true,
+      // },
+      // {
+      //   title: 'Sports Agent',
+      //   status: true,
+      // },
+      // {
+      //   title: 'Acupuncturist',
+      //   status: true,
+      // },
+      // {
+      //   title: 'Athletic Trainer',
+      //   status: true,
+      // },
+      // {
+      //   title: 'Child/Youth Services',
+      //   status: true,
+      // },
+      // {
+      //   title: 'Chiropractic Office',
+      //   status: true,
+      // },
+      // {
+      //   title: 'Dentistry',
+      //   status: true,
+      // },
+      // {
+      //   title: 'Electrolysis',
+      //   status: true,
+      // },
+      // {
+      //   title: 'Embalmer',
+      //   status: true,
+      // },
+      // {
+      //   title: 'Emergency Medical Services',
+      //   status: true,
+      // },
+      // {
+      //   title: 'Emergency Medical Transportation',
+      //   status: true,
+      // },
+      // {
+      //   title: 'Hearing Aid Dealers',
+      //   status: true,
+      // },
+      // {
+      //   title: 'Home Health Services',
+      //   status: true,
+      // },
+      // {
+      //   title: 'Hospital',
+      //   status: true,
+      // },
+      // {
+      //   title: 'Massage Therapy',
+      //   status: true,
+      // },
+      // {
+      //   title: 'Medical Office',
+      //   status: true,
+      // },
+      // {
+      //   title: 'Mental Health Services',
+      //   status: true,
+      // },
+      // {
+      //   title: 'Non Emergency Medical Transportation',
+      //   status: true,
+      // },
+      // {
+      //   title: 'Optometry',
+      //   status: true,
+      // },
+      // {
+      //   title: 'Other (Health Services)',
+      //   status: true,
+      // },
+      // {
+      //   title: 'Pharmacy',
+      //   status: true,
+      // },
+      // {
+      //   title: 'Physical Therapy',
+      //   status: true,
+      // },
+      // {
+      //   title: 'Physicians Office',
+      //   status: true,
+      // },
+      // {
+      //   title: 'Radiology',
+      //   status: true,
+      // },
+      // {
+      //   title: 'Residential Care Facility',
+      //   status: true,
+      // },
+      // {
+      //   title: 'Speech/Occupational Therapy',
+      //   status: true,
+      // },
+      // {
+      //   title: 'Substance Abuse Services',
+      //   status: true,
+      // },
+      // {
+      //   title: 'Veterinary Medicine',
+      //   status: true,
+      // },
+      // {
+      //   title: 'Vocational Rehabilitation',
+      //   status: true,
+      // },
+      // {
+      //   title: 'Wholesale Drug Distribution',
+      //   status: true,
+      // },
+      // {
+      //   title: 'Automotive Part Sales',
+      //   status: true,
+      // },
+      // {
+      //   title: 'Car Wash/Detailing',
+      //   status: true,
+      // },
+      // {
+      //   title: 'Motor Vehicle Rental',
+      //   status: true,
+      // },
+      // {
+      //   title: 'Motor Vehicle Repair',
+      //   status: true,
+      // },
+      // {
+      //   title: 'New Motor Vehicle Sales',
+      //   status: true,
+      // },
+      // {
+      //   title: 'Other (Motor Vehicle)',
+      //   status: true,
+      // },
+      // {
+      //   title: 'Recreational Vehicle Sales',
+      //   status: true,
+      // },
+      // {
+      //   title: 'Used Motor Vehicle Sales',
+      //   status: true,
+      // },
+      // {
+      //   title: 'Conservation Organizations',
+      //   status: true,
+      // },
+      // {
+      //   title: 'Environmental Health',
+      //   status: true,
+      // },
+      // {
+      //   title: 'Land Surveying',
+      //   status: true,
+      // },
+      // {
+      //   title: 'Oil & Gas Distribution',
+      //   status: true,
+      // },
+      // {
+      //   title: 'Oil & Gas Extraction/Production',
+      //   status: true,
+      // },
+      // {
+      //   title: 'Other (Natural Resources/Environmental)',
+      //   status: true,
+      // },
+      // {
+      //   title: 'Pipeline',
+      //   status: true,
+      // },
+      // {
+      //   title: 'Water Well Drilling',
+      //   status: true,
+      // },
+      // {
+      //   title: 'Other(Business Type Not Listed)',
+      //   status: true,
+      // },
+      // {
+      //   title: 'Animal Boarding',
+      //   status: true,
+      // },
+      // {
+      //   title: 'Barber Shop',
+      //   status: true,
+      // },
+      // {
+      //   title: 'Beauty Salon',
+      //   status: true,
+      // },
+      // {
+      //   title: 'Cemetery',
+      //   status: true,
+      // },
+      // {
+      //   title: 'Diet Center',
+      //   status: true,
+      // },
+      // {
+      //   title: 'Dry cleaning/Laundry',
+      //   status: true,
+      // },
+      // {
+      //   title: 'Entertainment/Party Rentals',
+      //   status: true,
+      // },
+      // {
+      //   title: 'Event Planning',
+      //   status: true,
+      // },
+      // {
+      //   title: 'Fitness Center',
+      //   status: true,
+      // },
+      // {
+      //   title: 'Florist',
+      //   status: true,
+      // },
+      // {
+      //   title: 'Funeral Director',
+      //   status: true,
+      // },
+      // {
+      //   title: 'Janitorial/Cleaning Services',
+      //   status: true,
+      // },
+      // {
+      //   title: 'Massage/Day Spa',
+      //   status: true,
+      // },
+      // {
+      //   title: 'Nail Salon',
+      //   status: true,
+      // },
+      // {
+      //   title: 'Other (Personal Services)',
+      //   status: true,
+      // },
+      // {
+      //   title: 'Personal Assistant',
+      //   status: true,
+      // },
+      // {
+      //   title: 'Photography',
+      //   status: true,
+      // },
+      // {
+      //   title: 'Tanning Salon',
+      //   status: true,
+      // },
+      // {
+      //   title: 'Home Inspection',
+      //   status: true,
+      // },
+      // {
+      //   title: 'Interior Design',
+      //   status: true,
+      // },
+      // {
+      //   title: 'Manufactured Housing',
+      //   status: true,
+      // },
+      // {
+      //   title: 'Mortgage Company',
+      //   status: true,
+      // },
+      // {
+      //   title: 'Other (Real Estate & Housing)',
+      //   status: true,
+      // },
+      // {
+      //   title: 'Property Management',
+      //   status: true,
+      // },
+      // {
+      //   title: 'Real Estate Broker/Agent',
+      //   status: true,
+      // },
+      // {
+      //   title: 'Warehouse/Storage',
+      //   status: true,
+      // },
+      // {
+      //   title: 'Attorney',
+      //   status: true,
+      // },
+      // {
+      //   title: 'Bail Bonds',
+      //   status: true,
+      // },
+      // {
+      //   title: 'Court Reporter',
+      //   status: true,
+      // },
+      // {
+      //   title: 'Drug Screening',
+      //   status: true,
+      // },
+      // {
+      //   title: 'Locksmith',
+      //   status: true,
+      // },
+      // {
+      //   title: 'Other (Safety/Security & Legal)',
+      //   status: true,
+      // },
+      // {
+      //   title: 'Private Investigator',
+      //   status: true,
+      // },
+      // {
+      //   title: 'Security Guard',
+      //   status: true,
+      // },
+      // {
+      //   title: 'Security System Services',
+      //   status: true,
+      // },
+      // {
+      //   title: 'Air Transportation',
+      //   status: true,
+      // },
+      // {
+      //   title: 'Boat Services',
+      //   status: true,
+      // },
+      // {
+      //   title: 'Limousine Services',
+      //   status: true,
+      // },
+      // {
+      //   title: 'Other (Transportation)',
+      //   status: true,
+      // },
+      // {
+      //   title: 'Taxi Services',
+      //   status: true,
+      // },
+      // {
+      //   title: 'Towing',
+      //   status: true,
+      // },
+      // {
+      //   title: 'Truck Transportation(Fuel)',
+      //   status: true,
+      // },
+      // {
+      //   title: 'Truck Transportation(Non Fuel)',
+      //   status: true,
+      // }
     ],
       ["id"]);
 
