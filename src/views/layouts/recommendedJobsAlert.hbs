@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        background-color:#ECF9FF;
+      }
+
+      .container {
+        padding: 0rem 10rem;
+      }
+
+      .header {
+        padding: 1.5rem 0;
+      }
+
+      .header table tr td button {
+        border: 2px solid #4b4bd5;
+        color: #4b4bd5;
+        background-color: white;
+        border-radius: 5px;
+        font-weight: 600;
+        padding: 0.5rem 1rem;
+      }
+
+      .main-div {
+        background-image: radial-gradient(
+          circle farthest-corner at 10% 20%,
+          rgba(176, 229, 208, 1) 42%,
+          rgba(92, 202, 238, 0.41) 93.6%
+        );
+        padding: 1.5rem 0;
+        margin-bottom: 1rem;
+      }
+
+      .main-div h1 {
+        text-align: center;
+        font-size: 1.5rem;
+      }
+
+      .main-div p {
+        text-align: center;
+      }
+
+      .verifyTable tr td img {
+        width: 0.8rem;
+        height: 0.8rem;
+      }
+
+      .verifyTable tr td span {
+        margin: 0;
+      }
+
+      .verifyTable tr td {
+        padding-right: 0.5rem;
+        padding-left: 0.5rem;
+      }
+
+      .listTable {
+        border: 1px solid rgb(240, 233, 233);
+        border-radius: 10px;
+        padding: 0.8rem 1.5rem;
+        box-sizing: border-box;
+        width: 100%;
+        margin-bottom: 1rem;
+        background-color: white;
+      }
+
+      .listTable tr .img_wrapper {
+        padding-right: 1rem;
+        box-sizing: border-box;
+      }
+
+      .listTable tr .img_wrapper img {
+        margin-bottom: 1.5rem;
+      }
+
+      .listTable tr h3 {
+        margin: 0;
+        padding: 0;
+        color: #4b4bd5;
+      }
+
+      .listTable tr h4 {
+        margin: 0 0 0.3rem 0;
+        font-weight: 100;
+      }
+
+      .listTable tr .multi-wrapper {
+        font-size: 0.9rem;
+        color: #5c5a5a;
+      }
+
+      .listTable tr .multi-wrapper img {
+        width: 0.8rem;
+        height: 0.8rem;
+      }
+
+      .viewAllBtn {
+        background-color: #4b4bd5;
+        border-radius: 25px;
+        padding: 0.8rem 1.5rem;
+        outline: none;
+        border: none;
+        color: white;
+      }
+
+      .media-wrapper {
+        padding: 0.5rem 0;
+      }
+
+      .media-wrapper h1 {
+        text-align: center;
+        color: gray;
+        font-family: cursive;
+        font-weight: 100;
+      }
+
+      .media-wrapper table {
+        width: 100%;
+      }
+
+      .media-wrapper table tr td a {
+        text-decoration: none;
+        margin: 0 0.5rem;
+      }
+
+      .media-wrapper table tr td a img {
+        width: 1.5 rem;
+        height: 1.5rem;
+      }
+
+      a {
+        text-decoration: none;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+      <div class="header">
+        <table cellpadding="0" cellspacing="0">
+          <tr>
+            <td>
+              <button>JOB PORTAL</button>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="main-div">
+        <h1>Hi {{name}},</h1>
+        <p>Your job alert for React Js Developer</p>
+      </div>
+      <div>
+        {{#each jobs}}
+        <a href="{{jobLink}}">
+          <table cellpadding="0" cellspacing="0" class="listTable">
+            <tr>
+              <td rowspan="4" class="img_wrapper">
+                <img src="https://i.imgur.com/Vd3SFOX.png" alt="company_logo" />
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <h3>{{title}}</h3>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <h4>{{company.title}}</h4>
+              </td>
+            </tr>
+            <tr>
+              <td class="multi-wrapper">
+                <img src="https://i.imgur.com/adQtdvh.png" alt="location" />
+                <span>Hybrid</span>
+                <span>-</span>
+                <span> {{jobsLocation.[0].location.title}} </span>
+              </td>
+            </tr>
+          </table>
+        </a>
+        {{/each}}
+
+        <table cellpadding="0" cellspacing="0" align="center">
+          <tr>
+            <td>
+              <a
+                href="{{jobLinkAll}}"
+                style="
+                  display: inline-block;
+                  padding: 10px;
+                  background-color: #4caf50;
+                  color: white;
+                  text-decoration: none;
+                  border-radius: 5px;
+                "
+                >View All Recommendations</a
+              >
+            </td>
+          </tr>
+        </table>
+        <div class="media-wrapper">
+          <h1><i>stay in touch</i></h1>
+          <table cellpadding="0" cellspacing="0">
+            <tr>
+              <td align="center">
+                <a
+                  href="https://www.facebook.com/ratnaglobaltech"
+                  class="achorforLogo"
+                >
+                  <img
+                    src="https://imgur.com/h7obuyu.jpg"
+                    alt="facebook"
+                    class="socialLogo"
+                  />
+                </a>
+                <a
+                  href="https://www.instagram.com/ratnaglobaltech"
+                  class="achorforLogo"
+                >
+                  <img
+                    src="https://imgur.com/ZpeQgzc.jpg"
+                    alt="instagram"
+                    class="socialLogo"
+                  />
+                </a>
+                <a
+                  href="https://www.linkedin.com/company/ratnaglobaltech"
+                  class="achorforLogo"
+                >
+                  <img
+                    src="https://imgur.com/xnsvaEZ.jpg"
+                    alt="linkedin"
+                    class="socialLogo"
+                  />
+                </a>
+              </td>
+            </tr>
+          </table>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
