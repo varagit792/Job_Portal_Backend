@@ -26,6 +26,7 @@ import { JobStatus } from './jobStatus.entity';
 import { JobExpiry } from './jobExpiry.entity';
 import { Questionnaire } from './questionnaire.entity';
 import { ApplyJobs } from './applyJobs.entity';
+import { SaveJob } from './saveJob.entity';
 
 @Entity()
 export class Jobs extends BaseEntity {
@@ -216,6 +217,9 @@ export class Jobs extends BaseEntity {
 
   @OneToOne(() => ApplyJobs, (applyJobs) => applyJobs.jobs)
   jobs!: Jobs
+
+  @OneToOne(() => SaveJob, (saveJobs) => saveJobs.jobs)
+  saveJobs!: SaveJob
 
   @OneToOne(() => JobStatus, jobStatus => jobStatus.jobStatus, {
     cascade: true, onDelete: 'CASCADE', createForeignKeyConstraints: false, nullable: true
