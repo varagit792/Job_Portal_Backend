@@ -27,22 +27,13 @@ export default class BoardSeeder implements Seeder {
         title: 'School',
         status: true,
       }, {
-        title: 'IB(International',
+        title: 'IB(International Baccalaureate)',
         status: true,
       }, {
-        title: 'Baccalaureate)',
+        title: 'Andhra Pradesh',
         status: true,
       }, {
-        title: 'Andhra',
-        status: true,
-      }, {
-        title: 'Pradesh',
-        status: true,
-      }, {
-        title: 'Arunachal',
-        status: true,
-      }, {
-        title: 'Pradesh',
+        title: 'Arunachal Pradesh',
         status: true,
       }, {
         title: 'Assam',
@@ -51,7 +42,7 @@ export default class BoardSeeder implements Seeder {
         title: 'Bihar',
         status: true,
       }, {
-        title: 'Chhattisgarh',
+        title: 'Chattisgarh',
         status: true,
       }, {
         title: 'Goa',
@@ -63,10 +54,7 @@ export default class BoardSeeder implements Seeder {
         title: 'Haryana',
         status: true,
       }, {
-        title: 'Himachal',
-        status: true,
-      }, {
-        title: 'Pradesh',
+        title: 'Himachal Pradesh',
         status: true,
       }, {
         title: 'J & K',
@@ -81,10 +69,7 @@ export default class BoardSeeder implements Seeder {
         title: 'Kerala',
         status: true,
       }, {
-        title: 'Madhya',
-        status: true,
-      }, {
-        title: 'Pradesh',
+        title: 'Madhya Pradesh',
         status: true,
       }, {
         title: 'Maharashtra',
@@ -111,10 +96,7 @@ export default class BoardSeeder implements Seeder {
         title: 'Rajasthan',
         status: true,
       }, {
-        title: 'Tamil',
-        status: true,
-      }, {
-        title: 'Nadu',
+        title: 'Tamil Nadu',
         status: true,
       }, {
         title: 'Telangana',
@@ -123,16 +105,13 @@ export default class BoardSeeder implements Seeder {
         title: 'Tripura',
         status: true,
       }, {
-        title: 'Uttar',
-        status: true,
-      }, {
-        title: 'Pradesh',
+        title: 'Uttar Pradesh',
         status: true,
       }, {
         title: 'Uttarakhand',
         status: true,
       }, {
-        title: 'West Bengal ',
+        title: 'West Bengal',
         status: true,
       }, {
         title: 'Other',
