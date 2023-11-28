@@ -327,18 +327,18 @@ export const ProfileIndicator = async (req: Request, res: Response) => {
 
   const completeData = {
     calculatedProfileIndicator: 0,
-    resume: { status: false, value: 10 },
+    resume: { status: false, value: 20 },
     resumeHeadLine: { status: false, value: 2 },
-    profilePicture: { status: false, value: 2 },
+    profilePicture: { status: false, value: 6 },
     careerProfile: { status: false, value: 10 },
-    keySkill: { status: false, value: 10 },
+    keySkill: { status: false, value: 15 },
     education: { status: false, value: 13 },
-    itSkills: { status: false, value: 10 },
-    projects: { status: false, value: 10 },
+    //itSkills: { status: false, value: 10 },
+    //projects: { status: false, value: 10 },
     profileSummery: { status: false, value: 4 },
-    accomplishments: { status: false, value: 4 },
+    //accomplishments: { status: false, value: 4 },
     personalDetails: { status: false, value: 10 },
-    employment: { status: false, value: 10 },
+    employment: { status: false, value: 15 },
     language: { status: false, value: 5 },
   }
   try {
