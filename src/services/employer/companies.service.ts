@@ -180,7 +180,9 @@ export const employerCompanyList = async (data: any) => {
             location:true
           },
           workMode: true,
-          employmentType:true
+          employmentType: true,
+          jobsRole: true,
+          department:true
         },
       }
     });

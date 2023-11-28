@@ -2724,7 +2724,15 @@ export default class CompaniesSeeder implements Seeder {
         {
           title: 'HELAPURI HOSPITALS PRIVATE LIMITED',
           status: true,
-        }
+      },
+      {
+        title: "Nokia LLC",
+        companyDescription: "Nokia LLC Corp",
+        //jobs: 5,           
+        employeeCount:50000,
+        rating:4.5, 
+        reviews: 7500
+      },
 
 
 
