@@ -60,3 +60,27 @@ export const getApplicantList = async (id: any) => {
     throw error;
   }
 }
+
+export const getApplyJobList = async (userId: any) => {
+  try {
+    const applyJobsRepository = AppDataSource.getRepository(ApplyJobs);
+    let applyJobs = await applyJobsRepository.find({
+      order: {
+        id: "DESC",
+      },
+      where: {
+        user: userId
+      },
+      relations: {
+        jobs: true,
+        user: true,
+        multipleChoiceQuestionnaireAnswer: { multipleChoiceQuestionnaire: true },
+        questionnaireAnswer: { questionnaire: true },
+      }
+    });
+    return applyJobs;
+  } catch (error) {
+    console.log('error', error);
+    throw error;
+  }
+}

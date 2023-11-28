@@ -3,6 +3,7 @@ import { JobSeekerProfile } from './jobSeekerProfile.entity';
 import { Jobs } from './jobs.entity';
 import { Companies } from './companies.entity';
 import { ApplyJobs } from './applyJobs.entity';
+import { SaveJob } from './saveJob.entity';
 
 @Entity()
 export class User extends BaseEntity {
@@ -31,7 +32,7 @@ export class User extends BaseEntity {
   userType!: string
 
   @OneToOne(() => JobSeekerProfile)
-  @JoinColumn({ name:'jobSeekerProfileId',referencedColumnName:'id'})
+  @JoinColumn({ name: 'jobSeekerProfileId', referencedColumnName: 'id' })
   jobSeekerProfile!: JobSeekerProfile
 
   @Column({ default: false })
@@ -45,6 +46,9 @@ export class User extends BaseEntity {
 
   @OneToOne(() => ApplyJobs, (applyJobs) => applyJobs.user)
   user!: ApplyJobs
+
+  @OneToOne(() => SaveJob, (saveJobs) => saveJobs.user)
+  saveJobs!: SaveJob
 
   @ManyToOne(() => Companies, (companies) => companies.user, { createForeignKeyConstraints: true, cascade: true })
   companies!: Companies
