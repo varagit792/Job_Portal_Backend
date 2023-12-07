@@ -8,52 +8,297 @@ export default class JobRoleSeeder implements Seeder {
   ): Promise<any> {
     const repository = dataSource.getRepository(JobRole);
     await repository.upsert([
+     
       {
-        title: 'DBA / Data warehousing',
+        title: 'Automation Architect',
         status: true,
       },
       {
-        title: 'DevOps',
+        title: 'Automation Developer',
         status: true,
       },
       {
-        title: 'Quality Assurance and Testing',
+        title: 'Back End Developer',
         status: true,
       },
       {
-        title: 'Software Development',
+        title: 'Big Data Engineer',
         status: true,
       },
       {
-        title: 'Banking Operations',
+        title: 'CRM Architect',
         status: true,
       },
       {
-        title: 'General Insurance',
+        title: 'Data Engineer',
         status: true,
       },
       {
-        title: 'Investment Banking, Private Equity & VC',
+        title: 'Data Platform Engineer',
         status: true,
       },
       {
-        title: 'Lending',
+        title: 'Embedded Systems Engineer',
         status: true,
       },
       {
-        title: 'Life Insurance',
+        title: 'Engineering Manager',
         status: true,
       },
       {
-        title: 'Trading, Asset & Wealth Management',
+        title: 'ERP Architect',
         status: true,
       },
       {
-        title: 'Treasury & Forex',
+        title: 'ERP Developer',
         status: true,
       },
       {
-        title: 'BFSI, Investments & Trading - Other',
+        title: 'Front End Developer',
+        status: true,
+      },
+      {
+        title: 'Full Stack Developer',
+        status: true,
+      },
+      {
+        title: 'Game Developer / Programmer',
+        status: true,
+      },
+      {
+        title: 'Head - Engineering',
+        status: true,
+      },
+      {
+        title: 'Mobile / App Developer',
+        status: true,
+      },
+      {
+        title: 'Practice Manager / Head',
+        status: true,
+      },
+      {
+        title: 'Search Engineer',
+        status: true,
+      },
+      {
+        title: 'Solution Architect',
+        status: true,
+      },
+      {
+        title: 'Technical Architect',
+        status: true,
+      },
+      {
+        title: 'Technical Lead',
+        status: true,
+      },
+      {
+        title: 'Webmaster',
+        status: true,
+      },
+      {
+        title: 'Software Development - Other',
+        status: true,
+      },
+      {
+        title: 'AR VR QA Tester',
+        status: true,
+      },
+      {
+        title: 'Automation Test Engineer',
+        status: true,
+      },
+      {
+        title: 'Blockchain Quality Assurance Engineer',
+        status: true,
+      },
+      {
+        title: 'Data / Big Data Testing Engineer',
+        status: true,
+      },
+      {
+        title: 'Game Tester',
+        status: true,
+      },
+      {
+        title: 'Head - QA',
+        status: true,
+      },
+      {
+        title: 'Manual Test Engineer',
+        status: true,
+      },
+      {
+        title: 'Mobile Apps Testing Engineer',
+        status: true,
+      },
+      {
+        title: 'Performance Testing Engineer',
+        status: true,
+      },
+      {
+        title: 'Post Silicon Test Engineer',
+        status: true,
+      },
+      {
+        title: 'Pre Silicon Test Engineer',
+        status: true,
+      },
+      {
+        title: 'QA Team Manager',
+        status: true,
+      },
+      {
+        title: 'Robotic Test Engineer',
+        status: true,
+      },
+      {
+        title: 'Security Testing Engineer',
+        status: true,
+      },
+      {
+        title: 'Software Developer in Test (SDET)',
+        status: true,
+      },
+      {
+        title: 'Test Analyst',
+        status: true,
+      },
+      {
+        title: 'Test Architect',
+        status: true,
+      },
+      {
+        title: 'White Box Testing Engineer',
+        status: true,
+      },
+      {
+        title: 'Quality Assurance and Testing - Other',
+        status: true,
+      },
+      {
+        title: 'Data warehouse Architect / Consultant',
+        status: true,
+      },
+      {
+        title: 'Data warehouse Developer',
+        status: true,
+      },
+      {
+        title: 'Data warehouse Manager',
+        status: true,
+      },
+      {
+        title: 'Database Administrator',
+        status: true,
+      },
+      {
+        title: 'Database Analyst',
+        status: true,
+      },
+      {
+        title: 'Database Architect / Designer',
+        status: true,
+      },
+      {
+        title: 'Database Developer / Engineer',
+        status: true,
+      },
+      {
+        title: 'Database Manager',
+        status: true,
+      },
+      {
+        title: 'ETL Developer',
+        status: true,
+      },
+      {
+        title: 'Head - Data Base',
+        status: true,
+      },
+      {
+        title: 'MIS Manager',
+        status: true,
+      },
+      {
+        title: 'DBA / Data warehousing - Other',
+        status: true,
+      },
+      {
+        title: 'DevOps Consultant / Architect',
+        status: true,
+      },
+      {
+        title: 'DevOps Engineer',
+        status: true,
+      },
+      {
+        title: 'DevOps Manager',
+        status: true,
+      },
+      {
+        title: 'Head - DevOps',
+        status: true,
+      },
+      {
+        title: 'Release Engineer',
+        status: true,
+      },
+      {
+        title: 'Release Manager',
+        status: true,
+      },
+      {
+        title: 'Site Reliability Engineer',
+        status: true,
+      },
+      {
+        title: 'DevOps - Other',
+        status: true,
+      },
+      {
+        title: 'Computer Vision',
+        status: true,
+      },
+      {
+        title: 'Data Engineer',
+        status: true,
+      },
+      {
+        title: 'Data Scientist',
+        status: true,
+      },
+      {
+        title: 'Full Stack Data Scientist',
+        status: true,
+      },
+      {
+        title: 'Head - Data Science',
+        status: true,
+      },
+      {
+        title: 'Machine Learning Engineer',
+        status: true,
+      },
+      {
+        title: 'Manager - Data Science',
+        status: true,
+      },
+      {
+        title: 'Manager - Machine Learning',
+        status: true,
+      },
+      {
+        title: 'NLP / DL Engineering / Architect',
+        status: true,
+      },
+      {
+        title: 'Statistician',
+        status: true,
+      },
+      {
+        title: 'Data Science & Machine Learning - Other',
         status: true,
       }
       // {
